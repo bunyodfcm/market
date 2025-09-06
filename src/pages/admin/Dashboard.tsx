@@ -22,7 +22,7 @@ const Dashboard: React.FC = () => {
   return (
     <div className="p-8 space-y-8">
       <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
-      <Card title="Welcome" subtitle={user ? `Hello, ${user.name}!` : ""}>
+      <Card title="Welcome" subtitle={user ? `Hello, ${user.nickname}!` : ""}>
         <p>
           This is the admin dashboard. Here you can manage users and view
           statistics.

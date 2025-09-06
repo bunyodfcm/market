@@ -2,23 +2,22 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 
-const Login: React.FC = () => {
-  const [nickname, setNickname] = useState("");
-  const [password, setPassword] = useState("");
+const OTP: React.FC = () => {
+  const [numberOTP, setNumberOTP] = useState("1111");
   const [error, setError] = useState("");
-  const { login, isLoading } = useAuth();
+  const { verifyOTP, isLoading } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
-    if (!nickname || !password) {
+    if (!numberOTP) {
       setError("Please fill in all fields");
       return;
     }
 
-    const success = await login(nickname, password);
+    const success = await verifyOTP(numberOTP);
     if (success) {
       navigate("/admin");
     } else {
@@ -33,9 +32,7 @@ const Login: React.FC = () => {
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             Admin Login
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            Sign in to your admin account
-          </p>
+          <p className="mt-2 text-center text-sm text-gray-600">Verify OTP</p>
         </div>
 
         <div className="bg-white rounded-lg shadow p-6">
@@ -51,38 +48,18 @@ const Login: React.FC = () => {
                 htmlFor="phone"
                 className="block text-sm font-medium text-gray-700"
               >
-                Your Nickname
+                OTP Code
               </label>
               <input
-                id="phone"
-                name="phone"
-                type="phone"
-                autoComplete="phone"
+                id="numberOTP"
+                name="numberOTP"
+                type="numberOTP"
+                autoComplete="numberOTP"
                 required
-                value={nickname}
-                onChange={(e) => setNickname(e.target.value)}
+                value={numberOTP}
+                onChange={(e) => setNumberOTP(e.target.value)}
                 className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                placeholder="Enter your nickname"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Password
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                placeholder="Enter your password"
+                placeholder="enter OTP Code"
               />
             </div>
 
@@ -92,21 +69,14 @@ const Login: React.FC = () => {
                 disabled={isLoading}
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isLoading ? "Signing in..." : "Sign in"}
+                {isLoading ? "Verify in..." : "Verify OTP"}
               </button>
             </div>
           </form>
 
           <div className="mt-4 text-center">
             <p className="text-sm text-gray-600">
-              go to{" "}
-              <a
-                href="/"
-                className="text-blue-600 hover:text-blue-500"
-                onClick={() => navigate("/register")}
-              >
-                Sign up
-              </a>
+              Demo credentials: admin@example.com / password
             </p>
           </div>
         </div>
@@ -115,4 +85,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default OTP;
