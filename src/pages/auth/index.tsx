@@ -1,12 +1,22 @@
+import React from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Login from "./components/Login";
+import Register from "./components/Register";
+import OTP from "./components/OTP";
 
 function AuthIndex() {
   return (
     <div>
       <Navbar />
-      <div className="h-screen flex items-center justify-center bg-gray-50 px-4 sm:px-6 lg:px-8">
-        <Login />
+      <div className="flex justify-center items-center h-screen">
+        <Routes>
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="verify-otp" element={<OTP />} />
+          {/* default bo'lsa login sahifasiga redirect qiladi */}
+          <Route path="*" element={<Navigate to="login" replace />} />
+        </Routes>
       </div>
     </div>
   );

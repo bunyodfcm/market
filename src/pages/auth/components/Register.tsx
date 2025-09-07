@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
+import DefaultButton from "../../../components/ui/Buttons/Default";
+import { Icon } from "@iconify/react";
+import ButtonWithIcon from "../../../components/ui/Buttons/ButtonWithIcon";
 
 const Login: React.FC = () => {
-  const [nickname, setNickname] = useState("");
   const [phone, setPhone] = useState("");
+  const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const { register, isLoading } = useAuth();
@@ -19,113 +22,184 @@ const Login: React.FC = () => {
       return;
     }
 
-    const success = await register(nickname, phone, password);
+    const success = await register(phone, phone, password);
     console.log(success, "success");
 
     if (success) {
-      navigate("/verify-otp");
+      navigate("/auth/verify-otp");
     } else {
       setError("Invalid credentials");
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Register
-          </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            Sign up a new account
-          </p>
-        </div>
+    <div className="bg-white w-[350px] rounded-lg shadow p-6 space-y-8">
+      <h2 className="text-left text-3xl font-semibold text-gray-900">
+        Sign Up
+      </h2>
+      <form className="space-y-6" onSubmit={handleSubmit}>
+        {error && (
+          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+            {error}
+          </div>
+        )}
 
-        <div className="bg-white rounded-lg shadow p-6">
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            {error && (
-              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
-                {error}
-              </div>
-            )}
-
-            <div>
-              <label
-                htmlFor="nickname"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Your Nickname
-              </label>
-              <input
-                id="nickname"
-                name="nickname"
-                type="nickname"
-                autoComplete="nickname"
-                required
-                value={nickname}
-                onChange={(e) => setNickname(e.target.value)}
-                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                placeholder="Enter your Nickname"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Phone Number
-              </label>
-              <input
-                id="phone"
-                name="phone"
-                type="phone"
-                autoComplete="phone"
-                required
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                placeholder="Enter your phone number"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Password
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                placeholder="Enter your password"
-              />
-            </div>
-
-            <div>
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isLoading ? "Registration..." : "Sign Up"}
-              </button>
-            </div>
-          </form>
-
-          <div className="mt-4 text-center">
-            <p className="text-sm text-gray-600">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia,
-              temporibus.
-            </p>
+        <div className="relative">
+          {/* <label
+            htmlFor="phone"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Your Nickname
+          </label> */}
+          <input
+            id="phone"
+            name="phone"
+            type="phone"
+            autoComplete="phone"
+            required
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            className="mt-1 appearance-none relative block w-full pl-9 pr-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm placeholder:text-gray-400"
+            placeholder="Nickname"
+          />
+          <div className="absolute inset-y-0 left-2 flex items-center pointer-events-none">
+            <Icon
+              icon="mdi:phone"
+              width="24"
+              height="24"
+              className="text-gray-400 z-10"
+            />
           </div>
         </div>
+        <div className="relative">
+          {/* <label
+            htmlFor="phone"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Your Nickname
+          </label> */}
+          <input
+            id="nickname"
+            name="nickname"
+            type="nickname"
+            autoComplete="nickname"
+            required
+            value={nickname}
+            onChange={(e) => setNickname(e.target.value)}
+            className="mt-1 appearance-none relative block w-full pl-9 pr-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm placeholder:text-gray-400"
+            placeholder="Nickname"
+          />
+          <div className="absolute inset-y-0 left-2 flex items-center pointer-events-none">
+            <Icon
+              icon="mdi:user"
+              width="24"
+              height="24"
+              className="text-gray-400 z-10"
+            />
+          </div>
+        </div>
+
+        <div className="relative">
+          {/* <label
+            htmlFor="password"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Password
+          </label> */}
+          <input
+            id="password"
+            name="password"
+            type="password"
+            autoComplete="current-password"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="mt-1 appearance-none relative block w-full px-9 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm placeholder:text-gray-400"
+            placeholder="Password"
+          />
+          <div className="absolute inset-y-0 left-2 flex items-center pointer-events-none">
+            <Icon
+              icon="mdi:lock"
+              width="24"
+              height="24"
+              className="text-gray-400 z-10"
+            />
+          </div>
+          <div className="absolute inset-y-0 right-2 flex items-center pointer-events-none">
+            <Icon
+              icon="mdi:eye-off-outline"
+              width="24"
+              height="24"
+              className="text-gray-400 z-10"
+            />
+          </div>
+        </div>
+        <div className="text-sm text-gray-500">
+          By signing up, you confirm that you’ve read and accepted our
+          <a
+            href=""
+            className="font-semibold text-blue-600 hover:text-blue-500 mx-1"
+          >
+            User Notice
+          </a>
+          and{" "}
+          <a
+            href=""
+            className="font-semibold text-blue-600 hover:text-blue-500 mx-1"
+          >
+            {" "}
+            Privacy Policy
+          </a>
+          .
+        </div>
+
+        <div>
+          <DefaultButton
+            disabled={isLoading}
+            type="submit"
+            className="w-full disabled:cursor-not-allowed didabled:opacity-50"
+          >
+            {isLoading ? "Registration..." : "Register"}
+          </DefaultButton>
+        </div>
+      </form>
+
+      <div className="text-center">
+        <p className="text-sm text-gray-400">or sign up with</p>
+      </div>
+      <div className="flex justify-between items-center gap-4">
+        <ButtonWithIcon
+          className="w-full"
+          icon={
+            <Icon
+              icon="logos:telegram"
+              width="24"
+              height="24"
+              className="text-gray-500"
+            />
+          }
+        >
+          Telegram
+        </ButtonWithIcon>
+        <ButtonWithIcon
+          className="w-full"
+          icon={
+            <Icon
+              icon="flat-color-icons:google"
+              width="24"
+              height="24"
+              className="text-gray-500"
+            />
+          }
+        >
+          Google
+        </ButtonWithIcon>
+      </div>
+      <div className="flex items-center justify-center gap-2">
+        <p>Already have an account?</p>
+        <a href="" className="font-semibold text-blue-500">
+          Sign In
+        </a>
       </div>
     </div>
   );

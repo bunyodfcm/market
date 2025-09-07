@@ -5,7 +5,6 @@ import {
   Navigate,
 } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
-import Register from "./pages/auth/components/Register.tsx";
 import AdminRoutes from "./routes/AdminRoutes";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import "./index.css";
@@ -18,7 +17,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/auth/*" element={<AuthIndex />} />
-          <Route path="/register" element={<Register />} />
+          {/* <Route path="/register" element={<Register />} /> */}
           <Route path="/verify-otp" element={<OTP />} />
           <Route
             path="/admin/*"
