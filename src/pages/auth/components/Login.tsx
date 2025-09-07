@@ -127,17 +127,41 @@ const Login: React.FC = () => {
       </form>
 
       <div className="text-center">
-        <p className="text-sm text-gray-400">
-          or login with
-        </p>
+        <p className="text-sm text-gray-400">or login with</p>
       </div>
       <div className="flex justify-between items-center gap-4">
-        <ButtonWithIcon className="w-full" icon={<Icon icon="mdi:telegram" width="24" height="24" className="text-gray-500"/>}>Telegram</ButtonWithIcon>
-        <ButtonWithIcon className="w-full" icon={<Icon icon="mdi:google" width="24" height="24" className="text-gray-500"/>}>Google</ButtonWithIcon>
+        <ButtonWithIcon
+          className="w-full"
+          icon={
+            <Icon
+              icon="logos:telegram"
+              width="24"
+              height="24"
+              className="text-gray-500"
+            />
+          }
+        >
+          Telegram
+        </ButtonWithIcon>
+        <ButtonWithIcon
+          className="w-full"
+          icon={
+            <Icon
+              icon="flat-color-icons:google"
+              width="24"
+              height="24"
+              className="text-gray-500"
+            />
+          }
+        >
+          Google
+        </ButtonWithIcon>
       </div>
       <div className="flex items-center justify-center gap-2">
         <p>Don't have an account?</p>
-        <a href="" className="font-semibold text-blue-500">Sign Up</a>
+        <a href="" className="font-semibold text-blue-500">
+          Sign Up
+        </a>
       </div>
     </div>
   );
