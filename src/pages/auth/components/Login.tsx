@@ -62,7 +62,7 @@ const Login: React.FC = () => {
               icon="mdi:account-circle"
               width="24"
               height="24"
-              className="text-gray-400"
+              className="text-gray-400 z-10"
             />
           </div>
         </div>
@@ -90,7 +90,7 @@ const Login: React.FC = () => {
               icon="mdi:lock"
               width="24"
               height="24"
-              className="text-gray-400"
+              className="text-gray-400 z-10"
             />
           </div>
           <div className="absolute inset-y-0 right-2 flex items-center pointer-events-none">
@@ -98,7 +98,7 @@ const Login: React.FC = () => {
               icon="mdi:eye-off-outline"
               width="24"
               height="24"
-              className="text-gray-400"
+              className="text-gray-400 z-10"
             />
           </div>
         </div>
