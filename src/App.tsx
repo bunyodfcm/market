@@ -5,19 +5,20 @@ import {
   Navigate,
 } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
-import Login from "./pages/auth/Login";
-import Register from "./pages/auth/Register.tsx";
+import Login from "./pages/auth/components/Login.tsx";
+import Register from "./pages/auth/components/Register.tsx";
 import AdminRoutes from "./routes/AdminRoutes";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import "./index.css";
-import OTP from "./pages/auth/OTP.tsx";
+import OTP from "./pages/auth/components/OTP.tsx";
+import AuthIndex from "./pages/auth/index.tsx";
 
 function App() {
   return (
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/auth/*" element={<AuthIndex />} />
           <Route path="/register" element={<Register />} />
           <Route path="/verify-otp" element={<OTP />} />
           <Route
@@ -28,7 +29,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/" element={<Navigate to="/admin" replace />} />
+          <Route path="/" element={<Navigate to="/auth" replace />} />
         </Routes>
       </Router>
     </AuthProvider>
