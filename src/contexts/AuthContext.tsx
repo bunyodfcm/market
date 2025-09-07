@@ -1,12 +1,11 @@
 import axios from "axios";
 import React, { createContext, useState, useEffect } from "react";
-
-interface User {
-  id: string;
-  phone: string;
-  nickname: string;
-  role: "admin" | "user";
-}
+import {
+  loginUser,
+  registerUser,
+  verifyOtp,
+  type User,
+} from "../services/authApi";
 
 interface AuthContextType {
   user: User | null;
@@ -18,6 +17,7 @@ interface AuthContextType {
   ) => Promise<boolean>;
   login: (nickname: string, password: string) => Promise<boolean>;
   logout: () => void;
+  resetPassword: (phone: string) => Promise<boolean>;
   isLoading: boolean;
 }
 
@@ -58,6 +58,33 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     checkAuth();
   }, []);
 
+  //reset password
+  const resetPassword = async (phone: string): Promise<boolean> => {
+    try {
+      setIsLoading(true);
+      const response = await axios.post(
+        "https://e-mall.webpack.uz/api/user/reset-password",
+        {
+          phone,
+        }
+      );
+      const { token } = response.data;
+      if (token) {
+        localStorage.setItem("otpToken", token);
+        return true;
+      }
+      return false;
+    } catch (error: any) {
+      console.error(
+        "Reset password failed:",
+        error.response?.data || error.message
+      );
+      return false;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   // verify OTP
 
   const verifyOTP = async (numberOTP: string): Promise<boolean> => {
@@ -72,21 +99,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       }
 
       // OTP ni backendga yuborish (header + body bilan)
-      const response = await axios.post(
-        "https://e-mall.webpack.uz/api/user/verify-otp",
-        { otp: parseInt(numberOTP) },
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
+      const response = await verifyOtp({ numberOTP });
 
-      const { user } = response.data;
+      const user = response.user;
 
       if (user) {
         // setUser(user);
-        localStorage.setItem("user", user); // yangi token bo‘lsa yangilab qo‘yiladi
+        localStorage.setItem("user", JSON.stringify(user)); // yangi token bo‘lsa yangilab qo‘yiladi
         return true;
       }
 
@@ -111,16 +130,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     try {
       setIsLoading(true);
 
-      const response = await axios.post(
-        "https://e-mall.webpack.uz/api/user/register",
-        {
-          phone,
-          nickname, 
-          password,
-        }
-      );
+      const response = await registerUser({
+        phone: phone,
+        nickname: nickname,
+        password: password,
+      });
 
-      const { token } = response.data;
+      const token = response.token;
 
       if (token) {
         // setUser(user);
@@ -143,20 +159,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     try {
       setIsLoading(true);
 
-      const response = await axios.post(
-        "https://e-mall.webpack.uz/api/user/login",
-        {
-          nickname: nickname,
-          password,
-        }
-      );
+      const response = await loginUser({
+        nickname: nickname,
+        password: password,
+      });
 
-      
-      const { user } = response.data;
+      const { user } = response;
 
       if (user) {
         setUser(user);
-        localStorage.setItem("user", user);
+        localStorage.setItem("user", JSON.stringify(user));
         return true;
       }
       return false;
@@ -179,6 +191,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     register,
     login,
     logout,
+    resetPassword,
     isLoading,
   };
 
