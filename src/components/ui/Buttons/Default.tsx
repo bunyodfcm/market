@@ -1,5 +1,3 @@
-import React from "react";
-
 type DefaultButtonProps = {
   children: React.ReactNode;
   onClick?: () => void;
