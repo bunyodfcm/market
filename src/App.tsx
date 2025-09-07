@@ -5,7 +5,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
-import AdminRoutes from "./routes/AdminRoutes";
+import AdminRoutes from "./pages/admin";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import "./index.css";
 import OTP from "./pages/auth/components/OTP.tsx";

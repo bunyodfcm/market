@@ -3,7 +3,8 @@ import type { AxiosResponse } from "axios";
 const API_URL = "https://e-mall.webpack.uz/api"; // bazaviy URL
 
 // LocalStorage’dan token olish
-const getToken = () => localStorage.getItem("authToken");
+const getToken = () => localStorage.getItem("otpToken");
+
 
 // Axios instance
 const api = axios.create({
@@ -59,5 +60,14 @@ export const deleteItem = async <T>(
   id: string | number
 ): Promise<T> => {
   const response: AxiosResponse<T> = await api.delete(`/${endpoint}/${id}`);
+  return response.data;
+};
+
+// get users with by post method
+export const getUsersByPost = async <T>(
+  endpoint: string,
+  data: any
+): Promise<T> => {
+  const response: AxiosResponse<T> = await api.post(`/${endpoint}`, data);
   return response.data;
 };

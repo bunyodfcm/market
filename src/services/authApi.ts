@@ -1,4 +1,4 @@
-import { createItem } from "./api";
+import { createItem, getUsersByPost } from "./api";
 
 // User type (kerak bo‘lsa kengaytirib olasan)
 export interface User {
@@ -30,4 +30,14 @@ export const loginUser = async (data: {
   password: string;
 }): Promise<{ token: string; user: User }> => {
   return await createItem("user/login", data);
+};
+
+// fetch users
+
+export const fetchUsers = async (data: {
+  page: number;
+  limit: number;
+  search?: string;
+}): Promise<{ token: string; data: any }> => {
+  return await getUsersByPost("user", data);
 };

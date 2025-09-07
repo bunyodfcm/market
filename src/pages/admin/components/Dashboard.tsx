@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Card from "../../components/ui/Card";
+import Card from "../../../components/ui/Card";
 // import Table from "../../components/ui/Table";
 // import Modal from "../../components/ui/Modal";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../../hooks/useAuth";
 
 // const usersData = [
 //   { id: 1, name: "Admin User", email: "admin@example.com", role: "admin" },

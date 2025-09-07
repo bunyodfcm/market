@@ -1,9 +1,9 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import AdminLayout from "../components/layout/AdminLayout";
-import Dashboard from "../pages/admin/Dashboard";
-import Users from "../pages/admin/Users";
-import Products from "../pages/admin/Products";
+import AdminLayout from "../../components/layout/AdminLayout";
+import Dashboard from "./components/Dashboard";
+import Users from "./components/Users";
+import Products from "./components/Products";
 
 const AdminRoutes: React.FC = () => {
   return (
