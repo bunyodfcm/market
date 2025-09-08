@@ -4,12 +4,14 @@ import AdminLayout from "./components/AdminLayout";
 import Dashboard from "./components/Dashboard";
 import Users from "./components/Users";
 import Products from "./components/Products";
+import Companies from "./components/Companies";
 
 const AdminRoutes: React.FC = () => {
   return (
     <AdminLayout>
       <Routes>
         <Route path="/" element={<Dashboard />} />
+        <Route path="/companies" element={<Companies />} />
         <Route path="/users" element={<Users />} />
         <Route path="/products" element={<Products />} />
         <Route path="*" element={<Navigate to="/admin" replace />} />

@@ -2,6 +2,8 @@ import React from 'react';
 import { BellIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 const Header: React.FC = () => {
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  
   return (
     <header className="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
       <div className="flex items-center justify-between">
@@ -29,8 +31,8 @@ const Header: React.FC = () => {
               className="w-8 h-8 rounded-full"
             />
             <div className="hidden md:block">
-              <p className="text-sm font-medium text-gray-700">Admin User</p>
-              <p className="text-xs text-gray-500">admin@example.com</p>
+              <p className="text-sm font-medium text-gray-700">{user.nickname}</p>
+              <p className="text-xs text-gray-500">{user.phone}</p>
             </div>
           </div>
         </div>

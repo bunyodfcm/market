@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { 
   HomeIcon, 
+  HomeModernIcon,
   UsersIcon, 
   ShoppingBagIcon, 
   ChartBarIcon,
@@ -15,6 +16,7 @@ const Sidebar: React.FC = () => {
 
   const menuItems = [
     { name: 'Dashboard', icon: HomeIcon, path: '/admin' },
+    { name: 'Companies', icon: HomeModernIcon, path: '/admin/companies' },
     { name: 'Users', icon: UsersIcon, path: '/admin/users' },
     { name: 'Products', icon: ShoppingBagIcon, path: '/admin/products' },
     { name: 'Orders', icon: DocumentTextIcon, path: '/admin/orders' },
