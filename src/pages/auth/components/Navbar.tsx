@@ -4,7 +4,7 @@ import { Icon } from "@iconify/react";
 
 const Navbar: React.FC = () => {
   return (
-    <nav className="bg-white shadow-md p-6">
+    <nav className="bg-white shadow-md p-4">
       <div className="flex items-center justify-between mx-auto">
         <div
           className="flex flex-row items-center gap-2 text-blue-500"
