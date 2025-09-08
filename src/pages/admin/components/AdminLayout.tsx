@@ -1,6 +1,6 @@
-import React from 'react';
-import Sidebar from './Sidebar';
-import Header from './Header';
+import React from "react";
+import Sidebar from "./Sidebar";
+import Header from "./Header";
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -20,4 +20,4 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   );
 };
 
-export default AdminLayout; 
+export default AdminLayout;

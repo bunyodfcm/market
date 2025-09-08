@@ -7,23 +7,24 @@ interface User {
   nickname: string;
   phone: string;
   roles: string;
-  status: "active" | "inactive";
+  isActive: boolean;
   createdAt: string;
 }
 
 const Users: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const getUsers = async () => {
-    const users = await fetchUsers({ page: 1, limit: 10 });
-    console.log(users.data);
+  const getUsers = async (data?: any) => {
+    const users = await fetchUsers({ page: 1, limit: 10, ...data });
+    console.log(users);
 
     setUsers(users.data);
   };
 
   useEffect(() => {
-    getUsers();
-  }, []);
+    getUsers(searchTerm ? { search: searchTerm } : undefined);
+  }, [searchTerm]);
 
   const getStatusBadge = (status: string) => {
     return status === "active" ? (
@@ -58,6 +59,14 @@ const Users: React.FC = () => {
                 type="text"
                 placeholder="Search users..."
                 className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                value={searchTerm}
+                onChange={(e) => {
+                  setSearchTerm(e.target.value);
+                  // Implement search functionality here
+                  if (e.target.value === "") {
+                    getUsers();
+                  }
+                }}
               />
             </div>
           </div>
@@ -71,7 +80,7 @@ const Users: React.FC = () => {
                   Name
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Email
+                  Phone Number
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Role
@@ -113,7 +122,7 @@ const Users: React.FC = () => {
                     {user.roles}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {getStatusBadge(user.status)}
+                    {getStatusBadge(user.isActive ? "active" : "inactive")}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                     {new Date(user.createdAt).toLocaleString()}
