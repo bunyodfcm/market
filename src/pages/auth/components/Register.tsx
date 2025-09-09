@@ -54,7 +54,6 @@ const Login: React.FC = () => {
       setInputError(response.message);
       return setIsChecking(true);
     } catch (error: any) {
-      console.log(error, "❌ error");
       setInputError("");
       setIsChecking(false);
     }
