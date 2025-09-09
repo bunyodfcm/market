@@ -11,7 +11,7 @@ const Navbar: React.FC = () => {
           style={{ fontWeight: "bold", fontSize: "1.2rem" }}
         >
           <Icon icon="icon-park-outline:market" width="48" height="48" />
-          Uz-Market
+          E-MALL.UZ
         </div>
         <ul className="flex space-x-6">
           <li>

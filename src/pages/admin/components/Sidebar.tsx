@@ -1,48 +1,79 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { 
-  HomeIcon, 
+import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import {
+  HomeIcon,
   HomeModernIcon,
-  UsersIcon, 
-  ShoppingBagIcon, 
+  UsersIcon,
+  ShoppingBagIcon,
   ChartBarIcon,
   CogIcon,
-  DocumentTextIcon
-} from '@heroicons/react/24/outline';
+  DocumentTextIcon,
+} from "@heroicons/react/24/outline";
+import { Icon } from "@iconify/react";
 
 const Sidebar: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
 
   const menuItems = [
-    { name: 'Dashboard', icon: HomeIcon, path: '/admin' },
-    { name: 'Companies', icon: HomeModernIcon, path: '/admin/companies' },
-    { name: 'Users', icon: UsersIcon, path: '/admin/users' },
-    { name: 'Products', icon: ShoppingBagIcon, path: '/admin/products' },
-    { name: 'Orders', icon: DocumentTextIcon, path: '/admin/orders' },
-    { name: 'Analytics', icon: ChartBarIcon, path: '/admin/analytics' },
-    { name: 'Settings', icon: CogIcon, path: '/admin/settings' },
+    { name: "Dashboard", icon: HomeIcon, path: "/admin" },
+    { name: "Companies", icon: HomeModernIcon, path: "/admin/companies" },
+    { name: "Users", icon: UsersIcon, path: "/admin/users" },
+    { name: "Products", icon: ShoppingBagIcon, path: "/admin/products" },
+    { name: "Orders", icon: DocumentTextIcon, path: "/admin/orders" },
+    { name: "Analytics", icon: ChartBarIcon, path: "/admin/analytics" },
+    { name: "Settings", icon: CogIcon, path: "/admin/settings" },
   ];
 
   return (
-    <div className={`bg-white shadow-lg transition-all duration-300 ${collapsed ? 'w-16' : 'w-64'}`}>
-      <div className="p-4 border-b">
-        <h1 className={`font-bold text-xl text-gray-800 ${collapsed ? 'hidden' : 'block'}`}>
-          Admin Panel
-        </h1>
+    <div
+      className={`bg-white shadow-lg transition-all duration-300 ${
+        collapsed ? "w-16" : "w-64"
+      }`}
+    >
+      <div className="relative p-3 border-b text-blue-500 border-b border-r shadow-md">
+        
+        <div
+          className="flex flex-row items-center justify-between space-x-2 text-blue-500 mb-4"
+          style={{ fontWeight: "bold", fontSize: "1.2rem" }}
+        >
+          <div className="flex flex-row items-center gap-2">
+          <div
+            className={`drop-shadow-lg ${
+              collapsed ? "hidden" : ""
+            } items-center justify-center`}
+          >
+            <Icon icon="icon-park-outline:market" width="48" height="48" />
+          </div>
+          <h1 className={`font-bold text-xl ${collapsed ? "hidden" : "block"}`}>
+            Admin
+            <span className="text-blue-500 text-sm block">E-MALL.UZ</span>
+          </h1>
+          </div>
+          <button
+            onClick={() => setCollapsed(!collapsed)}
+            className={` bg-white border-none py-3 hover:text-blue-700 transition-colors ${
+              collapsed ? "rotate-180" : ""
+            }`}
+          >
+            <Icon icon="eva:menu-arrow-outline" width="24" height="24" />
+          </button>
+        </div>
       </div>
-      
+
       <nav className="mt-6">
         {menuItems.map((item) => {
           const Icon = item.icon;
           const isActive = location.pathname === item.path;
-          
+
           return (
             <Link
               key={item.name}
               to={item.path}
               className={`flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors ${
-                isActive ? 'bg-blue-50 text-blue-600 border-r-2 border-blue-600' : ''
+                isActive
+                  ? "bg-blue-50 text-blue-600 border-r-2 border-blue-600"
+                  : ""
               }`}
             >
               <Icon className="w-5 h-5" />
@@ -51,15 +82,6 @@ const Sidebar: React.FC = () => {
           );
         })}
       </nav>
-      
-      <button
-        onClick={() => setCollapsed(!collapsed)}
-        className="absolute -right-3 top-20 bg-white border border-gray-200 rounded-full p-1 shadow-md hover:shadow-lg transition-shadow"
-      >
-        <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={collapsed ? "M9 5l7 7-7 7" : "M15 19l-7-7 7-7"} />
-        </svg>
-      </button>
     </div>
   );
 };
