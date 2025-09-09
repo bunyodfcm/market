@@ -40,14 +40,14 @@ const Login: React.FC = () => {
 
   const checkInputNickname = async (nickname: string) => {
     try {
-      if (nickname.length < 3 || nickname.length > 20) {
+      if (!/^[A-Za-z0-9]+$/.test(nickname)) {
+        setInputError("Nickname must not contain special characters");
+        return setIsChecking(true);
+      }else if (nickname.length < 3 || nickname.length > 20) {
         setInputError("Nickname must be between 3 and 20 characters");
         return setIsChecking(true);
       }
-      if(!/\w/.test(nickname)){
-        setInputError("Nickname must not contain special characters");
-        return setIsChecking(true);
-      }
+      
       const response = await checkNickname({ nickname });
 
       // Agar backend 200 qaytarsa → message ni chiqaramiz
