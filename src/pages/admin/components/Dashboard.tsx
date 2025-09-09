@@ -42,6 +42,18 @@ const Dashboard: React.FC = () => {
       >
         <Table id="users-table" />
       </Modal> */}
+
+      <div className="p-6 space-y-6">
+      <Card title="User Stats" subtitle="Overview of active users">
+        <p className="text-gray-700">Total Users: 120</p>
+        <p className="text-gray-700">Active: 90</p>
+        <p className="text-gray-700">Inactive: 30</p>
+      </Card>
+
+      <Card>
+        <p className="text-gray-700">This is a simple card without header</p>
+      </Card>
+    </div>
     </div>
   );
 };

@@ -21,7 +21,7 @@ const Sidebar: React.FC = () => {
   const menuItems = [
     { name: "Dashboard", icon: HomeIcon, path: "/admin" },
     { name: "Companies", icon: HomeModernIcon, path: "/admin/companies" },
-    { name: "Users", icon: UsersIcon, path: "/admin/users" },
+    { name: "Customers", icon: UsersIcon, path: "/admin/users" },
     { name: "Products", icon: ShoppingBagIcon, path: "/admin/products" },
     { name: "Orders", icon: DocumentTextIcon, path: "/admin/orders" },
     { name: "Analytics", icon: ChartBarIcon, path: "/admin/analytics" },
