@@ -65,7 +65,7 @@ const Sidebar: React.FC = () => {
         </div>
       </div>
 
-      <nav className={`mt-6 m-4   ${collapsed ? "mx-2" : "mx-4"} `}>
+      <nav className={`mt-6  ${collapsed ? "mx-2" : "mx-4"} space-y-3`}>
         {menuItems.map((item) => {
           const Icon = item.icon;
           const isActive = location.pathname === item.path;
@@ -87,7 +87,7 @@ const Sidebar: React.FC = () => {
         })}
       </nav>
 
-      <div className={`bottom-0 w-full  border-t ${collapsed  ? "px-2 justify-center":"px-4 "}`}>
+      <div className={`bottom-0 w-full mt-6 pt-4 border-t ${collapsed  ? "px-2 justify-center":"px-4 "}`}>
         <button
           className={`w-full font-semibold flex items-center  px-4 py-3 space-x-2 text-red-700 hover:bg-red-50 hover:text-red-600 transition-colors`}
           onClick={() => {
