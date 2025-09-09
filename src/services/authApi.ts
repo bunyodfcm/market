@@ -49,10 +49,19 @@ export const checkNickname = async (data: {
   return await checkUser("user/nickname-check", data);
 };
 
-// get user 
+//check user phone number
+export const checkPhone = async (data: {
+  phone: string;
+}): Promise<{ message: string }> => {
+  return await checkUser("user/phone-check", data);
+};
 
-export const getUser = async (data:{
+
+// get user
+export const getUser = async ({
+  nickname,
+}: {
   nickname: string;
-}): Promise<{ data:any }>=> {
-  
-}
+}): Promise<{ data: any }> => {
+  return await getUsersByPost("user/nickname", nickname);
+};

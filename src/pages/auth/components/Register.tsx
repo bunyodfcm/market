@@ -4,13 +4,14 @@ import { useAuth } from "../../../hooks/useAuth";
 import DefaultButton from "../../../components/ui/Buttons/Default";
 import { Icon } from "@iconify/react";
 import ButtonWithIcon from "../../../components/ui/Buttons/ButtonWithIcon";
-import { checkNickname } from "../../../services/authApi";
+import { checkNickname, checkPhone } from "../../../services/authApi";
 import { useEffect } from "react";
 
 const Login: React.FC = () => {
   const [phone, setPhone] = useState("");
   const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
+  const [inputPhoneError, setInputPhoneError] = useState("");
   const [inputError, setInputError] = useState("");
   const [error, setError] = useState("");
   const [isChecking, setIsChecking] = useState(false);
@@ -36,7 +37,7 @@ const Login: React.FC = () => {
     }
   };
 
-  const checkInput = async (nickname: string) => {
+  const checkInputNickname = async (nickname: string) => {
     try {
       const response = await checkNickname({ nickname });
 
@@ -49,12 +50,28 @@ const Login: React.FC = () => {
       setIsChecking(false);
     }
   };
+  const checkInputPhone = async (nickname: string) => {
+    try {
+      const response = await checkPhone({ phone });
+
+      // Agar backend 200 qaytarsa → message ni chiqaramiz
+      setInputPhoneError(response.message);
+      return setIsChecking(true);
+    } catch (error: any) {
+      console.log(error, "❌ error");
+      setInputPhoneError("");
+      setIsChecking(false);
+    }
+  };
 
   useEffect(() => {
     if (nickname) {
-      checkInput(nickname);
+      checkInputNickname(nickname);
     }
-  }, [nickname]);
+    if (phone) {
+      checkInputPhone(phone);
+    }
+  }, [nickname, phone]);
 
   return (
     <div className="bg-white w-[350px] rounded-lg shadow p-6 space-y-8">
@@ -83,7 +100,11 @@ const Login: React.FC = () => {
             required
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            className="mt-1 appearance-none relative block w-full pl-9 pr-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm placeholder:text-gray-400"
+            className={`mt-1 appearance-none relative block w-full pl-9 pr-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none ${
+              inputPhoneError
+                ? "focus:ring-red-500 focus:border-red-500"
+                : "focus:ring-blue-500 focus:border-blue-500"
+            }  focus:z-10 sm:text-sm placeholder:text-gray-400`}
             placeholder="Phone Number"
           />
           <div className="absolute inset-y-0 left-2 flex items-center pointer-events-none">
@@ -94,6 +115,11 @@ const Login: React.FC = () => {
               className="text-gray-400 z-10"
             />
           </div>
+          {inputPhoneError && (
+            <p className="absolute top-full left-6 bg-white border rounded-md text-sm text-red-600 mt-1 p-2 z-50">
+              {inputPhoneError}
+            </p>
+          )}
         </div>
         <div className="relative">
           {/* <label
