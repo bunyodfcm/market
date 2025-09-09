@@ -71,3 +71,8 @@ export const getUsersByPost = async <T>(
   const response: AxiosResponse<T> = await api.post(`/${endpoint}`, data);
   return response.data;
 };
+
+export const checkUser = async <T>(endpoint: string, data: any): Promise<T> => {
+  const response: AxiosResponse<T> = await api.get(`/${endpoint}`, data);
+  return response.data;
+}

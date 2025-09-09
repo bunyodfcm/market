@@ -4,7 +4,7 @@ import { useAuth } from "../../../hooks/useAuth";
 import DefaultButton from "../../../components/ui/Buttons/Default";
 
 const ResetPassword: React.FC = () => {
-  const [numberOTP, setNumberOTP] = useState("1111");
+  const [number, setPhone] = useState("");
   const [error, setError] = useState("");
   const { verifyOTP, isLoading } = useAuth();
   const navigate = useNavigate();
@@ -13,14 +13,14 @@ const ResetPassword: React.FC = () => {
     e.preventDefault();
     setError("");
 
-    if (!numberOTP) {
+    if (!number) {
       setError("Please fill in all fields");
       return;
     }
 
-    const success = await verifyOTP(numberOTP);
+    const success = await verifyOTP(number);
     if (success) {
-      navigate("/admin");
+      navigate("/auth/login");
     } else {
       setError("Invalid credentials");
     }
@@ -46,16 +46,16 @@ const ResetPassword: React.FC = () => {
                Your Nickname
              </label> */}
           <input
-            id="number-otp"
-            name="number-otp"
-            type="number-otp"
-            autoComplete="number-otp"
+            id="phone"
+            name="phone"
+            type="phone"
+            autoComplete="phone"
             required
-            value={numberOTP}
-            onChange={(e) => setNumberOTP(e.target.value)}
+            value={number}
+            onChange={(e) => setPhone(e.target.value)}
             className="mt-1 appearance-none relative block w-full text-center font-semibold tracking-wide text-3xl py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm placeholder:text-gray-400"
-            placeholder="OTP Code"
-            maxLength={4}
+            placeholder="Enter your phone number"
+            maxLength={9}
           />
         </div>
 
@@ -72,7 +72,11 @@ const ResetPassword: React.FC = () => {
 
       <div className="flex items-center justify-center gap-2">
         <p>go to</p>
-        <a href="" className="font-semibold text-blue-500">
+        <a
+          href=""
+          className="font-semibold text-blue-500"
+          onClick={() => navigate("/auth/login")}
+        >
           Back
         </a>
       </div>

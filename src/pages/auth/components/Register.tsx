@@ -4,12 +4,16 @@ import { useAuth } from "../../../hooks/useAuth";
 import DefaultButton from "../../../components/ui/Buttons/Default";
 import { Icon } from "@iconify/react";
 import ButtonWithIcon from "../../../components/ui/Buttons/ButtonWithIcon";
+import { checkNickname } from "../../../services/authApi";
+import { useEffect } from "react";
 
 const Login: React.FC = () => {
   const [phone, setPhone] = useState("");
   const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
+  const [inputError, setInputError] = useState("");
   const [error, setError] = useState("");
+  const [isChecking, setIsChecking] = useState(false);
   const { register, isLoading } = useAuth();
   const navigate = useNavigate();
 
@@ -31,6 +35,29 @@ const Login: React.FC = () => {
       setError("Invalid credentials");
     }
   };
+
+  const checkInput = async (data: any) => {
+    try {
+      const response = await checkNickname(data);
+      if (!response.message) {
+        setInputError(response.message);
+        setIsChecking(false);
+      }
+    } catch (error: any) {
+      setInputError(error.message);
+      setIsChecking(true);
+    }
+  };
+
+  useEffect(() => {
+    if (nickname) {
+      const timeoutId = setTimeout(() => {
+        checkInput({ nickname });
+        setIsChecking(true);
+      }, 500);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [nickname]);
 
   return (
     <div className="bg-white w-[350px] rounded-lg shadow p-6 space-y-8">
@@ -86,7 +113,11 @@ const Login: React.FC = () => {
             required
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
-            className="mt-1 appearance-none relative block w-full pl-9 pr-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm placeholder:text-gray-400"
+            className={`mt-1 appearance-none relative block w-full pl-9 pr-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none ${
+              inputError
+                ? "focus:ring-red-500 focus:border-red-500"
+                : "focus:ring-blue-500 focus:border-blue-500"
+            }  focus:z-10 sm:text-sm placeholder:text-gray-400`}
             placeholder="Nickname"
           />
           <div className="absolute inset-y-0 left-2 flex items-center pointer-events-none">
@@ -97,6 +128,11 @@ const Login: React.FC = () => {
               className="text-gray-400 z-10"
             />
           </div>
+          {inputError && (
+            <p className="absolute top-full left-6 bg-white border rounded-md text-sm text-red-600 mt-1 p-2 z-50">
+              {inputError}
+            </p>
+          )}
         </div>
 
         <div className="relative">
@@ -155,7 +191,7 @@ const Login: React.FC = () => {
 
         <div>
           <DefaultButton
-            disabled={isLoading}
+            disabled={isLoading || isChecking}
             type="submit"
             className="w-full disabled:cursor-not-allowed didabled:opacity-50"
           >

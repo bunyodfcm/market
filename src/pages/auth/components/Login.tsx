@@ -9,6 +9,7 @@ const Login: React.FC = () => {
   const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
   const { login, isLoading } = useAuth();
   const navigate = useNavigate();
 
@@ -20,6 +21,8 @@ const Login: React.FC = () => {
       setError("Please fill in all fields");
       return;
     }
+
+    // check nickname with on back-end
 
     const success = await login(nickname, password);
     if (success) {
@@ -110,6 +113,7 @@ const Login: React.FC = () => {
           <a
             href=""
             className="text-base font-semibold text-blue-600 hover:text-blue-500"
+            onClick={() => navigate("/auth/reset-password")}
           >
             Forgot Password
           </a>
@@ -117,7 +121,7 @@ const Login: React.FC = () => {
 
         <div>
           <DefaultButton
-            disabled={isLoading}
+            disabled={ isLoading}
             type="submit"
             className="w-full disabled:cursor-not-allowed didabled:opacity-50"
           >
