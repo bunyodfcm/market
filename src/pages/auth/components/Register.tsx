@@ -50,7 +50,7 @@ const Login: React.FC = () => {
       setIsChecking(false);
     }
   };
-  const checkInputPhone = async (nickname: string) => {
+  const checkInputPhone = async (phone: string) => {
     try {
       const response = await checkPhone({ phone });
 
