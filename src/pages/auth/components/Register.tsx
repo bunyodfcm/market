@@ -40,6 +40,10 @@ const Login: React.FC = () => {
 
   const checkInputNickname = async (nickname: string) => {
     try {
+      if (nickname.length < 3 || nickname.length > 20) {
+        setInputError("Nickname must be between 3 and 20 characters");
+        return setIsChecking(true);
+      }
       const response = await checkNickname({ nickname });
 
       // Agar backend 200 qaytarsa → message ni chiqaramiz
@@ -53,6 +57,10 @@ const Login: React.FC = () => {
   };
   const checkInputPhone = async (phone: string) => {
     try {
+      if (phone.length < 9) {
+        setInputPhoneError("Phone number must be 9 digits");
+        return setIsChecking(true);
+      }
       const response = await checkPhone({ phone });
 
       // Agar backend 200 qaytarsa → message ni chiqaramiz
@@ -66,13 +74,16 @@ const Login: React.FC = () => {
   };
 
   useEffect(() => {
-    if (nickname) {
-      checkInputNickname(nickname);
-    }
     if (phone) {
       checkInputPhone(phone);
     }
-  }, [nickname, phone]);
+  }, [phone]);
+
+  useEffect(() => {
+    if (nickname) {
+      checkInputNickname(nickname);
+    }
+  }, [nickname]);
 
   return (
     <div className="bg-white w-[350px] rounded-lg shadow p-6 space-y-8">
