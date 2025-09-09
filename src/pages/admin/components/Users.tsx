@@ -17,7 +17,6 @@ const Users: React.FC = () => {
 
   const getUsers = async (data?: any) => {
     const users = await fetchUsers({ page: 1, limit: 10, ...data });
-    console.log(users);
 
     setUsers(users.data);
   };

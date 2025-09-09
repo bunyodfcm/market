@@ -37,7 +37,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         const token = localStorage.getItem("user.activeToken");
         if (token) {
           const response = await axios.get(
-            "https://e-mall.webpack.uz/api/user/me",
+            "https://e-mall.webpack.uz/api/user/nickname",
             {
               headers: {
                 Authorization: token,
