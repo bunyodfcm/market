@@ -5,7 +5,6 @@ const API_URL = "https://e-mall.webpack.uz/api"; // bazaviy URL
 // LocalStorage’dan token olish
 const getToken = () => localStorage.getItem("otpToken");
 
-
 // Axios instance
 const api = axios.create({
   baseURL: API_URL,
@@ -73,6 +72,6 @@ export const getUsersByPost = async <T>(
 };
 
 export const checkUser = async <T>(endpoint: string, data: any): Promise<T> => {
-  const response: AxiosResponse<T> = await api.get(`/${endpoint}`, data);
+  const response: AxiosResponse<T> = await api.post(`/${endpoint}`, data);
   return response.data;
-}
+};

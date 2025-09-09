@@ -36,29 +36,34 @@ const Login: React.FC = () => {
     }
   };
 
-  const checkInput = async (data: any) => {
+  const checkInput = async (nickname: string) => {
     try {
-      const response = await checkNickname(data);
-      if (!response.message) {
-        setInputError(response.message);
-        setIsChecking(false);
+      setIsChecking(true);
+      const response = await checkNickname({ nickname });
+      console.log(response, "response");
+
+      if (response.message === "") {
+        // agar backend error qaytarsa
+        setInputError(response.message || "Nickname already taken");
+      } else {
+        setInputError(response.message); // xato yo‘q
       }
     } catch (error: any) {
-      setInputError(error.message);
-      setIsChecking(true);
+      console.error(error, "error");
+      setInputError(error.message || "Server error");
+    } finally {
+      setIsChecking(false);
     }
   };
 
   useEffect(() => {
     if (nickname) {
       const timeoutId = setTimeout(() => {
-        checkInput({ nickname });
-        setIsChecking(true);
-      }, 500);
+        checkInput(nickname);
+      }, 500); // 500ms debounce
       return () => clearTimeout(timeoutId);
     }
   }, [nickname]);
-
   return (
     <div className="bg-white w-[350px] rounded-lg shadow p-6 space-y-8">
       <h2 className="text-left text-3xl font-semibold text-gray-900">
