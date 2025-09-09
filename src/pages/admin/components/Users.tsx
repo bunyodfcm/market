@@ -1,5 +1,5 @@
-import React, { use, useEffect, useState } from "react";
-import { PencilIcon, TrashIcon, EyeIcon } from "@heroicons/react/24/outline";
+import React, { useEffect, useState } from "react";
+// import { PencilIcon, TrashIcon, EyeIcon } from "@heroicons/react/24/outline";
 import { fetchUsers } from "../../../services/authApi";
 import Table from "../../../components/ui/Table";
 import UserCard from "../../../components/ui/UserCard";
@@ -28,17 +28,17 @@ const Users: React.FC = () => {
     getUsers(searchTerm ? { search: searchTerm } : undefined);
   }, [searchTerm]);
 
-  const getStatusBadge = (status: string) => {
-    return status === "active" ? (
-      <span className="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">
-        Active
-      </span>
-    ) : (
-      <span className="px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full">
-        Inactive
-      </span>
-    );
-  };
+  // const getStatusBadge = (status: string) => {
+  //   return status === "active" ? (
+  //     <span className="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">
+  //       Active
+  //     </span>
+  //   ) : (
+  //     <span className="px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full">
+  //       Inactive
+  //     </span>
+  //   );
+  // };
 
   return (
     <div className="space-y-6">

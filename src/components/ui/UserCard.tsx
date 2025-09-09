@@ -1,12 +1,12 @@
 import React from "react";
 
 interface UserCardProps {
- nickname: string;
+  nickname: string;
   phone: string;
   roles: string;
   isActive: boolean;
-  avatar?:string
-  createdAt: string;
+  avatar?: string;
+  createdAt?: string;
   onViewProfile?: () => void;
 }
 
@@ -14,9 +14,7 @@ const UserCard: React.FC<UserCardProps> = ({
   nickname,
   roles,
   phone,
-  avatar,
   isActive,
-  createdAt,
   onViewProfile,
 }) => {
   return (
@@ -30,24 +28,21 @@ const UserCard: React.FC<UserCardProps> = ({
             className="w-24 h-24 rounded-full border-4 border-white shadow"
           />
         </div>
-         {
-                  isActive ? (
-                    <span className="absolute top-2 right-2 px-2 py-1 text-xs bg-green-100 text-green-700 rounded-full">
-                      Active
-                    </span>
-                  ) : (
-                    <span className="absolute px-2 py-1 text-xs bg-red-100 text-red-700 rounded-full">
-                      Inactive
-                    </span>
-                  )}
+        {isActive ? (
+          <span className="absolute top-2 right-2 px-2 py-1 text-xs bg-green-100 text-green-700 rounded-full">
+            Active
+          </span>
+        ) : (
+          <span className="absolute px-2 py-1 text-xs bg-red-100 text-red-700 rounded-full">
+            Inactive
+          </span>
+        )}
       </div>
 
       {/* Body */}
       <div className="pt-16 pb-6 px-6 text-center">
         <h3 className="text-lg font-semibold text-gray-900">{nickname}</h3>
-        <p className="relative text-gray-500 text-sm">Role: {roles}
-           
-        </p>
+        <p className="relative text-gray-500 text-sm">Role: {roles}</p>
         <p className="text-gray-500 text-sm">{phone}</p>
 
         <button
