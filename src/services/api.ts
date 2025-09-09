@@ -71,6 +71,7 @@ export const getUsersByPost = async <T>(
   return response.data;
 };
 
+// checking user nickname the registration
 export const checkUser = async <T>(endpoint: string, data: any): Promise<T> => {
   const response: AxiosResponse<T> = await api.post(`/${endpoint}`, data);
   return response.data;

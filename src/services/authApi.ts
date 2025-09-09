@@ -48,3 +48,11 @@ export const checkNickname = async (data: {
 }): Promise<{ message: string }> => {
   return await checkUser("user/nickname-check", data);
 };
+
+// get user 
+
+export const getUser = async (data:{
+  nickname: string;
+}): Promise<{ data:any }>=> {
+  
+}
