@@ -44,6 +44,10 @@ const Login: React.FC = () => {
         setInputError("Nickname must be between 3 and 20 characters");
         return setIsChecking(true);
       }
+      if(/\w/.test(nickname)){
+        setInputError("Nickname must not contain special characters");
+        return setIsChecking(true);
+      }
       const response = await checkNickname({ nickname });
 
       // Agar backend 200 qaytarsa → message ni chiqaramiz
