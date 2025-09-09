@@ -11,6 +11,7 @@ const Login: React.FC = () => {
   const [phone, setPhone] = useState("");
   const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [inputPhoneError, setInputPhoneError] = useState("");
   const [inputError, setInputError] = useState("");
   const [error, setError] = useState("");
@@ -95,8 +96,11 @@ const Login: React.FC = () => {
           <input
             id="phone"
             name="phone"
-            type="phone"
             autoComplete="phone"
+            type="tel"
+            inputMode="numeric"
+            maxLength={9}
+            pattern="\d{9}"
             required
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
@@ -105,7 +109,11 @@ const Login: React.FC = () => {
                 ? "focus:ring-red-500 focus:border-red-500"
                 : "focus:ring-blue-500 focus:border-blue-500"
             }  focus:z-10 sm:text-sm placeholder:text-gray-400`}
-            placeholder="Phone Number"
+            placeholder="Phone Number: 901234567"
+            onInput={(e) => {
+              const target = e.target as HTMLInputElement;
+              target.value = target.value.replace(/\D/g, ""); // faqat raqam qoldiradi
+            }}
           />
           <div className="absolute inset-y-0 left-2 flex items-center pointer-events-none">
             <Icon
@@ -159,16 +167,10 @@ const Login: React.FC = () => {
         </div>
 
         <div className="relative">
-          {/* <label
-            htmlFor="password"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Password
-          </label> */}
           <input
             id="password"
             name="password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             autoComplete="current-password"
             required
             value={password}
@@ -176,23 +178,32 @@ const Login: React.FC = () => {
             className="mt-1 appearance-none relative block w-full px-9 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm placeholder:text-gray-400"
             placeholder="Password"
           />
-          <div className="absolute inset-y-0 left-2 flex items-center pointer-events-none">
+
+          {/* Chap tomonda lock icon */}
+          <div className="absolute inset-y-0 left-2 flex items-center">
             <Icon
               icon="mdi:lock"
-              width="24"
-              height="24"
-              className="text-gray-400 z-10"
+              width="20"
+              height="20"
+              className="text-gray-400 z-50"
             />
           </div>
-          <div className="absolute inset-y-0 right-2 flex items-center pointer-events-none">
+
+          {/* O‘ng tomonda eye icon (bosiladigan) */}
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute inset-y-0 right-2 flex items-center"
+          >
             <Icon
-              icon="mdi:eye-off-outline"
-              width="24"
-              height="24"
-              className="text-gray-400 z-10"
+              icon={showPassword ? "mdi:eye-outline" : "mdi:eye-off-outline"}
+              width="20"
+              height="20"
+              className="text-gray-400 z-50"
             />
-          </div>
+          </button>
         </div>
+
         <div className="text-sm text-gray-500">
           By signing up, you confirm that you’ve read and accepted our
           <a

@@ -8,6 +8,7 @@ import ButtonWithIcon from "../../../components/ui/Buttons/ButtonWithIcon";
 const Login: React.FC = () => {
   const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
 
   const { login, isLoading } = useAuth();
@@ -71,16 +72,10 @@ const Login: React.FC = () => {
         </div>
 
         <div className="relative">
-          {/* <label
-            htmlFor="password"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Password
-          </label> */}
           <input
             id="password"
             name="password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             autoComplete="current-password"
             required
             value={password}
@@ -88,22 +83,30 @@ const Login: React.FC = () => {
             className="mt-1 appearance-none relative block w-full px-9 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm placeholder:text-gray-400"
             placeholder="Password"
           />
-          <div className="absolute inset-y-0 left-2 flex items-center pointer-events-none">
+
+          {/* Chap tomonda lock icon */}
+          <div className="absolute inset-y-0 left-2 flex items-center">
             <Icon
               icon="mdi:lock"
-              width="24"
-              height="24"
-              className="text-gray-400 z-10"
+              width="20"
+              height="20"
+              className="text-gray-400 z-50"
             />
           </div>
-          <div className="absolute inset-y-0 right-2 flex items-center pointer-events-none">
+
+          {/* O‘ng tomonda eye icon (bosiladigan) */}
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute inset-y-0 right-2 flex items-center"
+          >
             <Icon
-              icon="mdi:eye-off-outline"
-              width="24"
-              height="24"
-              className="text-gray-400 z-10"
+              icon={showPassword ? "mdi:eye-outline" : "mdi:eye-off-outline"}
+              width="20"
+              height="20"
+              className="text-gray-400 z-50"
             />
-          </div>
+          </button>
         </div>
         <div className="flex items-center justify-between">
           <div className="flex items-center  text-md">
@@ -121,7 +124,7 @@ const Login: React.FC = () => {
 
         <div>
           <DefaultButton
-            disabled={ isLoading}
+            disabled={isLoading}
             type="submit"
             className="w-full disabled:cursor-not-allowed didabled:opacity-50"
           >
