@@ -5,10 +5,11 @@ interface CardListProps {
   children: React.ReactNode;
   className?: string;
   arrows?: boolean;
-  arrowFunc?:()=>void;
 }
 
-const CardList: React.FC<CardListProps> = ({ children, className = "", arrows, arrowFunc }) => {
+const CardList: React.FC<CardListProps> = ({ children, className = "", arrows}) => {
+
+  
   return (
     <div className={className}>
     <div
