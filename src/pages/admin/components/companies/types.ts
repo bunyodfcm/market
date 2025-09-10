@@ -1,13 +1,13 @@
 export interface Company {
-  id: number;
+  id?: number;
   name: string;
-  slug: string; // URL uchun qisqa nom
+  slug?: string; // URL uchun qisqa nom
   phone?: string;
   email?: string;
   website?: string;
   address?: string;
   logo?: string; // logo URL
-  createdAt: string; // ISO date
+  createdAt?: string; // ISO date
   isActive: boolean;
   employees?: number;
   revenueUSD?: number;

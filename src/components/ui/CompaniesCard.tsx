@@ -9,20 +9,10 @@ interface ICompanyCard {
 
 const CompanyCard: React.FC<ICompanyCard> = ({ company, onViewProfile }) => {
   const {
-    id,
     name,
-    slug,
     phone,
-    email,
-    website,
-    address,
-    logo,
-    createdAt,
     isActive,
-    employees,
-    revenueUSD,
     categories,
-    description,
   } = company;
   return (
     <div className="max-w-sm w-full bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
