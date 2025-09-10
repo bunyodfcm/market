@@ -1,24 +1,13 @@
 import React, { useEffect, useState } from "react";
+import type { User } from "./types";
 // import { PencilIcon, TrashIcon, EyeIcon } from "@heroicons/react/24/outline";
-import { fetchUsers } from "../../../services/authApi";
-import Table from "../../../components/ui/Table";
-import UserCard from "../../../components/ui/UserCard";
-import CardList from "../../../components/ui/CardList";
-import Modal from "../../../components/ui/Modal";
+import { fetchUsers } from "../../../../services/authApi";
+import Table from "../../../../components/ui/Table";
 
-interface User {
-  id: number;
-  nickname: string;
-  phone: string;
-  roles: string;
-  isActive: boolean;
-  createdAt: string;
-}
 
 const Users: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const getUsers = async (data?: any) => {
     const users = await fetchUsers({ page: 1, limit: 10, ...data });
@@ -30,39 +19,26 @@ const Users: React.FC = () => {
     getUsers(searchTerm ? { search: searchTerm } : undefined);
   }, [searchTerm]);
 
-  // const getStatusBadge = (status: string) => {
-  //   return status === "active" ? (
-  //     <span className="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">
-  //       Active
-  //     </span>
-  //   ) : (
-  //     <span className="px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full">
-  //       Inactive
-  //     </span>
-  //   );
-  // };
+  const getStatusBadge = (status: boolean) => {
+    return status ? (
+      <span className="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">
+        Active
+      </span>
+    ) : (
+      <span className="px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full">
+        Inactive
+      </span>
+    );
+  };
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Users</h1>
-          <p className="text-gray-600">Manage your application users</p>
+          <h1 className="text-2xl font-bold text-gray-900">Customers</h1>
+          <p className="text-gray-600">Manage your application Customers</p>
         </div>
-        <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"onClick={() => setIsModalOpen(true)}>
-          Add User
-        </button>
       </div>
-       <Modal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        title="User List"
-        size="md"
-      >
-       <div className="p-4">
-        data
-        </div>
-      </Modal>
 
       <div className="bg-white rounded-lg shadow">
         <div className="px-6 py-4 border-b border-gray-200">
@@ -90,22 +66,24 @@ const Users: React.FC = () => {
           <Table<User>
             data={users}
             columns={[
+              {
+                key: "nickname",
+                header: "Image",
+                render: (_, row) => (
+                  <img
+                    src={`https://ui-avatars.com/api/?name=${row.nickname}&background=random`}
+                    alt={row.nickname}
+                    className="w-10 h-10 rounded-full border"
+                  />
+                ),
+              },
               { key: "nickname", header: "Nickname" },
               { key: "phone", header: "Phone" },
               { key: "roles", header: "Roles" },
               {
                 key: "isActive",
                 header: "Status",
-                render: (value) =>
-                  value ? (
-                    <span className="px-2 py-1 text-xs bg-green-100 text-green-700 rounded-full">
-                      Active
-                    </span>
-                  ) : (
-                    <span className="px-2 py-1 text-xs bg-red-100 text-red-700 rounded-full">
-                      Inactive
-                    </span>
-                  ),
+                render: (value: any) => getStatusBadge(value),
               },
               {
                 key: "createdAt",
@@ -115,18 +93,9 @@ const Users: React.FC = () => {
             ]}
             onRowClick={(user) => alert(`Clicked user: ${user.nickname}`)}
           />
-          <CardList>
-            {users.map((user) => (
-              <UserCard
-                key={user.id}
-                nickname={user.nickname}
-                phone={user.phone}
-                roles={user.roles}
-                isActive={user.isActive}
-                createdAt={user.createdAt}
-              />
-            ))}
-          </CardList>
+          {/* <CardList className="bg-white p-6 rounded-lg shadow">
+           
+          </CardList> */}
         </div>
       </div>
     </div>

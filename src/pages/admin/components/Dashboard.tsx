@@ -1,19 +1,10 @@
 import { useState } from "react";
 import Card from "../../../components/ui/Card";
-import Table from "../../../components/ui/Table";
 import Modal from "../../../components/ui/Modal";
 import { useAuth } from "../../../hooks/useAuth";
 
-const usersData = [
-  { id: 1, name: "Admin User", email: "admin@example.com", role: "admin" },
-  { id: 2, name: "Regular User", email: "user@example.com", role: "user" },
-];
 
-const userColumns = [
-  { key: "name", header: "Name" },
-  { key: "email", header: "Email" },
-  { key: "role", header: "Role" },
-];
+
 
 const Dashboard: React.FC = () => {
   const { user } = useAuth();
