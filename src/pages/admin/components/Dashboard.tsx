@@ -1,19 +1,19 @@
 import { useState } from "react";
 import Card from "../../../components/ui/Card";
-// import Table from "../../components/ui/Table";
-// import Modal from "../../components/ui/Modal";
+import Table from "../../../components/ui/Table";
+import Modal from "../../../components/ui/Modal";
 import { useAuth } from "../../../hooks/useAuth";
 
-// const usersData = [
-//   { id: 1, name: "Admin User", email: "admin@example.com", role: "admin" },
-//   { id: 2, name: "Regular User", email: "user@example.com", role: "user" },
-// ];
+const usersData = [
+  { id: 1, name: "Admin User", email: "admin@example.com", role: "admin" },
+  { id: 2, name: "Regular User", email: "user@example.com", role: "user" },
+];
 
-// const userColumns = [
-//   { key: "name", header: "Name" },
-//   { key: "email", header: "Email" },
-//   { key: "role", header: "Role" },
-// ];
+const userColumns = [
+  { key: "name", header: "Name" },
+  { key: "email", header: "Email" },
+  { key: "role", header: "Role" },
+];
 
 const Dashboard: React.FC = () => {
   const { user } = useAuth();
@@ -34,14 +34,15 @@ const Dashboard: React.FC = () => {
           Show Users
         </button>
       </Card>
-      {/* <Modal
+      <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         title="User List"
         size="md"
       >
-        <Table id="users-table" />
-      </Modal> */}
+        <p>Lorem ipsum dolor sit amet.</p>
+        {/* <Table data={usersData} columns={userColumns} className="" onRowClick={()=>alert()} /> */}
+      </Modal>
 
       <div className="p-6 space-y-6">
       <Card title="User Stats" subtitle="Overview of active users">

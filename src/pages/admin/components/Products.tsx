@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { PlusIcon, PencilIcon, TrashIcon, EyeIcon } from '@heroicons/react/24/outline';
+import Modal from '../../../components/ui/Modal';
+import ProductForm from './ui/ProductForm';
 
 interface Product {
   id: number;
@@ -12,6 +14,7 @@ interface Product {
 }
 
 const Products: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [products] = useState<Product[]>([
     {
       id: 1,
@@ -62,11 +65,19 @@ const Products: React.FC = () => {
           <h1 className="text-2xl font-bold text-gray-900">Products</h1>
           <p className="text-gray-600">Manage your product catalog</p>
         </div>
-        <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2">
+        <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2" onClick={() => setIsModalOpen(true)}>
           <PlusIcon className="w-5 h-5" />
           <span>Add Product</span>
         </button>
       </div>
+       <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Add New Product"
+        size="md"
+      >
+       <ProductForm />
+      </Modal>
 
       {/* Filters */}
       <div className="bg-white rounded-lg shadow p-4">
