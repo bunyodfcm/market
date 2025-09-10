@@ -155,6 +155,8 @@ const Login: React.FC = () => {
             name="nickname"
             type="nickname"
             autoComplete="nickname"
+            minLength={3}
+            maxLength={20}
             required
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
