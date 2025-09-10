@@ -1,6 +1,6 @@
 import React from "react";
 
-import type { Company } from "../../pages/admin/components/companies/types";
+import type { Company } from "../../../pages/admin/components/companies/types";
 
 interface ICompanyCard {
   company: Company;

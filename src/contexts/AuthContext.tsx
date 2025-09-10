@@ -15,7 +15,7 @@ interface AuthContextType {
     phone: string,
     password: string
   ) => Promise<boolean>;
-  login: (nickname: string, password: string) => Promise<{success:boolean, error?:string}>;
+  login: (nickname: string, password: string) => Promise<boolean>;
   logout: () => void;
   resetPassword: (phone: string) => Promise<boolean>;
   isLoading: boolean;
@@ -156,7 +156,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const login = async (
     nickname: string,
     password: string
-  ): Promise<{success:boolean, error?:string}> => {
+  ): Promise<boolean> => {
     try {
       setIsLoading(true);
 
@@ -174,12 +174,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
         localStorage.setItem("otpToken", activeToken.activeToken);
 
-        return {success:true};
+        return true
       }
-      return {success: false};
+      return false
     } catch (error: any) {
-      console.error("Login failed:", error.response?.data || error.message);
-      return {success: false, error: error.response?.data || error.message};
+      console.error("Login failed:", error);
+      return false
     } finally {
       setIsLoading(false);
     }

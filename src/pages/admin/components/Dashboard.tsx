@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Card from "../../../components/ui/Card";
+import Card from "../../../components/ui/Cards/Card";
 import Modal from "../../../components/ui/Modal";
 import { useAuth } from "../../../hooks/useAuth";
 

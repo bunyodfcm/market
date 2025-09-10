@@ -25,12 +25,12 @@ const Login: React.FC = () => {
 
     // check nickname with on back-end
 
-    const {success, error} = await login(nickname, password);
+    const success= await login(nickname, password);
     if (success) {
       navigate("/admin");
     } else {
 
-      setError(error ? error : "Invalid credentials" );
+      setError("Invalid credentials" );
     }
   };
 
