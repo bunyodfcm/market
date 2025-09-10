@@ -30,7 +30,7 @@ const CompanyCard: React.FC<ICompanyCard> = ({ company, onViewProfile }) => {
             Active
           </span>
         ) : (
-          <span className="absolute px-2 py-1 text-xs bg-red-100 text-red-700 rounded-full">
+          <span className="absolute top-2 right-2 px-2 py-1 text-xs bg-red-100 text-red-700 rounded-full">
             Inactive
           </span>
         )}
