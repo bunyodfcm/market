@@ -5,6 +5,7 @@ import Dashboard from "./components/Dashboard";
 import Users from "./components/cutomers/Users";
 import Products from "./components/products/Products";
 import Companies from "./components/companies/Companies";
+import Warehouses from "./components/warehouse/Warehouses";
 
 const AdminRoutes: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const AdminRoutes: React.FC = () => {
         <Route path="/companies" element={<Companies />} />
         <Route path="/users" element={<Users />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/warehouses" element={<Warehouses />} />
         <Route path="*" element={<Navigate to="/admin" replace />} />
       </Routes>
     </AdminLayout>

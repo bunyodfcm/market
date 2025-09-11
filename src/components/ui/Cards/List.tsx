@@ -4,16 +4,19 @@ import {Icon} from "@iconify/react"
 interface CardListProps {
   children: React.ReactNode;
   className?: string;
+  grid?: boolean;
   arrows?: boolean;
 }
 
-const CardList: React.FC<CardListProps> = ({ children, className = "", arrows}) => {
+const grids = `grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 place-items-center`
+
+const CardList: React.FC<CardListProps> = ({ children, className = "",grid, arrows}) => {
 
   
   return (
     <div className={className}>
     <div
-      className={`grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 place-items-center`}
+      className={grid ? grids : ""}
     >
       {children}
       

@@ -1,4 +1,4 @@
-import { checkNickname, checkPhone } from "../services/authApi";
+
 
 // Nickname tekshiruv
 export const validateNickname = (nickname: string): string | null => {

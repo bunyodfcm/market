@@ -23,7 +23,7 @@ const Sidebar: React.FC = () => {
     { name: "Companies", icon: HomeModernIcon, path: "/admin/companies" },
     { name: "Customers", icon: UsersIcon, path: "/admin/users" },
     { name: "Products", icon: ShoppingBagIcon, path: "/admin/products" },
-    { name: "Orders", icon: DocumentTextIcon, path: "/admin/orders" },
+    { name: "WareHouses", icon: DocumentTextIcon, path: "/admin/warehouses" },
     { name: "Analytics", icon: ChartBarIcon, path: "/admin/analytics" },
     { name: "Settings", icon: CogIcon, path: "/admin/settings" },
   ];
