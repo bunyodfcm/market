@@ -1,23 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
 import DefaultButton from "../../../components/ui/Buttons/Default";
 import { Icon } from "@iconify/react";
 import ButtonWithIcon from "../../../components/ui/Buttons/ButtonWithIcon";
+import { useValidation } from "../../../hooks/useValidation";
+import { validateNickname, validatePhone } from "../../../utils/validation";
 import { checkNickname, checkPhone } from "../../../services/authApi";
-import { useEffect } from "react";
 
 const Login: React.FC = () => {
   const [phone, setPhone] = useState("");
   const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [inputPhoneError, setInputPhoneError] = useState("");
-  const [inputError, setInputError] = useState("");
   const [error, setError] = useState("");
-  const [isChecking, setIsChecking] = useState(false);
   const { register, isLoading } = useAuth();
   const navigate = useNavigate();
+
+  // Custom validation
+  const nicknameError = useValidation(nickname, validateNickname, 500);
+  const phoneError = useValidation(phone, validatePhone, 500);
+
+  //backend validation
+   const [inputPhoneError, setInputPhoneError] = useState("");
+  const [inputNicknameError, setInputNicknameError] = useState("")
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,7 +34,7 @@ const Login: React.FC = () => {
       return;
     }
 
-    const success = await register(phone, phone, password);
+    const success = await register(phone, nickname, password);
     console.log(success, "success");
 
     if (success) {
@@ -38,55 +44,34 @@ const Login: React.FC = () => {
     }
   };
 
-  const checkInputNickname = async (nickname: string) => {
+   const checkInputNickname = async (nickname: string) => {
     try {
-      if (!/^[A-Za-z0-9]+$/.test(nickname)) {
-        setInputError("Nickname must not contain special characters");
-        return setIsChecking(true);
-      }else if (nickname.length < 3 || nickname.length > 20) {
-        setInputError("Nickname must be between 3 and 20 characters");
-        return setIsChecking(true);
-      }
-      
+      if (nickname.length < 3) return;
       const response = await checkNickname({ nickname });
-
-      // Agar backend 200 qaytarsa → message ni chiqaramiz
-      setInputError(response.message);
-      return setIsChecking(true);
-    } catch (error: any) {
-      setInputError("");
-      setIsChecking(false);
+      setInputNicknameError(response.message || "");
+    } catch (err) {
+      setInputNicknameError("");
     }
   };
+
   const checkInputPhone = async (phone: string) => {
     try {
-      if (phone.length < 9) {
-        setInputPhoneError("Phone number must be 9 digits");
-        return setIsChecking(true);
-      }
+      if (phone.length < 9) return;
       const response = await checkPhone({ phone });
-
-      // Agar backend 200 qaytarsa → message ni chiqaramiz
-      setInputPhoneError(response.message);
-      return setIsChecking(true);
-    } catch (error: any) {
-      console.log(error, "❌ error");
+      setInputPhoneError(response.message || "");
+    } catch (err) {
       setInputPhoneError("");
-      setIsChecking(false);
     }
   };
 
+  // useEffect → nickname va phone yozilganda backend check
   useEffect(() => {
-    if (phone) {
-      checkInputPhone(phone);
-    }
-  }, [phone]);
+    if (nickname) checkInputNickname(nickname);
+  }, [nickname]);
 
   useEffect(() => {
-    if (nickname) {
-      checkInputNickname(nickname);
-    }
-  }, [nickname]);
+    if (phone) checkInputPhone(phone);
+  }, [phone]);
 
   return (
     <div className="bg-white w-[350px] rounded-lg shadow p-6 space-y-8">
@@ -100,17 +85,11 @@ const Login: React.FC = () => {
           </div>
         )}
 
+        {/* Phone */}
         <div className="relative">
-          {/* <label
-            htmlFor="phone"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Your Nickname
-          </label> */}
           <input
             id="phone"
             name="phone"
-            autoComplete="phone"
             type="tel"
             inputMode="numeric"
             maxLength={9}
@@ -118,70 +97,46 @@ const Login: React.FC = () => {
             required
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            className={`mt-1 appearance-none relative block w-full pl-9 pr-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none ${
-              inputPhoneError
-                ? "focus:ring-red-500 focus:border-red-500"
-                : "focus:ring-blue-500 focus:border-blue-500"
-            }  focus:z-10 sm:text-sm placeholder:text-gray-400`}
+            className={`mt-1 block w-full pl-9 pr-3 py-2 border rounded-lg focus:outline-none ${
+              phoneError
+                ? "border-red-500 focus:ring-red-500"
+                : "border-gray-300 focus:ring-blue-500"
+            } sm:text-sm placeholder:text-gray-400`}
             placeholder="Phone Number: 901234567"
-            onInput={(e) => {
-              const target = e.target as HTMLInputElement;
-              target.value = target.value.replace(/\D/g, ""); // faqat raqam qoldiradi
-            }}
           />
           <div className="absolute inset-y-0 left-2 flex items-center pointer-events-none">
-            <Icon
-              icon="mdi:phone"
-              width="24"
-              height="24"
-              className="text-gray-400 z-10"
-            />
+            <Icon icon="mdi:phone" width="24" height="24" className="text-gray-400" />
           </div>
-          {inputPhoneError && (
-            <p className="absolute top-full left-6 bg-white border rounded-md text-sm text-red-600 mt-1 p-2 z-50">
-              {inputPhoneError}
-            </p>
-          )}
+          {(phoneError || inputPhoneError) && <p className="absolute top-full left-5 mt-1 text-sm text-red-600">{(phoneError || inputPhoneError)}</p>}
         </div>
+
+        {/* Nickname */}
         <div className="relative">
-          {/* <label
-            htmlFor="phone"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Your Nickname
-          </label> */}
           <input
             id="nickname"
             name="nickname"
-            type="nickname"
-            autoComplete="nickname"
+            type="text"
             minLength={3}
             maxLength={20}
             required
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
-            className={`mt-1 appearance-none relative block w-full pl-9 pr-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none ${
-              inputError
-                ? "focus:ring-red-500 focus:border-red-500"
-                : "focus:ring-blue-500 focus:border-blue-500"
-            }  focus:z-10 sm:text-sm placeholder:text-gray-400`}
+            className={`mt-1 block w-full pl-9 pr-3 py-2 border rounded-lg focus:outline-none ${
+              nicknameError
+                ? "border-red-500 focus:ring-red-500"
+                : "border-gray-300 focus:ring-blue-500"
+            } sm:text-sm placeholder:text-gray-400`}
             placeholder="Nickname"
           />
           <div className="absolute inset-y-0 left-2 flex items-center pointer-events-none">
-            <Icon
-              icon="mdi:user"
-              width="24"
-              height="24"
-              className="text-gray-400 z-10"
-            />
+            <Icon icon="mdi:user" width="24" height="24" className="text-gray-400" />
           </div>
-          {inputError && (
-            <p className="absolute top-full left-6 bg-white border rounded-md text-sm text-red-600 mt-1 p-2 z-50">
-              {inputError}
-            </p>
-          )}
+          {(nicknameError || inputNicknameError) && (
+            <p className="absolute top-full left-5 mt-1 text-sm text-red-600">{nicknameError || inputNicknameError }</p>)
+          }
         </div>
 
+        {/* Password */}
         <div className="relative">
           <input
             id="password"
@@ -191,21 +146,12 @@ const Login: React.FC = () => {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="mt-1 appearance-none relative block w-full px-9 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm placeholder:text-gray-400"
+            className="mt-1 block w-full px-9 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm placeholder:text-gray-400"
             placeholder="Password"
           />
-
-          {/* Chap tomonda lock icon */}
           <div className="absolute inset-y-0 left-2 flex items-center">
-            <Icon
-              icon="mdi:lock"
-              width="20"
-              height="20"
-              className="text-gray-400 z-50"
-            />
+            <Icon icon="mdi:lock" width="20" height="20" className="text-gray-400" />
           </div>
-
-          {/* O‘ng tomonda eye icon (bosiladigan) */}
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
@@ -215,68 +161,44 @@ const Login: React.FC = () => {
               icon={showPassword ? "mdi:eye-outline" : "mdi:eye-off-outline"}
               width="20"
               height="20"
-              className="text-gray-400 z-50"
+              className="text-gray-400"
             />
           </button>
         </div>
 
         <div className="text-sm text-gray-500">
           By signing up, you confirm that you’ve read and accepted our
-          <a
-            href=""
-            className="font-semibold text-blue-600 hover:text-blue-500 mx-1"
-          >
+          <a href="" className="font-semibold text-blue-600 hover:text-blue-500 mx-1">
             User Notice
           </a>
-          and{" "}
-          <a
-            href=""
-            className="font-semibold text-blue-600 hover:text-blue-500 mx-1"
-          >
-            {" "}
+          and
+          <a href="" className="font-semibold text-blue-600 hover:text-blue-500 mx-1">
             Privacy Policy
           </a>
-          .
         </div>
 
-        <div>
-          <DefaultButton
-            disabled={isLoading || isChecking}
-            type="submit"
-            className="w-full disabled:cursor-not-allowed didabled:opacity-50"
-          >
-            {isLoading ? "Registration..." : "Register"}
-          </DefaultButton>
-        </div>
+        <DefaultButton
+          disabled={isLoading || !!nicknameError || !!phoneError}
+          type="submit"
+          className="w-full disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          {isLoading ? "Registration..." : "Register"}
+        </DefaultButton>
       </form>
 
       <div className="text-center">
         <p className="text-sm text-gray-400">or sign up with</p>
       </div>
-      <div className="flex justify-between items-center gap-4">
+      <div className="flex justify-between gap-4">
         <ButtonWithIcon
           className="w-full"
-          icon={
-            <Icon
-              icon="logos:telegram"
-              width="24"
-              height="24"
-              className="text-gray-500"
-            />
-          }
+          icon={<Icon icon="logos:telegram" width="24" height="24" />}
         >
           Telegram
         </ButtonWithIcon>
         <ButtonWithIcon
           className="w-full"
-          icon={
-            <Icon
-              icon="flat-color-icons:google"
-              width="24"
-              height="24"
-              className="text-gray-500"
-            />
-          }
+          icon={<Icon icon="flat-color-icons:google" width="24" height="24" />}
         >
           Google
         </ButtonWithIcon>
