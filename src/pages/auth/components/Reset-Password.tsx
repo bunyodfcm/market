@@ -22,7 +22,7 @@ const ResetPassword: React.FC = () => {
     if (success) {
       navigate("/auth/login");
     } else {
-      setError("Invalid credentials");
+      setError("Invalid credentials"); 
     }
   };
 
