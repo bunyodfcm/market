@@ -2,12 +2,24 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Icon } from "@iconify/react";
 
+type NavItem = {
+  name: string;
+  path: string;
+};
+
+const navItems: NavItem[] = [
+  { name: "Home", path: "/" },
+  { name: "Help", path: "/help" },
+  { name: "Login", path: "/auth/login" },
+  { name: "Register", path: "/auth/register" },
+];
+
 const Navbar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
     <nav className="bg-white shadow-md p-4">
-      <div className=" relative flex items-center justify-between mx-auto max-w-7xl">
+      <div className="flex items-center justify-between mx-auto max-w-7xl">
         {/* Logo */}
         <div
           className="flex flex-row items-center gap-2 text-blue-500"
@@ -19,60 +31,26 @@ const Navbar: React.FC = () => {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-6">
-          <li>
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                `text-base font-semibold ${
-                  isActive ? "text-blue-600" : "text-gray-500"
-                }`
-              }
-            >
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/help"
-              className={({ isActive }) =>
-                `text-base font-semibold ${
-                  isActive ? "text-blue-600" : "text-gray-500"
-                }`
-              }
-            >
-              Help
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/auth/login"
-              className={({ isActive }) =>
-                `text-base font-semibold ${
-                  isActive ? "text-blue-600" : "text-gray-500"
-                }`
-              }
-            >
-              Login
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/auth/register"
-              className={({ isActive }) =>
-                `text-base font-semibold ${
-                  isActive ? "text-blue-600" : "text-gray-500"
-                }`
-              }
-            >
-              Register
-            </NavLink>
-          </li>
+          {navItems.map((item) => (
+            <li key={item.path}>
+              <NavLink
+                to={item.path}
+                className={({ isActive }) =>
+                  `text-base font-semibold transition-colors ${
+                    isActive ? "text-blue-600" : "text-gray-500 hover:text-blue-500"
+                  }`
+                }
+              >
+                {item.name}
+              </NavLink>
+            </li>
+          ))}
         </ul>
 
         {/* Mobile Hamburger */}
         <button
           className="md:hidden text-gray-700"
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => setIsOpen((prev) => !prev)}
         >
           <Icon icon={isOpen ? "mdi:close" : "mdi:menu"} width="28" height="28" />
         </button>
@@ -80,59 +58,22 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <ul className="absolute top-10 right-5 md:hidden flex flex-col space-y-4 mt-4 p-4 bg-gray-50 rounded-lg shadow transition-all duration-300">
-          <li>
-            <NavLink
-              to="/"
-              onClick={() => setIsOpen(false)}
-              className={({ isActive }) =>
-                `block text-base font-semibold ${
-                  isActive ? "text-blue-600" : "text-gray-600"
-                }`
-              }
-            >
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/help"
-              onClick={() => setIsOpen(false)}
-              className={({ isActive }) =>
-                `block text-base font-semibold ${
-                  isActive ? "text-blue-600" : "text-gray-600"
-                }`
-              }
-            >
-              Help
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/auth/login"
-              onClick={() => setIsOpen(false)}
-              className={({ isActive }) =>
-                `block text-base font-semibold ${
-                  isActive ? "text-blue-600" : "text-gray-600"
-                }`
-              }
-            >
-              Login
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/auth/register"
-              onClick={() => setIsOpen(false)}
-              className={({ isActive }) =>
-                `block text-base font-semibold ${
-                  isActive ? "text-blue-600" : "text-gray-600"
-                }`
-              }
-            >
-              Register
-            </NavLink>
-          </li>
+        <ul className="md:hidden flex flex-col space-y-4 mt-4 p-4 bg-gray-50 rounded-lg shadow">
+          {navItems.map((item) => (
+            <li key={item.path}>
+              <NavLink
+                to={item.path}
+                onClick={() => setIsOpen(false)}
+                className={({ isActive }) =>
+                  `block text-base font-semibold transition-colors ${
+                    isActive ? "text-blue-600" : "text-gray-600 hover:text-blue-500"
+                  }`
+                }
+              >
+                {item.name}
+              </NavLink>
+            </li>
+          ))}
         </ul>
       )}
     </nav>
