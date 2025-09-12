@@ -7,7 +7,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className="bg-white shadow-md p-4">
-      <div className="flex items-center justify-between mx-auto max-w-7xl">
+      <div className=" relative flex items-center justify-between mx-auto max-w-7xl">
         {/* Logo */}
         <div
           className="flex flex-row items-center gap-2 text-blue-500"
@@ -80,7 +80,7 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <ul className="md:hidden flex flex-col space-y-4 mt-4 p-4 bg-gray-50 rounded-lg shadow">
+        <ul className="absolute top-full right-0 md:hidden flex flex-col space-y-4 mt-4 p-4 bg-gray-50 rounded-lg shadow transition-all duration-300">
           <li>
             <NavLink
               to="/"
