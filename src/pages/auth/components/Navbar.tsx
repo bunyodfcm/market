@@ -80,7 +80,7 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <ul className="absolute top-5 right-5 md:hidden flex flex-col space-y-4 mt-4 p-4 bg-gray-50 rounded-lg shadow transition-all duration-300">
+        <ul className="absolute top-10 right-5 md:hidden flex flex-col space-y-4 mt-4 p-4 bg-gray-50 rounded-lg shadow transition-all duration-300">
           <li>
             <NavLink
               to="/"
