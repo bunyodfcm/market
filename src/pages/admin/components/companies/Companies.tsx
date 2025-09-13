@@ -2,6 +2,7 @@ import React from "react";
 import CompanyCard from "../../../../components/ui/Cards/CompanyCard";
 import { companies } from "./data";
 import ShowList from "../../../../components/ui/Cards/ShowList";
+import DelayedMount from "../../../../components/ui/DelayedMount";
 // import CompanyCard from "../../../../components/ui/Cards/CompaniesCard";
 
 const Companies: React.FC = () => {
@@ -9,7 +10,8 @@ const Companies: React.FC = () => {
     <div>
       <h1 className="text-2xl font-bold mb-4">Companies</h1>
       <ShowList className="bg-white p-6 rounded-lg shadow space-y-6 ">
-        {companies.map((company) => (
+        {companies.map((company,index) => (
+          <DelayedMount key={company.id} delay={300 * (index + 1)} onFinish={() =>(index + 1)}>
           <CompanyCard
             key={company.id}
             company={company}
@@ -18,6 +20,7 @@ const Companies: React.FC = () => {
             //   console.log(`Viewing profile for company ID: ${company.id}`);
             // }}
           />
+          </DelayedMount>
         ))}
       </ShowList>
     </div>

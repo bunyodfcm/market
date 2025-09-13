@@ -1,4 +1,5 @@
 import React from 'react';
+import DelayedMount from './DelayedMount';
 
 interface Column<T> {
   key: keyof T;
@@ -37,6 +38,7 @@ function Table<T extends { id?: string | number }>({
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
           {data.map((item, index) => (
+            <DelayedMount key={item.id || index} delay={500 * (index + 1)}>
             <tr
               key={item.id || index}
               onClick={() => onRowClick?.(item)}
@@ -53,6 +55,7 @@ function Table<T extends { id?: string | number }>({
                 </td>
               ))}
             </tr>
+            </DelayedMount>
           ))}
         </tbody>
       </table>
