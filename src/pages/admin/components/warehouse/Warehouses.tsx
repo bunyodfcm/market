@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import CardList from "../../../../components/ui/Cards/List";
+import CardList from "../../../../components/ui/Cards/ShowList";
 import Table from "../../../../components/ui/Table";
 import type { Warehouse } from "./types";
 import { warehouses } from "./data";
 
 const Warehouses: React.FC = () => {
   const [warehousesList, setWarehouses] = useState<Warehouse[]>([]);
-    const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   const getUsers = async () => {

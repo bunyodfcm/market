@@ -131,8 +131,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       setIsLoading(true);
 
       const response = await registerUser({
-        phone: phone,
         nickname: nickname,
+        phone: phone,
         password: password,
       });
 
