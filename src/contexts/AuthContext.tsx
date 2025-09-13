@@ -174,12 +174,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
         localStorage.setItem("otpToken", activeToken.activeToken);
 
-        return true
+        return true;
       }
-      return false
+      return false;
     } catch (error: any) {
       console.error("Login failed:", error);
-      return false
+      return false;
     } finally {
       setIsLoading(false);
     }
