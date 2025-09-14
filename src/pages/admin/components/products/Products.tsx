@@ -8,15 +8,7 @@ import {
 import Modal from "../../../../components/ui/Modal";
 import ProductForm from "../ui/ProductForm";
 
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  category: string;
-  stock: number;
-  status: "in_stock" | "low_stock" | "out_of_stock";
-  image: string;
-}
+import type { Product } from "./types";
 
 const Products: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
