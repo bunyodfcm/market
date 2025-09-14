@@ -12,7 +12,7 @@ import {
   Users,
   Building2,
   Boxes,
-  TrendingUp,
+  // TrendingUp,
 } from "lucide-react";
 
 const salesData = [
