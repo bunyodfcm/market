@@ -1,14 +1,24 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { BellIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
 const Header: React.FC = () => {
-
   const [searchInput, setSearchInput] = useState("");
   const [darkmode, setDarkmode] = useState(false);
+  const [adminMenuOpen, setAdminMenuOpen] = useState(false);
+
+  const toggleAdminMenu = () => {
+    setAdminMenuOpen(!adminMenuOpen);
+  };
+
+  const toggleDarkMode = () => {
+    setDarkmode(!darkmode);
+    document.documentElement.classList.toggle("dark");
+  };
 
   return (
-    <header className="bg-white shadow-md border-b  border-gray-200 px-7 py-6">
+    <header className=" bg-white shadow-md border-b  border-gray-200 px-7 py-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
           <div className="relative">
@@ -23,10 +33,10 @@ const Header: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex items-center space-x-3">
+        <div className=" relative flex items-center space-x-3">
           <button
             className="relative p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors"
-            onClick={() => setDarkmode(!darkmode)}
+            onClick={() => toggleDarkMode()}
           >
             {darkmode ? (
               <Icon icon="tdesign:mode-dark" width="25" height="24" />
@@ -46,13 +56,56 @@ const Header: React.FC = () => {
               className="w-10 h-10 rounded-full"
             />
             <div className="md:block">
-              <button>
+              <button
+                onClick={() => toggleAdminMenu()}
+                className="ml-2 flex items-center"
+              >
                 <Icon
-                  icon="iconamoon:arrow-down-2-duotone"
+                  icon={
+                    adminMenuOpen
+                      ? "iconamoon:arrow-up-2-duotone"
+                      : "iconamoon:arrow-down-2-duotone"
+                  }
                   width="24"
                   height="24"
                 />
               </button>
+              {adminMenuOpen && (
+                <div className="absolute right-2 mt-10 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+                  <div>
+                    <div className="px-4 py-2 border-b border-gray-200">
+                      <p className="text-gray-800 font-semibold">Admin Menu</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-start border-gray-200 px-4 py-2 space-x-2">
+                    <Icon icon="carbon:user-profile" width="24" height="24" />
+                    <Link
+                      to="admin/profile"
+                      className="block px-1 py-2 text-gray-700 hover:bg-gray-100"
+                    >
+                      Profile
+                    </Link>
+                  </div>
+                  <div className="flex items-center justify-start border-gray-200 px-4 py-2 space-x-2">
+                    <Icon icon="mingcute:settings-7-line" width="24" height="24" />
+                  <Link
+                    to="admin/settings"
+                    className="block px-1 py-2 text-gray-700 hover:bg-gray-100"
+                  >
+                    Settings
+                  </Link>
+                  </div>
+                  <div className="flex items-center justify-start border-gray-200 px-4 py-2 space-x-2">
+                  <Icon icon="ic:outline-design-services" width="24" height="24" />
+                  <Link
+                    to="admin/services"
+                    className="block px-1 py-2 text-gray-700 hover:bg-gray-100"
+                  >
+                    Services
+                  </Link>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
