@@ -10,7 +10,12 @@ import {
   Pie,
   Cell,
 } from "recharts";
-import { Building2, DollarSign, Users, Boxes } from "lucide-react";
+import {
+  Building2,
+  DollarSign,
+  // Users,
+  // Boxes
+} from "lucide-react";
 
 const branchData = [
   { name: "Chilonzor", sales: 4500 },
@@ -79,7 +84,9 @@ const Analytics: React.FC = () => {
 
       {/* Filiallar bo‘yicha sotuvlar */}
       <div className="bg-white p-4 rounded-2xl shadow">
-        <h2 className="text-lg font-semibold mb-4">Filiallar bo‘yicha Sotuvlar</h2>
+        <h2 className="text-lg font-semibold mb-4">
+          Filiallar bo‘yicha Sotuvlar
+        </h2>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={branchData}>
             <XAxis dataKey="name" />
