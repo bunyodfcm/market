@@ -30,74 +30,74 @@ const Sidebar: React.FC = () => {
 
   return (
     <div
-      className={`bg-white shadow-lg transition-all duration-300 ${
-        collapsed ? "w-16" : "w-64"
-      } transform transform-all duration-300`}
+      className={`bg-white shadow-lg transition-all duration-300 h-screen flex flex-col 
+        ${collapsed ? "w-16" : "w-64"}`}
     >
-      <div className="relative p-3 border-b text-blue-500 border-b border-r shadow-md">
-        <div
-          className="flex flex-row items-center justify-between space-x-2 text-blue-500 mb-4"
-          style={{ fontWeight: "bold", fontSize: "1.2rem" }}
+      {/* Header */}
+      <div className="p-3 border-b text-blue-500 shadow-sm flex justify-between items-center">
+        <div className="flex items-center gap-2">
+          {!collapsed && (
+            <>
+              <Icon icon="icon-park-outline:market" width="36" height="36" />
+              <h1 className="font-bold text-lg">
+                Admin
+                <span className="text-blue-500 text-sm block">E-MALL.UZ</span>
+              </h1>
+            </>
+          )}
+        </div>
+        <button
+          onClick={() => setCollapsed(!collapsed)}
+          className="bg-white border-none p-2 hover:text-blue-700 transition-colors"
         >
-          <div className="flex flex-row items-center gap-2">
-            <div
-              className={`drop-shadow-lg ${
-                collapsed ? "hidden" : ""
-              } items-center justify-center`}
-            >
-              <Icon icon="icon-park-outline:market" width="48" height="48" />
-            </div>
-            <h1
-              className={`font-bold text-xl ${collapsed ? "hidden" : "block"}`}
-            >
-              Admin
-              <span className="text-blue-500 text-sm block">E-MALL.UZ</span>
-            </h1>
-          </div>
-          <button
-            onClick={() => setCollapsed(!collapsed)}
-            className={` bg-white border-none py-3 hover:text-blue-700 transition-colors ${
+          <Icon
+            icon="eva:menu-arrow-outline"
+            width="24"
+            height="24"
+            className={`transition-transform duration-300 ${
               collapsed ? "rotate-180" : ""
             }`}
-          >
-            <Icon icon="eva:menu-arrow-outline" width="24" height="24" />
-          </button>
-        </div>
+          />
+        </button>
       </div>
 
-      <nav className={`mt-6  ${collapsed ? "mx-2" : "mx-4"} space-y-3`}>
+      {/* Menu */}
+      <nav className={`mt-6 flex-1 ${collapsed ? "mx-2" : "mx-4"} space-y-2`}>
         {menuItems.map((item) => {
-          const Icon = item.icon;
+          const IconComp = item.icon;
           const isActive = location.pathname === item.path;
 
           return (
             <Link
               key={item.name}
               to={item.path}
-              className={`flex items-center py-3 ${collapsed  ? "px-2 justify-center":"px-4 "} text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors ${
+              className={`flex items-center py-3 rounded-lg transition-colors ${
+                collapsed ? "justify-center px-2" : "px-4"
+              } ${
                 isActive
-                  ? "bg-blue-50 text-blue-600 border-1 rounded-lg border-blue-600"
-                  : ""
+                  ? "bg-blue-50 text-blue-600 border border-blue-600"
+                  : "text-gray-700 hover:bg-blue-50 hover:text-blue-600"
               }`}
             >
-              <Icon className="w-5 h-5" />
+              <IconComp className="w-5 h-5" />
               {!collapsed && <span className="ml-3">{item.name}</span>}
             </Link>
           );
         })}
       </nav>
 
-      <div className={`bottom-0 w-full mt-6 pt-4 border-t ${collapsed  ? "px-2 justify-center":"px-4 "}`}>
+      {/* Footer (Logout) */}
+      <div
+        className={`border-t p-4 ${
+          collapsed ? "flex justify-center" : ""
+        }`}
+      >
         <button
-          className={`w-full font-semibold flex items-center  px-4 py-3 space-x-2 text-red-700 hover:bg-red-50 hover:text-red-600 transition-colors`}
-          onClick={() => {
-            logout();
-          }}
+          onClick={logout}
+          className="flex items-center text-red-700 hover:bg-red-50 hover:text-red-600 transition-colors px-4 py-2 rounded-lg w-full justify-center md:justify-start"
         >
           <Icon icon="tabler:logout-2" width="20" height="20" />
-          <span className={` ${
-                collapsed ? "hidden" : "block"
-          }`}>Log Out</span>
+          {!collapsed && <span className="ml-2 font-semibold">Log Out</span>}
         </button>
       </div>
     </div>
