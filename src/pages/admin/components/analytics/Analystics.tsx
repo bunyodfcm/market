@@ -1,170 +1,128 @@
 import React from "react";
 import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
+  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
+  LineChart, Line, PieChart, Pie, Cell, Legend
 } from "recharts";
-import {
-  Building2,
-  DollarSign,
-  // Users,
-  // Boxes
-} from "lucide-react";
+
+const revenueData = [
+  { name: "Yan", income: 4000, expense: 2400 },
+  { name: "Fev", income: 3000, expense: 1398 },
+  { name: "Mar", income: 5000, expense: 2000 },
+  { name: "Apr", income: 2780, expense: 3908 },
+];
 
 const branchData = [
-  { name: "Chilonzor", sales: 4500 },
-  { name: "Yunusobod", sales: 3800 },
-  { name: "Sergeli", sales: 5100 },
-  { name: "Mirzo Ulug‘bek", sales: 2900 },
+  { name: "Toshkent", sales: 2400 },
+  { name: "Samarqand", sales: 1398 },
+  { name: "Andijon", sales: 980 },
+  { name: "Buxoro", sales: 2000 },
 ];
 
-const expenseData = [
-  { name: "Kirim", value: 24000 },
-  { name: "Chiqim", value: 14500 },
-  { name: "Foyda", value: 9500 },
+const employees = [
+  { id: 1, name: "Aliyev", position: "Manager", salary: 800, report: "Yaxshi" },
+  { id: 2, name: "Karimov", position: "Sales", salary: 500, report: "O'rtacha" },
+  { id: 3, name: "Xolmatova", position: "Accountant", salary: 700, report: "Yaxshi" },
 ];
 
-const workers = [
-  { id: 1, name: "Ali", role: "Kassir", sales: 12000 },
-  { id: 2, name: "Malika", role: "Sotuvchi", sales: 8000 },
-  { id: 3, name: "Jasur", role: "Admin", sales: 15000 },
+const productData = [
+  { name: "Non", value: 400 },
+  { name: "Sut", value: 300 },
+  { name: "Go‘sht", value: 300 },
+  { name: "Sabzavot", value: 200 },
 ];
 
-const products = [
-  { id: 1, name: "iPhone 14", sold: 120, stock: 30, revenue: 144000 },
-  { id: 2, name: "AirPods Pro", sold: 250, stock: 80, revenue: 62500 },
-  { id: 3, name: "MacBook Pro", sold: 60, stock: 10, revenue: 126000 },
-];
-
-const COLORS = ["#4F46E5", "#EF4444", "#22C55E"];
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 const Analytics: React.FC = () => {
   return (
-    <div className="p-6 space-y-6">
-      {/* Statistik bloklar */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-white p-4 rounded-2xl shadow flex items-center justify-between">
-          <div>
-            <p className="text-gray-500">Filiallar</p>
-            <h2 className="text-2xl font-bold">4</h2>
-          </div>
-          <Building2 className="w-10 h-10 text-blue-500" />
-        </div>
+    <div className="p-6 space-y-8">
+      <h1 className="text-2xl font-bold">📊 Analytics Dashboard</h1>
 
-        <div className="bg-white p-4 rounded-2xl shadow flex items-center justify-between">
-          <div>
-            <p className="text-gray-500">Umumiy Kirim</p>
-            <h2 className="text-2xl font-bold">$24,000</h2>
-          </div>
-          <DollarSign className="w-10 h-10 text-green-500" />
-        </div>
-
-        <div className="bg-white p-4 rounded-2xl shadow flex items-center justify-between">
-          <div>
-            <p className="text-gray-500">Umumiy Chiqim</p>
-            <h2 className="text-2xl font-bold">$14,500</h2>
-          </div>
-          <DollarSign className="w-10 h-10 text-red-500" />
-        </div>
-
-        <div className="bg-white p-4 rounded-2xl shadow flex items-center justify-between">
-          <div>
-            <p className="text-gray-500">Foyda</p>
-            <h2 className="text-2xl font-bold">$9,500</h2>
-          </div>
-          <DollarSign className="w-10 h-10 text-purple-500" />
-        </div>
+      {/* Kirim-chiqimlar grafigi */}
+      <div className="bg-white p-4 rounded-2xl shadow">
+        <h2 className="text-lg font-semibold mb-2">Umumiy Kirim / Chiqimlar</h2>
+        <ResponsiveContainer width="100%" height={300}>
+          <LineChart data={revenueData}>
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="income" stroke="#4CAF50" />
+            <Line type="monotone" dataKey="expense" stroke="#F44336" />
+          </LineChart>
+        </ResponsiveContainer>
       </div>
 
-      {/* Filiallar bo‘yicha sotuvlar */}
+      {/* Filiallar bo‘yicha savdo */}
       <div className="bg-white p-4 rounded-2xl shadow">
-        <h2 className="text-lg font-semibold mb-4">
-          Filiallar bo‘yicha Sotuvlar
-        </h2>
+        <h2 className="text-lg font-semibold mb-2">Filiallar bo‘yicha savdo</h2>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={branchData}>
             <XAxis dataKey="name" />
             <YAxis />
             <Tooltip />
-            <Bar dataKey="sales" fill="#4F46E5" radius={[8, 8, 0, 0]} />
+            <Bar dataKey="sales" fill="#2196F3" />
           </BarChart>
         </ResponsiveContainer>
       </div>
 
-      {/* Kirim-chiqim Pie Chart */}
+      {/* Xodimlar ro‘yxati */}
       <div className="bg-white p-4 rounded-2xl shadow">
-        <h2 className="text-lg font-semibold mb-4">Umumiy Kirim-Chiqim</h2>
+        <h2 className="text-lg font-semibold mb-2">Xodimlar ro‘yxati</h2>
+        <table className="w-full border-collapse border">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="border p-2">Ism</th>
+              <th className="border p-2">Lavozim</th>
+              <th className="border p-2">Maosh</th>
+              <th className="border p-2">Hisobot</th>
+            </tr>
+          </thead>
+          <tbody>
+            {employees.map((emp) => (
+              <tr key={emp.id}>
+                <td className="border p-2">{emp.name}</td>
+                <td className="border p-2">{emp.position}</td>
+                <td className="border p-2">${emp.salary}</td>
+                <td className="border p-2">{emp.report}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Mahsulotlar */}
+      <div className="bg-white p-4 rounded-2xl shadow">
+        <h2 className="text-lg font-semibold mb-2">Mahsulotlar hisobotlari</h2>
         <ResponsiveContainer width="100%" height={300}>
           <PieChart>
             <Pie
-              data={expenseData}
-              dataKey="value"
+              data={productData}
               cx="50%"
               cy="50%"
-              outerRadius={100}
+              labelLine={false}
+              outerRadius={120}
+              dataKey="value"
               label
             >
-              {expenseData.map((_, index) => (
+              {productData.map((entry, index) => (
                 <Cell key={index} fill={COLORS[index % COLORS.length]} />
               ))}
             </Pie>
-            <Tooltip />
+            <Legend />
           </PieChart>
         </ResponsiveContainer>
       </div>
 
-      {/* Ishchilar ro‘yxati */}
+      {/* Buxgalteriya */}
       <div className="bg-white p-4 rounded-2xl shadow">
-        <h2 className="text-lg font-semibold mb-4">Ishchilar Hisoboti</h2>
-        <table className="w-full border-collapse">
-          <thead>
-            <tr className="bg-gray-100 text-left">
-              <th className="p-2">Ism</th>
-              <th className="p-2">Lavozim</th>
-              <th className="p-2">Sotuv</th>
-            </tr>
-          </thead>
-          <tbody>
-            {workers.map((w) => (
-              <tr key={w.id} className="border-b">
-                <td className="p-2">{w.name}</td>
-                <td className="p-2">{w.role}</td>
-                <td className="p-2">${w.sales}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Mahsulotlar bo‘yicha hisobot */}
-      <div className="bg-white p-4 rounded-2xl shadow">
-        <h2 className="text-lg font-semibold mb-4">Mahsulotlar Hisoboti</h2>
-        <table className="w-full border-collapse">
-          <thead>
-            <tr className="bg-gray-100 text-left">
-              <th className="p-2">Mahsulot</th>
-              <th className="p-2">Sotilgan</th>
-              <th className="p-2">Qoldiq</th>
-              <th className="p-2">Tushum</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products.map((p) => (
-              <tr key={p.id} className="border-b">
-                <td className="p-2">{p.name}</td>
-                <td className="p-2">{p.sold}</td>
-                <td className="p-2">{p.stock}</td>
-                <td className="p-2">${p.revenue}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <h2 className="text-lg font-semibold mb-2">Buxgalteriya hisob-kitoblari</h2>
+        <ul className="list-disc pl-6">
+          <li>📌 Umumiy balans: $15,000</li>
+          <li>📌 Joriy daromad: $5,000</li>
+          <li>📌 Joriy xarajatlar: $3,200</li>
+          <li>📌 Soliq majburiyatlari: $1,500</li>
+        </ul>
       </div>
     </div>
   );
