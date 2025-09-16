@@ -1,4 +1,5 @@
 import React from "react";
+import AccountingReports from "./AccountingReports";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
   LineChart, Line, PieChart, Pie, Cell, Legend
@@ -113,6 +114,8 @@ const Analytics: React.FC = () => {
           </PieChart>
         </ResponsiveContainer>
       </div>
+
+<AccountingReports />
 
       {/* Buxgalteriya */}
       <div className="bg-white p-4 rounded-2xl shadow">
