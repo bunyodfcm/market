@@ -16,10 +16,10 @@ const Companies: React.FC = () => {
   type CompanyData = Company[]
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [companyList, setCompanyList] = useState<CompanyData>([]);
-    const [loading, setLoading] = useState(true);
+    // const [loading, setLoading] = useState(true);
   const fetchCompanies = async () => {
     try {
-      setLoading(true);
+      // setLoading(true);
       const {data}= await getCompanyList();
       console.log("📋 Barcha kompaniyalar:", data);
       
@@ -27,7 +27,7 @@ const Companies: React.FC = () => {
     } catch (error) {
       console.error("❌ Kompaniya ro‘yxatini olishda xatolik:", error);
     } finally {
-      setLoading(false);
+      // setLoading(false);
     }
   };
 
