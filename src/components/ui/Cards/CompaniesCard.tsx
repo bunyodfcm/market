@@ -10,9 +10,9 @@ interface ICompanyCard {
 const CompanyCard: React.FC<ICompanyCard> = ({ company, onViewProfile }) => {
   const {
     name,
-    phone,
+    // phone,
     isActive,
-    categories,
+    // categories,
   } = company;
   return (
     <div className="max-w-sm w-full bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
@@ -39,8 +39,8 @@ const CompanyCard: React.FC<ICompanyCard> = ({ company, onViewProfile }) => {
       {/* Body */}
       <div className="pt-16 pb-6 px-6 text-center">
         <h3 className="text-lg font-semibold text-gray-900">{name}</h3>
-        <p className="relative text-gray-500 text-sm">Category: {categories}</p>
-        <p className="text-gray-500 text-sm">{phone}</p>
+        <p className="relative text-gray-500 text-sm">Category: {}</p>
+        <p className="text-gray-500 text-sm">{}</p>
 
         <button
           onClick={onViewProfile}

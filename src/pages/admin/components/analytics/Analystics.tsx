@@ -106,8 +106,11 @@ const Analytics: React.FC = () => {
               dataKey="value"
               label
             >
-              {productData.map((entry, index) => (
-                <Cell key={index} fill={COLORS[index % COLORS.length]} />
+              {productData.map((_, index) => (
+                
+                <Cell key={index} fill={COLORS[index % COLORS.length]}  />
+                
+                
               ))}
             </Pie>
             <Legend />
