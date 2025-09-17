@@ -16,7 +16,7 @@ const CompanyCard: React.FC<CompanyCardProps> = ({ company }) => {
         {/* Logo */}
         <div className="flex-shrink-0 bg-white rounded-lg shadow-lg p-4 -translate-y-10 w-32 h-32 flex items-center justify-center mr-6">
           <img
-            src={company.logo || `https://ui-avatars.com/api/?name=${company.name}&background=random`}
+            src={company.logoUrl || `https://ui-avatars.com/api/?name=${company.name}&background=random`}
             alt={`${company.name} Logo`}
             className="max-h-20 object-contain"
           />
@@ -40,7 +40,7 @@ const CompanyCard: React.FC<CompanyCardProps> = ({ company }) => {
               </div>
             )}
           </div>
-          <p className="text-sm text-gray-500 mt-1">{company.address}</p>
+          <p className="text-sm text-gray-500 mt-1">{company.desc}</p>
         </div>
 
         {/* Buttons */}
@@ -76,11 +76,11 @@ const CompanyCard: React.FC<CompanyCardProps> = ({ company }) => {
             <p>
               Manager:{" "}
               <span className="text-blue-600 cursor-pointer hover:underline">
-                {company.employees}
+                {company.emails}
               </span>
             </p>
-            <p className="cursor-pointer hover:underline">{company.email}</p>
-            <p>{company.phone}</p>
+            <p className="cursor-pointer hover:underline">{company.emails}</p>
+            <p>{company.isBranch}</p>
           </div>
         </div>
 
@@ -90,15 +90,15 @@ const CompanyCard: React.FC<CompanyCardProps> = ({ company }) => {
           <div className="text-gray-500 text-sm space-y-1">
             <p>
               <span className="font-semibold mr-2">Country:</span>{" "}
-              {company.address}
+              {company.address.country}
             </p>
             <p>
               <span className="font-semibold mr-2">Address:</span>{" "}
-              {company.address}
+              {company.address.street}, {company.address.city}, {company.address.region}
             </p>
             <p>
               <span className="font-semibold mr-2">Postal code:</span>{" "}
-              {company.address}
+              {company.address.zipCode}
             </p>
           </div>
         </div>

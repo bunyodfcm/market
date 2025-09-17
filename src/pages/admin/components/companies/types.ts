@@ -1,16 +1,27 @@
+// types.ts
+
+export interface Address {
+  street?: string;
+  city?: string;
+  region?: string;
+  country?: string;
+  zipCode?: string;
+}
+
 export interface Company {
-  id?: number;
+  id?: number; // agar backend ID qaytarsa
   name: string;
-  slug?: string; // URL uchun qisqa nom
-  phone?: string;
-  email?: string;
-  website?: string;
-  address?: string;
-  logo?: string; // logo URL
-  createdAt?: string; // ISO date
+  desc: string;
+  address: Address;
+  mainPhone: string;
+  phones: string[];
+  bannerUrl: string;
+  logoUrl: string;
+  emails: string[];
+  websiteUrl: string;
+  type: string;
   isActive: boolean;
-  employees?: number;
-  revenueUSD?: number;
-  categories?: string[]; // e.g. ["E-commerce", "Logistics"]
-  description?: string;
+  isBranch: boolean;
+  companyId: number;
+  categoryIds: number[];
 }
