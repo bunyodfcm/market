@@ -1,4 +1,4 @@
-import { checkUser, createItem, getUsersByPost } from "./api";
+import { checkUser, createItem, getItem, getUsersByPost } from "./api";
 
 // User type (kerak bo‘lsa kengaytirib olasan)
 export interface User {
@@ -65,3 +65,12 @@ export const getUser = async ({
 }): Promise<{ data: any }> => {
   return await getUsersByPost("user/nickname", nickname);
 };
+
+// get user by id
+export const getUserById = async ({
+  id,
+}: {
+  id: number;
+}): Promise<{ data: any }> => {
+  return await getItem(`user`, id);
+}

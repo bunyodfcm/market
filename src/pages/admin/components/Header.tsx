@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BellIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Icon } from "@iconify/react/dist/iconify.js";
+
 
 const Header: React.FC = () => {
   const [searchInput, setSearchInput] = useState("");
   const [darkmode, setDarkmode] = useState(false);
   const [adminMenuOpen, setAdminMenuOpen] = useState(false);
+  const navigate = useNavigate()
 
   const toggleAdminMenu = () => {
     setAdminMenuOpen(!adminMenuOpen);
@@ -53,7 +55,8 @@ const Header: React.FC = () => {
             <img
               src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face"
               alt="User avatar"
-              className="w-10 h-10 rounded-full"
+              className="w-10 h-10 rounded-full cursor-pointer"
+              onClick={()=>navigate('/admin/profile')}
             />
             <div className="md:block">
               <button
@@ -80,7 +83,7 @@ const Header: React.FC = () => {
                   <div className="flex items-center justify-start border-gray-200 px-4 py-2 space-x-2">
                     <Icon icon="carbon:user-profile" width="24" height="24" />
                     <Link
-                      to="admin/profile"
+                      to="/admin/profile"
                       className="block px-1 py-2 text-gray-700 hover:bg-gray-100"
                     >
                       Profile
@@ -89,7 +92,7 @@ const Header: React.FC = () => {
                   <div className="flex items-center justify-start border-gray-200 px-4 py-2 space-x-2">
                     <Icon icon="mingcute:settings-7-line" width="24" height="24" />
                   <Link
-                    to="admin/settings"
+                    to="/admin/settings"
                     className="block px-1 py-2 text-gray-700 hover:bg-gray-100"
                   >
                     Settings
@@ -98,7 +101,7 @@ const Header: React.FC = () => {
                   <div className="flex items-center justify-start border-gray-200 px-4 py-2 space-x-2">
                   <Icon icon="ic:outline-design-services" width="24" height="24" />
                   <Link
-                    to="admin/services"
+                    to="/admin/services"
                     className="block px-1 py-2 text-gray-700 hover:bg-gray-100"
                   >
                     Services
