@@ -4,5 +4,5 @@ export interface User {
   phone: string;
   roles: string;
   isActive: boolean;
-  createdAt: string;
+  actions?: string;
 }

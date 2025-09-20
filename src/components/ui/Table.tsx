@@ -2,9 +2,9 @@ import React from 'react';
 import DelayedMount from './DelayedMount';
 
 interface Column<T> {
-  key: keyof T;
+  key: keyof T | string; // ← string ham bo‘lishi mumkin
   header: string;
-  render?: (value: T[keyof T], item: T) => React.ReactNode;
+  render?: (value: T[keyof T] | undefined, item: T) => React.ReactNode;
   className?: string;
 }
 
@@ -15,11 +15,11 @@ interface TableProps<T> {
   className?: string;
 }
 
-function Table<T extends { id?: string | number }>({ 
-  data, 
-  columns, 
-  onRowClick, 
-  className = '' 
+function Table<T extends { id?: string | number }>({
+  data,
+  columns,
+  onRowClick,
+  className = ''
 }: TableProps<T>) {
   return (
     <div className={`overflow-x-auto ${className}`}>
@@ -39,22 +39,31 @@ function Table<T extends { id?: string | number }>({
         <tbody className="bg-white divide-y divide-gray-200">
           {data.map((item, index) => (
             <DelayedMount key={item.id || index} delay={500 * (index + 1)}>
-            <tr
-              key={item.id || index}
-              onClick={() => onRowClick?.(item)}
-              className={onRowClick ? 'cursor-pointer hover:bg-gray-50' : ''}
-            >
-              {columns.map((column) => (
-                <td
-                  key={String(column.key)}
-                  className={`px-6 py-4 whitespace-nowrap text-sm text-gray-900 ${column.className || ''}`}
-                >
-                  {column.render
-                    ? column.render(item[column.key], item)
-                    : String(item[column.key] || '')}
-                </td>
-              ))}
-            </tr>
+              <tr
+                onClick={() => onRowClick?.(item)}
+                className={onRowClick ? 'cursor-pointer hover:bg-gray-50' : ''}
+              >
+                {columns.map((column) => {
+                  // Agar key `item` ichida mavjud bo'lsa value ni olamiz
+                  const value =
+                    column.key in item
+                      ? (item as any)[column.key as keyof T]
+                      : undefined;
+
+                  return (
+                    <td
+                      key={String(column.key)}
+                      className={`px-6 py-4 whitespace-nowrap text-sm text-gray-900 ${column.className || ''}`}
+                    >
+                      {column.render
+                        ? column.render(value, item)
+                        : value !== undefined
+                        ? String(value)
+                        : null}
+                    </td>
+                  );
+                })}
+              </tr>
             </DelayedMount>
           ))}
         </tbody>
@@ -63,4 +72,4 @@ function Table<T extends { id?: string | number }>({
   );
 }
 
-export default Table; 
+export default Table;

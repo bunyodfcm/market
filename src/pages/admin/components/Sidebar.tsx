@@ -1,32 +1,18 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
-import {
-  HomeIcon,
-  HomeModernIcon,
-  UsersIcon,
-  ShoppingBagIcon,
-  ChartBarIcon,
-  CogIcon,
-  DocumentTextIcon,
-} from "@heroicons/react/24/outline";
 import { Icon } from "@iconify/react";
+import { menuItems } from "./data";
 
 const Sidebar: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const [openMenu, setOpenMenu] = useState<string | null>(null); // sub-menu uchun
   const location = useLocation();
-
   const { logout } = useAuth();
 
-  const menuItems = [
-    { name: "Dashboard", icon: HomeIcon, path: "/admin" },
-    { name: "Kompaniya", icon: HomeModernIcon, path: "/admin/companies" },
-    { name: "Ishchi-Xizmatchilar", icon: UsersIcon, path: "/admin/users" },
-    { name: "Maxsulotlar", icon: ShoppingBagIcon, path: "/admin/products" },
-    { name: "Omborlar", icon: DocumentTextIcon, path: "/admin/warehouses" },
-    { name: "Hisobotlar", icon: ChartBarIcon, path: "/admin/analytics" },
-    { name: "Sozlamalar", icon: CogIcon, path: "/admin/settings" },
-  ];
+  const toggleSubMenu = (name: string) => {
+    setOpenMenu(openMenu === name ? null : name);
+  };
 
   return (
     <div
@@ -67,10 +53,62 @@ const Sidebar: React.FC = () => {
           const IconComp = item.icon;
           const isActive = location.pathname === item.path;
 
+          if (item.children) {
+            // 🔹 Sub-menu
+            return (
+              <div key={item.name}>
+                <button
+                  onClick={() => toggleSubMenu(item.name)}
+                  className={`flex items-center w-full py-3 rounded-lg transition-colors ${
+                    collapsed ? "justify-center px-2" : "px-4"
+                  } ${
+                    openMenu === item.name
+                      ? "bg-blue-50 text-blue-600 border border-blue-600"
+                      : "text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                  }`}
+                >
+                  {IconComp && <IconComp className="w-5 h-5" />}
+                  {!collapsed && <span className="ml-3">{item.name}</span>}
+                  {!collapsed && (
+                    <Icon
+                      icon="mdi:chevron-down"
+                      className={`ml-auto transition-transform ${
+                        openMenu === item.name ? "rotate-180" : ""
+                      }`}
+                    />
+                  )}
+                </button>
+
+                {/* Sub-menu items */}
+                {openMenu === item.name && !collapsed && (
+                  <div className="ml-8 mt-1 space-y-1">
+                    {item.children.map((sub) => {
+                      const subActive = location.pathname === sub.path;
+                      return (
+                        <Link
+                          key={sub.name}
+                          to={sub.path}
+                          className={`block py-2 px-3 rounded-md text-sm transition-colors ${
+                            subActive
+                              ? "bg-blue-100 text-blue-600"
+                              : "text-gray-600 hover:bg-blue-50 hover:text-blue-600"
+                          }`}
+                        >
+                          {sub.name}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            );
+          }
+
+          // 🔹 Oddiy menu
           return (
             <Link
               key={item.name}
-              to={item.path}
+              to={item.path!}
               className={`flex items-center py-3 rounded-lg transition-colors ${
                 collapsed ? "justify-center px-2" : "px-4"
               } ${
@@ -79,7 +117,7 @@ const Sidebar: React.FC = () => {
                   : "text-gray-700 hover:bg-blue-50 hover:text-blue-600"
               }`}
             >
-              <IconComp className="w-5 h-5" />
+              {IconComp && <IconComp className="w-5 h-5" />}
               {!collapsed && <span className="ml-3">{item.name}</span>}
             </Link>
           );
@@ -87,11 +125,7 @@ const Sidebar: React.FC = () => {
       </nav>
 
       {/* Footer (Logout) */}
-      <div
-        className={`border-t p-4 ${
-          collapsed ? "flex justify-center" : ""
-        }`}
-      >
+      <div className={`border-t p-4 ${collapsed ? "flex justify-center" : ""}`}>
         <button
           onClick={logout}
           className="flex items-center text-red-700 hover:bg-red-50 hover:text-red-600 transition-colors px-4 py-2 rounded-lg w-full justify-center md:justify-start"
