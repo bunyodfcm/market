@@ -6,7 +6,7 @@ import { menuItems } from "./data";
 
 const Sidebar: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const [openMenu, setOpenMenu] = useState<string | null>(null); // sub-menu uchun
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
   const location = useLocation();
   const { logout } = useAuth();
 
@@ -16,7 +16,7 @@ const Sidebar: React.FC = () => {
 
   return (
     <div
-      className={`bg-white shadow-lg transition-all duration-300 h-screen flex flex-col 
+      className={`bg-white shadow-lg transition-all duration-300 h-screen flex flex-col relative
         ${collapsed ? "w-16" : "w-64"}`}
     >
       {/* Header */}
@@ -54,9 +54,8 @@ const Sidebar: React.FC = () => {
           const isActive = location.pathname === item.path;
 
           if (item.children) {
-            // 🔹 Sub-menu
             return (
-              <div key={item.name}>
+              <div key={item.name} className="relative">
                 <button
                   onClick={() => toggleSubMenu(item.name)}
                   className={`flex items-center w-full py-3 rounded-lg transition-colors ${
@@ -79,9 +78,34 @@ const Sidebar: React.FC = () => {
                   )}
                 </button>
 
-                {/* Sub-menu items */}
-                {openMenu === item.name && !collapsed && (
+                {/* Sub-menu: Expanded */}
+                {!collapsed && openMenu === item.name && (
                   <div className="ml-8 mt-1 space-y-1">
+                    {item.children.map((sub) => {
+                      const subActive = location.pathname === sub.path;
+                      return (
+                        <Link
+                          key={sub.name}
+                          to={sub.path}
+                          className={`block py-2 px-3 rounded-md text-sm transition-colors ${
+                            subActive
+                              ? "bg-blue-100 text-blue-600"
+                              : "text-gray-600 hover:bg-blue-50 hover:text-blue-600"
+                          }`}
+                        >
+                          {sub.name}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+
+                {/* 🔹 Sub-menu: Collapsed bo‘lganda yon tomonda absolute */}
+                {collapsed && openMenu === item.name && (
+                  <div
+                    className="absolute left-16 top-0 bg-white shadow-lg rounded-md p-2 w-48 space-y-1 z-50 border"
+                    onMouseLeave={() => setOpenMenu(null)}
+                  >
                     {item.children.map((sub) => {
                       const subActive = location.pathname === sub.path;
                       return (
