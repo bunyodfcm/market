@@ -1,4 +1,9 @@
-import React, { createContext, useState, useEffect, type ReactNode } from 'react';  
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  type ReactNode,
+} from 'react';
 import {
   getTranslation,
   type Locale,
