@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useLogin } from '../model/useLogin';
 import { Icon } from '@iconify/react';
 
@@ -7,6 +8,7 @@ interface LoginFormProps {
 }
 
 export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
+  const navigate = useNavigate();
   const { handleLogin, isLoading, error } = useLogin();
   const [formData, setFormData] = useState({
     nickname: '',
@@ -30,6 +32,11 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
         nickname: formData.nickname,
         password: formData.password,
       });
+
+      // Muvaffaqiyatli login - dashboard sahifasiga yo'naltirish
+      navigate('/');
+
+      // Agar onSuccess callback berilgan bo'lsa, uni chaqirish
       onSuccess?.();
     } catch (err) {
       console.error('Login failed:', err);
