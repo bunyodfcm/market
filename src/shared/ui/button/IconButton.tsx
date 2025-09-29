@@ -1,7 +1,7 @@
 import React from 'react';
 import { cn } from '../../lib/cn';
 
-export interface ButtonProps
+export interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
   children: React.ReactNode;
@@ -16,7 +16,7 @@ const variantStyles = {
   ghost: 'bg-transparent text-gray-600 hover:bg-gray-100 border-transparent',
 };
 
-export const Button: React.FC<ButtonProps> = ({
+export const IconButton: React.FC<IconButtonProps> = ({
   variant = 'primary',
   children,
   className,
@@ -26,10 +26,11 @@ export const Button: React.FC<ButtonProps> = ({
   return (
     <button
       className={cn(
-        // Base styles
-        'px-4 py-2 rounded-md border font-medium transition-colors duration-200',
+        // Base styles - square shape for icons
+        'p-2 rounded-md border font-medium transition-colors duration-200',
         'focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2',
         'disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-current',
+        'flex items-center justify-center',
         // Variant styles
         variantStyles[variant],
         className
