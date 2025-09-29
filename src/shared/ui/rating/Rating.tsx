@@ -81,7 +81,7 @@ export const Rating: React.FC<RatingProps> = ({
 
   const renderStar = (index: number) => {
     const fillPercentage = getStarFillPercentage(index);
-    const starValue = allowHalf ? index + 0.5 : index + 1;
+    // const starValue = allowHalf ? index + 0.5 : index + 1;
 
     return (
       <div

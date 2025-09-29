@@ -146,7 +146,7 @@ export const Placeholder: React.FC<PlaceholderProps> = ({
   className,
   selected = false,
 }) => {
-  const displayIcon = icon || defaultIcons[type];
+  const displayIcon = icon || defaultIcons[type as keyof typeof defaultIcons];
 
   return (
     <div

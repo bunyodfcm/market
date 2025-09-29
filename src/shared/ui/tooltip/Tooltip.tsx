@@ -65,7 +65,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
   contentClassName,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const showTooltip = () => {

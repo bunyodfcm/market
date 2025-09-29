@@ -67,7 +67,7 @@ export const TooltipTrigger: React.FC<TooltipTriggerProps> = ({
   tooltipClassName,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const showTooltip = () => {
     if (disabled) return;
@@ -139,7 +139,7 @@ export const TooltipTrigger: React.FC<TooltipTriggerProps> = ({
     <div ref={containerRef} className={cn('relative inline-block', className)}>
       {cloneElement(children, {
         ...triggerProps,
-        className: cn(children.props.className),
+        className: cn((children.props as any).className),
       })}
 
       {isVisible && !disabled && (

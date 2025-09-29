@@ -1,5 +1,5 @@
 import React from 'react';
-import { Badge, BadgeProps } from './Badge';
+import { Badge, type BadgeProps } from './Badge';
 
 export interface StatusBadgeProps extends Omit<BadgeProps, 'variant'> {
   status: 'active' | 'inactive' | 'pending' | 'success' | 'error' | 'warning';

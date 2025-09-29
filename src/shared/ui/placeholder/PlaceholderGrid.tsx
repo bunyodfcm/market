@@ -1,6 +1,6 @@
 import React from 'react';
 import { cn } from '../../lib/cn';
-import { Placeholder, PlaceholderProps } from './Placeholder';
+import { Placeholder, type PlaceholderProps } from './Placeholder';
 
 export interface PlaceholderGridProps {
   items: Array<PlaceholderProps & { id: string }>;
