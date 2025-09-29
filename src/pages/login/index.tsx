@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useTranslation } from '../../shared/i18n/hooks';
+// import { useTranslation } from '../../shared/i18n/hooks';
 
 const LoginPage: React.FC = () => {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
   const [formData, setFormData] = useState({
     username: '',
     password: '',
