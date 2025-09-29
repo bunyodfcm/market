@@ -10,40 +10,71 @@
   --color-error: #fa3434;
 
   /* === RANG PALITALARI === */
-  /* Blue shades */
-  --color-blue-100: #3167eb;
-  --color-blue-200: #5a85ef;
-  --color-blue-300: #83a4f3;
-  --color-blue-400: #c1d1f9;
-  --color-blue-500: #eaeffd;
+  /* Blue shades - 100-900 */
+  --color-blue-100: #dbeafe;
+  --color-blue-200: #bfdbfe;
+  --color-blue-300: #93c5fd;
+  --color-blue-400: #60a5fa;
+  --color-blue-500: #3b82f6;
+  --color-blue-600: #3167eb;
+  --color-blue-700: #1d4ed8;
+  --color-blue-800: #1e40af;
+  --color-blue-900: #1e3a8a;
 
-  /* Green shades */
-  --color-green-100: #00b517;
-  --color-green-200: #33c445;
-  --color-green-300: #66d374;
-  --color-green-400: #b2e8b9;
-  --color-green-500: #e5f7e7;
+  /* Green shades - 100-900 */
+  --color-green-100: #dcfce7;
+  --color-green-200: #bbf7d0;
+  --color-green-300: #86efac;
+  --color-green-400: #4ade80;
+  --color-green-500: #22c55e;
+  --color-green-600: #00b517;
+  --color-green-700: #15803d;
+  --color-green-800: #166534;
+  --color-green-900: #14532d;
 
-  /* Red shades */
-  --color-red-100: #fa3434;
-  --color-red-200: #fb5d5d;
-  --color-red-300: #fc8585;
-  --color-red-400: #fdc2c2;
-  --color-red-500: #feeaea;
+  /* Red shades - 100-900 */
+  --color-red-100: #fee2e2;
+  --color-red-200: #fecaca;
+  --color-red-300: #fca5a5;
+  --color-red-400: #f87171;
+  --color-red-500: #ef4444;
+  --color-red-600: #fa3434;
+  --color-red-700: #dc2626;
+  --color-red-800: #b91c1c;
+  --color-red-900: #991b1b;
 
-  /* Orange shades */
-  --color-orange-100: #ff9017;
-  --color-orange-200: #ffa645;
-  --color-orange-300: #ffbc74;
-  --color-orange-400: #ffddb9;
-  --color-orange-500: #fff3e7;
+  /* Orange shades - 100-900 */
+  --color-orange-100: #fed7aa;
+  --color-orange-200: #fdba74;
+  --color-orange-300: #fdba74;
+  --color-orange-400: #fb923c;
+  --color-orange-500: #f97316;
+  --color-orange-600: #ff9017;
+  --color-orange-700: #ea580c;
+  --color-orange-800: #c2410c;
+  --color-orange-900: #9a3412;
 
-  /* White shades */
+  /* Gray shades - 100-900 */
+  --color-gray-100: #f1f5f9;
+  --color-gray-200: #e2e8f0;
+  --color-gray-300: #cbd5e1;
+  --color-gray-400: #94a3b8;
+  --color-gray-500: #64748b;
+  --color-gray-600: #475569;
+  --color-gray-700: #334155;
+  --color-gray-800: #1e293b;
+  --color-gray-900: #0f172a;
+
+  /* White shades - 100-900 */
   --color-white-100: #ffffff;
-  --color-white-200: rgba(255, 255, 255, 0.8);
-  --color-white-300: rgba(255, 255, 255, 0.6);
-  --color-white-400: rgba(255, 255, 255, 0.3);
-  --color-white-500: rgba(255, 255, 255, 0.15);
+  --color-white-200: #fefefe;
+  --color-white-300: #fdfdfd;
+  --color-white-400: #fcfcfc;
+  --color-white-500: #fafafa;
+  --color-white-600: #f8f8f8;
+  --color-white-700: #f5f5f5;
+  --color-white-800: #f2f2f2;
+  --color-white-900: #efefef;
 
   /* Background ranglar */
   --color-bg-primary: #ffffff;
@@ -86,18 +117,4 @@
 
   --color-border: #334155;
   --color-border-focus: #60a5fa;
-}
-
-/* === GLOBAL STYLES === */
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: var(--font-family-sans);
-  background-color: var(--color-bg-primary);
-  color: var(--color-text-primary);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
