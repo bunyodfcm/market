@@ -16,7 +16,24 @@ export type {
 } from './button';
 
 // Input components
-// TODO: export { Input } from './input';
+export {
+  Input,
+  Label,
+  Textarea,
+  NumberInput,
+  Switch,
+  Checkbox,
+  Radio,
+} from './input';
+export type {
+  InputProps,
+  LabelProps,
+  TextareaProps,
+  NumberInputProps,
+  SwitchProps,
+  CheckboxProps,
+  RadioProps,
+} from './input';
 
 // Form components
 // TODO: export { FormField } from './form';
