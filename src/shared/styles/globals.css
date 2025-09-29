@@ -1,1 +1,103 @@
-/* shared/styles/globals.css */
+@import 'tailwindcss';
+
+:root {
+  /* === RANGLAR === */
+  --color-primary: #3167eb;
+  --color-primary-hover: #5a85ef;
+  --color-secondary: #64748b;
+  --color-success: #00b517;
+  --color-warning: #ff9017;
+  --color-error: #fa3434;
+
+  /* === RANG PALITALARI === */
+  /* Blue shades */
+  --color-blue-100: #3167eb;
+  --color-blue-200: #5a85ef;
+  --color-blue-300: #83a4f3;
+  --color-blue-400: #c1d1f9;
+  --color-blue-500: #eaeffd;
+
+  /* Green shades */
+  --color-green-100: #00b517;
+  --color-green-200: #33c445;
+  --color-green-300: #66d374;
+  --color-green-400: #b2e8b9;
+  --color-green-500: #e5f7e7;
+
+  /* Red shades */
+  --color-red-100: #fa3434;
+  --color-red-200: #fb5d5d;
+  --color-red-300: #fc8585;
+  --color-red-400: #fdc2c2;
+  --color-red-500: #feeaea;
+
+  /* Orange shades */
+  --color-orange-100: #ff9017;
+  --color-orange-200: #ffa645;
+  --color-orange-300: #ffbc74;
+  --color-orange-400: #ffddb9;
+  --color-orange-500: #fff3e7;
+
+  /* White shades */
+  --color-white-100: #ffffff;
+  --color-white-200: rgba(255, 255, 255, 0.8);
+  --color-white-300: rgba(255, 255, 255, 0.6);
+  --color-white-400: rgba(255, 255, 255, 0.3);
+  --color-white-500: rgba(255, 255, 255, 0.15);
+
+  /* Background ranglar */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8fafc;
+  --color-bg-tertiary: #f1f5f9;
+  --color-bg-card: #ffffff;
+
+  /* Text ranglar */
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #94a3b8;
+
+  /* Border ranglar */
+  --color-border: #e2e8f0;
+  --color-border-focus: #3b82f6;
+
+  /* === FONTLAR === */
+  --font-family-sans: 'Inter', system-ui, sans-serif;
+  --font-family-serif: 'Georgia', serif;
+  --font-family-mono: 'JetBrains Mono', monospace;
+  --font-family-display: 'Poppins', sans-serif;
+
+  /* === SHADOWS === */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.dark {
+  /* Dark tema ranglari */
+  --color-bg-primary: #0f172a;
+  --color-bg-secondary: #1e293b;
+  --color-bg-tertiary: #334155;
+  --color-bg-card: #1e293b;
+
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #cbd5e1;
+  --color-text-muted: #64748b;
+
+  --color-border: #334155;
+  --color-border-focus: #60a5fa;
+}
+
+/* === GLOBAL STYLES === */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-sans);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
