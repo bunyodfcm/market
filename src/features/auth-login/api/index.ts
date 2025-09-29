@@ -5,15 +5,42 @@ export interface LoginRequest {
   password: string;
 }
 
+export interface User {
+  id: number;
+  activeToken: string;
+  nickname: string;
+  phone: string;
+  firstName: string | null;
+  lastName: string | null;
+  middleName: string | null;
+  bio: string | null;
+  avatarUrl: string | null;
+  adress: string | null;
+  secondPhone: string | null;
+  salary: number | null;
+  isActive: boolean;
+  isLoggedIn: boolean;
+  companyLimit: number;
+  deviceName: string;
+  ipAddress: string;
+  createdAt: string;
+  updatedAt: string;
+  emails: string[];
+  phones: string[];
+  roles: string[];
+  orderAssignments: any[];
+  userInCompanies: UserInCompany[];
+}
+
+export interface UserInCompany {
+  userId: number;
+  companyId: number;
+  roles: string[];
+}
+
 export interface LoginResponse {
-  token: string;
-  user: {
-    id: string;
-    nickname: string;
-    email?: string;
-    role?: string;
-  };
-  refreshToken?: string;
+  message: string;
+  user: User;
 }
 
 export const authApi = {
@@ -37,7 +64,7 @@ export const authApi = {
   },
 
   // Get user profile
-  getProfile: async (): Promise<LoginResponse['user']> => {
+  getProfile: async (): Promise<User> => {
     const response = await apiClient.get('/user/profile');
     return response.data;
   },

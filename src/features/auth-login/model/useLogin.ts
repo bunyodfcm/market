@@ -16,7 +16,8 @@ export const useLogin = () => {
       const response = await authApi.login(credentials);
       
       // Token saqlash
-      login(response.token);
+      console.log(response, 'response');
+      login(response.user.activeToken);
       
       return response;
     } catch (err: any) {
