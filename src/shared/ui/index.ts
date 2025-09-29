@@ -82,5 +82,15 @@ export type {
   DividerProps,
 } from './misc';
 
+// Table components
+export { Table, TableCell, TableActions } from './table';
+export type {
+  TableProps,
+  Column,
+  TableCellProps,
+  TableActionsProps,
+  Action,
+} from './table';
+
 // Language Switcher
 // TODO: export { LanguageSwitcher } from './language-switcher';
