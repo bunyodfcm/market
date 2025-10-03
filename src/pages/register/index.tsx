@@ -1,6 +1,6 @@
-import { LoginForm } from '../../features/auth-login/ui/LoginForm';
+import { RegisterForm } from '../../features/auth-register/ui/RegisterForm';
 
-const LoginPage: React.FC = () => {
+const RegisterPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
       {/* Header */}
@@ -34,14 +34,14 @@ const LoginPage: React.FC = () => {
                 Help
               </a>
               <a
-                href="#"
-                className="text-blue-600 hover:text-blue-500 px-3 py-2 text-sm font-medium"
+                href="/login"
+                className="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white px-3 py-2 text-sm font-medium"
               >
                 Login
               </a>
               <a
                 href="/register"
-                className="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white px-3 py-2 text-sm font-medium"
+                className="text-blue-600 hover:text-blue-500 px-3 py-2 text-sm font-medium"
               >
                 Register
               </a>
@@ -52,10 +52,10 @@ const LoginPage: React.FC = () => {
 
       {/* Main Content */}
       <main className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8">
-        <LoginForm />
+        <RegisterForm />
       </main>
     </div>
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

@@ -192,7 +192,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
             <p className="text-sm text-gray-600 dark:text-gray-400">
               Don't have an account?{' '}
               <a
-                href="#"
+                href="/register"
                 className="text-blue-600 hover:text-blue-500 font-medium"
               >
                 Sign Up
