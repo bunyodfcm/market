@@ -19,10 +19,9 @@ const ProductPageActions = (props: Props) => {
         </select>
         <select className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
           <option value="">Show 20</option>
-          <option value="price-asc">Price: Low to High</option>
-          <option value="price-desc">Price: High to Low</option>
-          <option value="newest">Newest Arrivals</option>
-          <option value="rating">Customer Rating</option>
+          <option value="price-asc">15</option>
+          <option value="price-desc">10</option>
+          <option value="newest">5</option>
         </select>
         <select
           className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
