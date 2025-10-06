@@ -10,6 +10,7 @@ const SettingsPage = lazy(() => import('../../pages/settings'));
 
 // Guards
 import { AuthGuard, GuestGuard } from './guards';
+import ProductsPage from '../../pages/products';
 
 export const AppRoutes = () => {
   return (
@@ -56,6 +57,14 @@ export const AppRoutes = () => {
             <AuthGuard>
               <SettingsPage />
             </AuthGuard>
+          }
+        />
+        <Route
+          path="/products"
+          element={
+            // <AuthGuard>
+              <ProductsPage />
+            // </AuthGuard>
           }
         />
 
