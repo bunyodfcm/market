@@ -31,7 +31,7 @@ export const AppRoutes = () => {
           element={
             <AuthGuard>
               <DashboardPage />
-            </AuthGuard>
+           </AuthGuard>
           } 
         />
         <Route 
@@ -53,9 +53,9 @@ export const AppRoutes = () => {
         <Route 
           path="/products" 
           element={
-            <AuthGuard>
+            // <AuthGuard>
               <ProductsPage />
-            </AuthGuard>
+            // </AuthGuard>
           } 
         />
         
