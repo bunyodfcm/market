@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const useAuth = () => {
+  const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -19,6 +21,8 @@ export const useAuth = () => {
   const logout = () => {
     localStorage.removeItem('auth_token');
     setIsAuthenticated(false);
+    // Login sahifasiga yo'naltirish
+    navigate('/login');
   };
 
   return {
