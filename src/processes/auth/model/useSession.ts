@@ -21,7 +21,6 @@ export const useAuth = () => {
   const logout = () => {
     localStorage.removeItem('auth_token');
     setIsAuthenticated(false);
-    // Login sahifasiga yo'naltirish
     navigate('/login');
   };
 
