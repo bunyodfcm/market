@@ -7,7 +7,6 @@ export const useAuth = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Token tekshirish
     const token = localStorage.getItem('auth_token');
     setIsAuthenticated(!!token);
     setIsLoading(false);
