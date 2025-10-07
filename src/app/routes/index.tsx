@@ -9,7 +9,7 @@ const UsersPage = lazy(() => import('../../pages/users'));
 const SettingsPage = lazy(() => import('../../pages/settings'));
 
 // Guards
-import { AuthGuard, GuestGuard } from './guards';
+import { GuestGuard } from './guards';
 import ProductsPage from '../../pages/products';
 
 export const AppRoutes = () => {
@@ -35,38 +35,10 @@ export const AppRoutes = () => {
         />
 
         {/* Protected routes */}
-        <Route
-          path="/dashboard"
-          element={
-            <AuthGuard>
-              <DashboardPage />
-            </AuthGuard>
-          }
-        />
-        <Route
-          path="/users"
-          element={
-            <AuthGuard>
-              <UsersPage />
-            </AuthGuard>
-          }
-        />
-        <Route
-          path="/settings"
-          element={
-            <AuthGuard>
-              <SettingsPage />
-            </AuthGuard>
-          }
-        />
-        <Route
-          path="/products"
-          element={
-            // <AuthGuard>
-              <ProductsPage />
-            // </AuthGuard>
-          }
-        />
+        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/users" element={<UsersPage />} />
+        <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/products" element={<ProductsPage />} />
 
         {/* Default redirect */}
         <Route path="/" element={<Navigate to="/dashboard" replace />} />

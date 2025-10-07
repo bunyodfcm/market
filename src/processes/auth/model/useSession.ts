@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export const useAuth = () => {
@@ -6,22 +6,49 @@ export const useAuth = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
+  // localStorage o'zgarishini kuzatish
   useEffect(() => {
-    const token = localStorage.getItem('auth_token');
-    setIsAuthenticated(!!token);
-    setIsLoading(false);
+    const checkAuth = () => {
+      const token = localStorage.getItem('auth_token');
+      setIsAuthenticated(!!token);
+      setIsLoading(false);
+    };
+
+    // Dastlabki tekshirish
+    checkAuth();
+
+    // Custom event listener - o'z tab/window da localStorage o'zgarishini kuzatish
+    const handleCustomStorageChange = () => {
+      checkAuth();
+    };
+
+    // Custom event yaratish
+    window.addEventListener('authStateChange', handleCustomStorageChange);
+
+    return () => {
+      window.removeEventListener('authStateChange', handleCustomStorageChange);
+    };
   }, []);
 
-  const login = (token: string) => {
+  const login = useCallback((token: string) => {
     localStorage.setItem('auth_token', token);
     setIsAuthenticated(true);
-  };
+    setIsLoading(false);
+    // Custom event dispatch qilish
+    window.dispatchEvent(new Event('authStateChange'));
+  }, []);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     localStorage.removeItem('auth_token');
     setIsAuthenticated(false);
-    navigate('/login');
-  };
+    setIsLoading(false);
+    // Custom event dispatch qilish
+    window.dispatchEvent(new Event('authStateChange'));
+    // Navigate faqat Router kontekstida ishlaydi
+    if (typeof window !== 'undefined') {
+      navigate('/login');
+    }
+  }, [navigate]);
 
   return {
     isAuthenticated,
