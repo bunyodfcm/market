@@ -38,4 +38,54 @@ export interface TranslationKeys {
     password: string;
     forgotPassword: string;
   };
+  // Dashboard
+  dashboard: {
+    welcome: string;
+    stats: string;
+    recentActivities: string;
+  };
+  // Users
+  users: {
+    userList: string;
+    userProfile: string;
+    createUser: string;
+    editUser: string;
+    deleteUser: string;
+  };
+  // Companies
+  companies: {
+    companyList: string;
+    companyProfile: string;
+    createCompany: string;
+    editCompany: string;
+    deleteCompany: string;
+  };
+  // Products
+  products: {
+    productList: string;
+    productDetails: string;
+    createProduct: string;
+    editProduct: string;
+    deleteProduct: string;
+    categories: string;
+    price: string;
+    stock: string;
+    description: string;
+    image: string;
+    name: string;
+    addNewProduct: string;
+    viewProduct: string;
+    updateProduct: string;
+    productCategory: string;
+    productPrice: string;
+    productStock: string;
+    productDescription: string;
+    productImage: string;
+  };
+  // Settings
+  settings: {
+    profileSettings: string;
+    accountSettings: string;
+    notificationSettings: string;
+  };
 }

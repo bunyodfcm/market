@@ -2,6 +2,7 @@ import React from 'react';
 import ProductPageHeader from '../../features/product-crud/ui/ProductPageHeader';
 import ProductPageActions from '../../features/product-crud/ui/ProductPageActions';
 import ProductCard from '../../features/product-crud/ui/ProductCard';
+import CreateProduct from './CreateProduct';
 
 const ProductsPage: React.FC = () => {
   return (
@@ -21,6 +22,7 @@ const ProductsPage: React.FC = () => {
               <ProductCard />
               <ProductCard />
           </div>
+          <CreateProduct />
         </div>
       </div>
     </div>
