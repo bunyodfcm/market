@@ -1,6 +1,4 @@
-type Props = {};
-
-const ProductPageActions = (props: Props) => {
+const ProductPageActions = () => {
   return (
     <div className="flex justify-between px-6">
       <input

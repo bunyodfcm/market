@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react';
 
 type Props = {};
 
-const ProductPageHeader = (props: Props) => {
+const ProductPageHeader = (_props: Props) => {
   return (
     <>
       <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
