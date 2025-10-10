@@ -9,7 +9,7 @@ const ProductPageHeader = (_props: Props) => {
       <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
         Mahsulotlar
       </h1>
-      <div className="flex gap-4">
+      <div className="flex gap-4 md:mt-0 mt-4 md:flex-row flex-col">
         <IconButton
           variant="ghost"
           className="bg-white text-gray-500 border-1 border-gray-200 px-4 py-2"
