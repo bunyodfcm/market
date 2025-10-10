@@ -3,14 +3,14 @@ import { Suspense, lazy } from "react";
 
 // Lazy load sahifalar
 const ProductsPage = lazy(() => import("../../../pages/products"));
-const AddProductPage = lazy(() => import("../../../pages/products/AddProduct"));
+const AddProductPageFull = lazy(() => import("../../../pages/products/AddProductFull"));
 
 export const ProductRoutes = () => {
   return (
     <Suspense fallback={<div>Loading Products...</div>}>
       <Routes>
         <Route index element={<ProductsPage />} />
-        <Route path="add" element={<AddProductPage />} />
+        <Route path="add" element={<AddProductPageFull />} />
 
         {/* Agar path mos kelmasa, /products ga qaytaradi */}
         <Route path="*" element={<Navigate to="/products" replace />} />
