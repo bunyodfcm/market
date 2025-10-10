@@ -8,9 +8,10 @@ const DashboardPage = lazy(() => import('../../pages/dashboard'));
 const UsersPage = lazy(() => import('../../pages/users'));
 const SettingsPage = lazy(() => import('../../pages/settings'));
 
+
 // Guards
 import { GuestGuard } from './guards';
-import ProductsPage from '../../pages/products';
+import { ProductRoutes } from './products';
 
 export const AppRoutes = () => {
   return (
@@ -38,7 +39,7 @@ export const AppRoutes = () => {
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/users" element={<UsersPage />} />
         <Route path="/settings" element={<SettingsPage />} />
-        <Route path="/products" element={<ProductsPage />} />
+        <Route path="/products/*" element={<ProductRoutes />} />
 
         {/* Default redirect */}
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
