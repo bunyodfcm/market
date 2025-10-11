@@ -3,7 +3,6 @@ import ProductPageHeader from '../../features/product-crud/ui/ProductPageHeader'
 import ProductPageActions from '../../features/product-crud/ui/ProductPageActions';
 import ProductCard from '../../features/product-crud/ui/ProductCard';
 
-
 const ProductsPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -16,13 +15,12 @@ const ProductsPage: React.FC = () => {
             <ProductPageActions />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
           </div>
-       
         </div>
       </div>
     </div>

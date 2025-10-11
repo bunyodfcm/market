@@ -1,9 +1,11 @@
+import { useNavigate } from 'react-router-dom';
 import { IconButton } from '../../../shared/ui';
 import { Icon } from '@iconify/react';
 
 type Props = {};
 
 const ProductPageHeader = (_props: Props) => {
+  const navigate = useNavigate();
   return (
     <>
       <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -34,7 +36,13 @@ const ProductPageHeader = (_props: Props) => {
           />
           Import
         </IconButton>
-        <IconButton variant="primary" className="px-3 py-2">
+        <IconButton
+          variant="primary"
+          className="px-3 py-2"
+          onClick={() => {
+            navigate('/products/add');
+          }}
+        >
           <Icon icon="bi:plus" width="24" height="24" className="mr-2" />
           Mahsulot qo'shish
         </IconButton>

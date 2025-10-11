@@ -2,8 +2,10 @@ import { Icon } from '@iconify/react';
 import { useTranslation } from '../../shared/i18n';
 // import DescriptionEditor from '../../features/product-crud/ui/DescriptionEditor';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const CreateProductFull: React.FC = () => {
+  const navigate = useNavigate();
   const [description, setDescription] = useState('');
   const { t } = useTranslation();
   return (
@@ -13,10 +15,24 @@ const CreateProductFull: React.FC = () => {
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
             {t.products.createProduct}
           </h1>
-          <button className="inline-flex items-center px-3 py-2 border border-2 border-gray-200 text-sm font-medium rounded-md text-gray-500 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-            <Icon icon="mdi:close" width="24" height="24" className="mr-2" />
-            {t.common.cancel}
-          </button>
+          <div className="flex gap-4">
+            <button
+              className="inline-flex items-center px-3 py-2 border border-2 border-gray-200 text-sm font-medium rounded-md text-gray-500 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              onClick={() => navigate(-1)}
+            >
+              <Icon icon="mdi:close" width="24" height="24" className="mr-2" />
+              {t.common.cancel}
+            </button>
+            <button className="inline-flex items-center px-3 py-2 border border-2 border-gray-200 text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+              <Icon
+                icon="mdi:content-save"
+                width="24"
+                height="24"
+                className="mr-2"
+              />
+              {t.common.save}
+            </button>
+          </div>
         </div>
         <div className="p-6">
           <form className="space-y-6">
