@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import OrdersPageActions from '../../features/orders-crud/ui/OrdersPageActions';
 import OrdersPageHeader from '../../features/orders-crud/ui/OrdersPageHeader';
 import { Table } from '../../shared/ui';
@@ -12,6 +13,9 @@ type Order = {
 }
 
 const OrdersPage: React.FC = () => {
+
+  const navigate = useNavigate()
+
    const orders: Order[] = [
     { id: 1, user: 'Ali', total: 150, status: 'delivered', date: '2023-10-01' },
     { id: 2, user: 'Vali', total: 200, status: 'pending', date: '2023-10-02' },
@@ -65,19 +69,19 @@ const OrdersPage: React.FC = () => {
       render: (_: unknown, record: Order) => (
         <div className="flex justify-center gap-2">
           <button
-            onClick={() => console.log('View: ', record.id)}
-            className="text-blue-600"
+            onClick={() => navigate(`/orders/details?${record.id}`)}
+            className="text-blue-600 cursor-pointer"
           >           <Icon icon="mdi:eye" height="16" width="16" />
           </button>
           <button
             onClick={() => console.log('Edit: ', record.id)}
-            className="text-yellow-600"
+            className="text-yellow-600 cursor-pointer"
           >
             <Icon icon="mdi:pencil" height="16" width="16" />
           </button>
           <button
             onClick={() => console.log('Delete: ', record.id)}
-            className="text-red-600"
+            className="text-red-600 cursor-pointer"
           >
             <Icon icon="mdi:delete" height="16" width="16" />
           </button>
