@@ -13,6 +13,12 @@ const Sidebar: React.FC = () => {
       uzLabel: 'Bosh sahifa',
     },
     {
+      path: '/orders',
+      icon: 'mdi:order-bool-descending-variant',
+      label: 'Orders',
+      uzLabel: 'Buyurtmalar',
+    },
+    {
       path: '/products',
       icon: 'mdi:package-variant',
       label: 'Products',
