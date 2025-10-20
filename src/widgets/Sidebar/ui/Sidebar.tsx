@@ -25,6 +25,12 @@ const Sidebar: React.FC = () => {
       uzLabel: 'Mahsulotlar',
     },
     {
+      path: '/sellers',
+      icon: 'mdi:user-tie',
+      label: 'Sellers',
+      uzLabel: 'Sotuvchilar',
+    },
+    {
       path: '/users',
       icon: 'mdi:account-group',
       label: 'Users',
