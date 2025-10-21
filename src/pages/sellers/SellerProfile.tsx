@@ -1,19 +1,7 @@
 // import { useTranslation } from '../../shared/i18n';
 import { useNavigate } from 'react-router-dom';
 import { Icon } from '@iconify/react';
-import { Rating } from '../../shared/ui';
-import ProductCard from '../../features/product-crud/ui/ProductCard';
 
-type SellerProfileProps = {
-  name: string;
-  location: string;
-  avatarUrl: string;
-  additionalInfo?: string;
-  address?: string;
-  contactDetails?: string;
-  sellerRatings?: number;
-  sellerReviews?: number;
-};
 const SellerProfile: React.FC = () => {
   const sellerProfile: SellerProfileProps = {
     name: 'Sotuvchi Ismi',

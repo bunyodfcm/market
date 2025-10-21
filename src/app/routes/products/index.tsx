@@ -1,9 +1,11 @@
-import { Routes, Route, Navigate } from "react-router-dom";
-import { Suspense, lazy } from "react";
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { Suspense, lazy } from 'react';
 
 // Lazy load sahifalar
-const ProductsPage = lazy(() => import("../../../pages/products"));
-const AddProductPageFull = lazy(() => import("../../../pages/products/AddProductFull"));
+const ProductsPage = lazy(() => import('../../../pages/products'));
+const AddProductPageFull = lazy(
+  () => import('../../../pages/products/AddProductFull')
+);
 
 export const ProductRoutes = () => {
   return (
