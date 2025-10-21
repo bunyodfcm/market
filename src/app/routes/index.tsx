@@ -8,7 +8,6 @@ const DashboardPage = lazy(() => import('../../pages/dashboard'));
 const UsersPage = lazy(() => import('../../pages/users'));
 const SettingsPage = lazy(() => import('../../pages/settings'));
 
-
 // Guards
 import { GuestGuard } from './guards';
 import { ProductRoutes } from './products';
