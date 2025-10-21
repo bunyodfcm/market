@@ -18,6 +18,11 @@ const UsersPage: React.FC = () => {
   ];
   const columns = [
     {
+      key: 'id',
+      title: 'ID',
+      dataIndex: 'id',
+    },
+    {
       key: 'name',
       title: 'Ism',
       dataIndex: 'name',
