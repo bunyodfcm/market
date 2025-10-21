@@ -1,6 +1,5 @@
 // import { useTranslation } from '../../shared/i18n';
 import { useNavigate } from 'react-router-dom';
-import { Icon } from '@iconify/react';
 
 const SellerProfile: React.FC = () => {
   const navigate = useNavigate();
