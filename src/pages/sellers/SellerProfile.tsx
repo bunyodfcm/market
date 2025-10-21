@@ -20,6 +20,11 @@ const SellerProfile: React.FC = () => {
           </button>
         </div>
 
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b-2 border-b-gray-300 pb-3 mb-4">
+           
+          </div>
+        </div>
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b-2 border-b-gray-300 pb-3 mb-4">
            
