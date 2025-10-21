@@ -10,7 +10,7 @@ export const SellerRoutes = () => {
     <Suspense fallback={<div>Loading Products...</div>}>
       <Routes>
         <Route index element={<SellersPage />} />
-        <Route path="add" element={<SellerProfile />} />
+        <Route path="profile" element={<SellerProfile />} />
 
         {/* Agar path mos kelmasa, /products ga qaytaradi */}
         <Route path="*" element={<Navigate to="/sellers" replace />} />

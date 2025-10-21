@@ -103,7 +103,7 @@ const SellersPage: React.FC = () => {
       render: (_: unknown, record: Seller) => (
         <div className="flex justify-center gap-2">
           <button
-            onClick={() => navigate(`/orders/details?${record.id}`)}
+            onClick={() => navigate(`/sellers/profile?${record.id}`)}
             className="text-blue-600 cursor-pointer"
           >
             {' '}
