@@ -1,6 +1,18 @@
 // import { useTranslation } from '../../shared/i18n';
 import { useNavigate } from 'react-router-dom';
 import { Icon } from '@iconify/react';
+import { Rating } from '../../shared/ui/rating/Rating';
+
+type SellerProfileProps = {
+  name: string;
+  location: string;
+  avatarUrl: string;
+  additionalInfo: string;
+  address: string;
+  contactDetails: string;
+  sellerRatings: number;
+  sellerReviews: number;
+};
 
 const SellerProfile: React.FC = () => {
   const sellerProfile: SellerProfileProps = {
@@ -118,11 +130,7 @@ const SellerProfile: React.FC = () => {
             Sotuvchining mahsulotlari
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
+          
           </div>
         </div>
       </div>
