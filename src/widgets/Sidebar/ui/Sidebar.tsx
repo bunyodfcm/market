@@ -37,6 +37,12 @@ const Sidebar: React.FC = () => {
       uzLabel: 'Foydalanuvchilar',
     },
     {
+      path: '/reviews',
+      icon: 'mdi:rate-review',
+      label: 'Reviews',
+      uzLabel: 'Sharhlar',
+    },
+    {
       path: '/settings',
       icon: 'mdi:cog',
       label: 'Settings',
