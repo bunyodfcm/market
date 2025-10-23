@@ -7,12 +7,14 @@ const RegisterPage = lazy(() => import('../../pages/register'));
 const DashboardPage = lazy(() => import('../../pages/dashboard'));
 const UsersPage = lazy(() => import('../../pages/users'));
 const SettingsPage = lazy(() => import('../../pages/settings'));
+const ReviewsPage = lazy(() => import('../../pages/reviews'));
 
 // Guards
 import { GuestGuard } from './guards';
 import { ProductRoutes } from './products';
 import { OrderRoutes } from './orders';
 import { SellerRoutes } from './sellers';
+
 
 export const AppRoutes = () => {
   return (
@@ -43,6 +45,7 @@ export const AppRoutes = () => {
         <Route path="/products/*" element={<ProductRoutes />} />
         <Route path="/orders/*" element={<OrderRoutes />} />
         <Route path="/sellers/*" element={<SellerRoutes />} />
+        <Route path="/reviews" element={<ReviewsPage />} />
 
         {/* Default redirect */}
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
