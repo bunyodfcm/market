@@ -92,18 +92,27 @@ const TransactionsPage: React.FC = () => {
         <div className="flex justify-between items-center mb-6 md:flex-row flex-col gap-4">
           <TransactionsPageHeader />
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow py-6">
-          <div className="text-gray-600 dark:text-gray-300 border-b-2 pb-4 border-gray-200">
-            <TransactionsPageActions />
+        <div className="flex flex-row bg-white dark:bg-gray-800 rounded-lg shadow py-6">
+          <div className='w-full'>
+            <div className="text-gray-600 dark:text-gray-300 border-b-2 pb-4 border-gray-200">
+              <TransactionsPageActions />
+            </div>
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+              <Table
+                columns={columns}
+                data={transactionsData}
+                className="text-center"
+                size='lg'
+              />
+            </div>
           </div>
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-            <Table
-              columns={columns}
-              data={transactionsData}
-              className="text-center"
-            />
+          <div className='w-[350px] flex items-center justify-center bg-gray-200 rounded-lg mx-4'>
+            <span className='text-gray-400'>
+             Views the transactions details
+            </span>
           </div>
         </div>
+        <div></div>
       </div>
     </div>
   );

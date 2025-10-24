@@ -43,6 +43,12 @@ const Sidebar: React.FC = () => {
       uzLabel: 'Sharhlar',
     },
     {
+      path: '/transactions',
+      icon: 'mdi:money-100',
+      label: 'Transactions',
+      uzLabel: 'Tranzaksiyalar',
+    },
+    {
       path: '/settings',
       icon: 'mdi:cog',
       label: 'Settings',
