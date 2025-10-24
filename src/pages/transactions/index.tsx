@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { Table } from '../../shared/ui';
 import { Icon } from '@iconify/react';
-import TransactionsPageHeader from '../../features/transactions-crud/ui/transactionsPageHeader';
+import TransactionsPageHeader from '../../features/transactions-crud/ui/TransactionsPageHeader';
 import TransactionsPageActions from '../../features/transactions-crud/ui/TransactionsPageActions';
 
 type Transactions = {
