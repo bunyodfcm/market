@@ -9,6 +9,7 @@ const UsersPage = lazy(() => import('../../pages/users'));
 const SettingsPage = lazy(() => import('../../pages/settings'));
 const ReviewsPage = lazy(() => import('../../pages/reviews'));
 const TransactionsPage = lazy(()=>import('../../pages/transactions'))
+const NotFoundPage = lazy(()=>import('../../pages/not-found'))
 
 // Guards
 import { GuestGuard } from './guards';
@@ -51,7 +52,7 @@ export const AppRoutes = () => {
 
         {/* Default redirect */}
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
-        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>
   );
