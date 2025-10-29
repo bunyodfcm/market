@@ -104,14 +104,6 @@ const Sidebar: React.FC = () => {
           );
         })}
       </nav>
-
-      {/* Footer */}
-      <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 dark:border-gray-700">
-        <div className="text-xs text-gray-500 dark:text-gray-400 text-center">
-          <p>Sudrab kengaytiring/toraytiring</p>
-          <p className="mt-1">← → klaviatura bilan</p>
-        </div>
-      </div>
     </div>
   );
 };
