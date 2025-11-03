@@ -6,17 +6,16 @@ const LoginPage = lazy(() => import('../../pages/login'));
 const RegisterPage = lazy(() => import('../../pages/register'));
 const DashboardPage = lazy(() => import('../../pages/dashboard'));
 const UsersPage = lazy(() => import('../../pages/users'));
-const SettingsPage = lazy(() => import('../../pages/settings'));
 const ReviewsPage = lazy(() => import('../../pages/reviews'));
-const TransactionsPage = lazy(()=>import('../../pages/transactions'))
-const NotFoundPage = lazy(()=>import('../../pages/not-found'))
+const TransactionsPage = lazy(() => import('../../pages/transactions'));
+const NotFoundPage = lazy(() => import('../../pages/not-found'));
 
 // Guards
 import { GuestGuard } from './guards';
 import { ProductRoutes } from './products';
 import { OrderRoutes } from './orders';
 import { SellerRoutes } from './sellers';
-
+import { SettingsRoutes } from './settings';
 
 export const AppRoutes = () => {
   return (
@@ -43,7 +42,7 @@ export const AppRoutes = () => {
         {/* Protected routes */}
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/users" element={<UsersPage />} />
-        <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/settings/*" element={<SettingsRoutes />} />
         <Route path="/products/*" element={<ProductRoutes />} />
         <Route path="/orders/*" element={<OrderRoutes />} />
         <Route path="/sellers/*" element={<SellerRoutes />} />
