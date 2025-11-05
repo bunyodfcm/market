@@ -11,7 +11,7 @@ const TransactionsPage = lazy(() => import('../../pages/transactions'));
 const NotFoundPage = lazy(() => import('../../pages/not-found'));
 
 // Guards
-import { GuestGuard } from './guards';
+import { AuthGuard, GuestGuard } from './guards';
 import { ProductRoutes } from './products';
 import { OrderRoutes } from './orders';
 import { SellerRoutes } from './sellers';
@@ -40,17 +40,73 @@ export const AppRoutes = () => {
         />
 
         {/* Protected routes */}
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/users" element={<UsersPage />} />
-        <Route path="/settings/*" element={<SettingsRoutes />} />
-        <Route path="/products/*" element={<ProductRoutes />} />
-        <Route path="/orders/*" element={<OrderRoutes />} />
-        <Route path="/sellers/*" element={<SellerRoutes />} />
-        <Route path="/reviews" element={<ReviewsPage />} />
-        <Route path="/transactions" element={<TransactionsPage />} />
+        <Route
+          path="/dashboard"
+          element={
+            <AuthGuard>
+              <DashboardPage />
+            </AuthGuard>
+          }
+        />
+        <Route
+          path="/users"
+          element={
+            <AuthGuard>
+              <UsersPage />
+            </AuthGuard>
+          }
+        />
+        <Route
+          path="/settings/*"
+          element={
+            <AuthGuard>
+              <SettingsRoutes />
+            </AuthGuard>
+          }
+        />
+        <Route
+          path="/products/*"
+          element={
+            <AuthGuard>
+              <ProductRoutes />
+            </AuthGuard>
+          }
+        />
+        <Route
+          path="/orders/*"
+          element={
+            <AuthGuard>
+              <OrderRoutes />
+            </AuthGuard>
+          }
+        />
+        <Route
+          path="/sellers/*"
+          element={
+            <AuthGuard>
+              <SellerRoutes />
+            </AuthGuard>
+          }
+        />
+        <Route
+          path="/reviews"
+          element={
+            <AuthGuard>
+              <ReviewsPage />
+            </AuthGuard>
+          }
+        />
+        <Route
+          path="/transactions"
+          element={
+            <AuthGuard>
+              <TransactionsPage />
+            </AuthGuard>
+          }
+        />
 
         {/* Default redirect */}
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>

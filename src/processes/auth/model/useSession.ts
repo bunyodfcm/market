@@ -6,7 +6,7 @@ export const useAuth = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  localStorage.setItem('auth_token', 'sample_token'); // Faqat test uchun
+  // localStorage.setItem('auth_token', 'sample_token'); // Faqat test uchun
 
   // localStorage o'zgarishini kuzatish
   useEffect(() => {

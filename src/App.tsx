@@ -4,6 +4,7 @@ import { ThemeProvider } from './shared/theme/providers/ThemeProvider';
 import { I18nProvider } from './app/providers/i18n/I18nProvider';
 import { ResizableLayout } from './shared/ui/resizable-layout';
 import Sidebar from './widgets/Sidebar/ui/Sidebar';
+import  Topbar  from './widgets/Topbar';
 import { useAuth } from './processes/auth/model/useSession';
 
 function App() {
@@ -43,7 +44,12 @@ function AppContent() {
           storageKey="market-sidebar-width"
         >
           <Sidebar />
-          <AppRoutes />
+          <div className="flex flex-col flex-1 h-screen overflow-hidden">
+            <Topbar />
+            <div className="flex-1 overflow-auto">
+              <AppRoutes />
+            </div>
+          </div>
         </ResizableLayout>
       ) : (
         <AppRoutes />
