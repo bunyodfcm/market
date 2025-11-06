@@ -23,6 +23,11 @@ export const registerApi = {
     const response = await apiClient.post('/user/verify-email', { token });
     return response.data;
   },
+  // Verify OTP API
+  verifyOtp: async (token: string, otp: number): Promise<{ message: string }> => {
+    const response = await apiClient.post('/user/verify-otp', { token, otp });
+    return response.data;
+  },
 
   // Resend verification email
   resendVerification: async (email: string): Promise<{ message: string }> => {
