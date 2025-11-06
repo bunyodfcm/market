@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { registerApi, type RegisterRequest } from '../api';
+import { env } from '../../../shared/config/env';
 
 export const useRegister = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -30,12 +31,12 @@ export const useRegister = () => {
       const { confirmPassword, ...apiData } = data;
       const response = await registerApi.register(apiData);
 
-
       // token qaytgani tekshiriladi
       // mavjud bo'lsa VerifyOTP ga o'tiladi
       if (response.token) {
-         setSuccessMessage("Siz muvaffaqiyatli ro'yxatdan o'tdingiz!");
-            // 3 soniyadan keyin login sahifasiga yo'naltirish
+        localStorage.setItem(`${env.TOKEN_STORAGE_KEY}`, response.token)
+        setSuccessMessage("Siz muvaffaqiyatli ro'yxatdan o'tdingiz!");
+        // 3 soniyadan keyin login sahifasiga yo'naltirish
         setTimeout(() => {
           navigate('/verify-otp');
         }, 3000);
@@ -43,12 +44,10 @@ export const useRegister = () => {
         // Agar token bo'lmasa, xatolik ko'rsatish
         throw new Error(response.message || 'Registratsiya xatoligi');
       }
-      
-      
 
       // // Token mavjudligini tekshirish
       // if (response.token) {
-        
+
       //   // Token saqlanmaydi, faqat success message ko'rsatiladi
       //   setSuccessMessage("Siz muvaffaqiyatli ro'yxatdan o'tdingiz!");
 
@@ -106,12 +105,13 @@ export const useRegister = () => {
     }
   };
 
-  const verifyOtp = async (token:string, otp:number) => {
+  const verifyOtp = async (otp: number) => {
     try {
       setIsLoading(true);
       setError(null);
 
-      const response = await registerApi.verifyOtp(token, otp);
+      const response = await registerApi.verifyOtp( otp);
+
       return response;
     } catch (err: any) {
       const errorMessage =
@@ -121,7 +121,7 @@ export const useRegister = () => {
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
   return {
     handleRegister,

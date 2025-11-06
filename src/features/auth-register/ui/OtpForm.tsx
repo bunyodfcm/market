@@ -10,45 +10,36 @@ interface OtpFormProps {
 
 export const OtpForm: React.FC<OtpFormProps> = ({ onSuccess }) => {
   const {
-    handleRegister: handleVerify,
+    verifyOtp,
     isLoading,
     error,
     successMessage,
     clearError,
     clearSuccessMessage,
   } = useRegister();
-  const [formData, setFormData] = useState({
-    phone: '',
-    nickname: '',
-    password: '',
-    confirmPassword: '',
-  });
+  const [otpNumber, setOtpNumber] = useState('');
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    try {
-      await handleVerify(formData);
-      onSuccess?.();
-    } catch (err) {
-      console.error('Registration failed:', err);
+ 
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  try {
+    const res = await verifyOtp(Number(otpNumber));
+    if (res) {
+      console.log(res)
+      onSuccess?.(); // parentda navigate bo'ladi
     }
-  };
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 
   return (
     <div className="max-w-md w-full space-y-8">
       {/* Register Form */}
       <div className="bg-white py-8 px-6 shadow-lg rounded-lg">
         <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-gray-900">Sign up</h2>
+          <h2 className="text-2xl font-bold text-gray-900">Verify OTP</h2>
         </div>
 
         {/* Success Alert */}
@@ -77,14 +68,17 @@ export const OtpForm: React.FC<OtpFormProps> = ({ onSuccess }) => {
           {/* OTP field */}
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Icon icon="mdi:phone" className="h-5 w-5 text-gray-400" />
+              <Icon
+                icon="teenyicons:otp-solid"
+                className="h-5 w-5 text-gray-400"
+              />
             </div>
             <input
               type="tel"
               name="phone"
-              value={formData.phone}
-              onChange={handleInputChange}
-              placeholder="Phone number"
+              value={otpNumber}
+              onChange={(e) => setOtpNumber(e.target.value)}
+              placeholder="Number in SMS"
               pattern="[0-9+\-\s()]*"
               inputMode="numeric"
               className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900"

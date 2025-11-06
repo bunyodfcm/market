@@ -24,8 +24,13 @@ export const registerApi = {
     return response.data;
   },
   // Verify OTP API
-  verifyOtp: async (token: string, otp: number): Promise<{ message: string }> => {
-    const response = await apiClient.post('/user/verify-otp', { token, otp });
+  verifyOtp: async (
+    otp: number
+  ): Promise<{ message: string }> => {
+    const response = await apiClient.post(
+      '/user/verify-otp',
+      { otp }
+    );
     return response.data;
   },
 

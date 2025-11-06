@@ -1,6 +1,8 @@
+import { useNavigate } from 'react-router-dom';
 import { OtpForm } from '../../features/auth-register/ui/OtpForm';
 
 const VerifyOtpPage: React.FC = () => {
+  const navigate = useNavigate()
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       {/* Header */}
@@ -52,7 +54,7 @@ const VerifyOtpPage: React.FC = () => {
 
       {/* Main Content */}
       <main className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8">
-        <OtpForm />
+        <OtpForm onSuccess={()=>navigate("/login")}/>
       </main>
     </div>
   );
