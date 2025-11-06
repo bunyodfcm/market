@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { env } from '../../shared/config/env';
 import type { User } from './types';
+import { authApi } from '../../features/auth-login/api';
 
 interface AuthState {
   // State
@@ -13,7 +14,7 @@ interface AuthState {
 
   // Actions
   login: (token: string, user: User) => void;
-  logout: () => void;
+  logout: () => Promise<void>;
   setPendingToken: (token: string) => void;
   clearPendingToken: () => void;
   setUser: (user: User | null) => void;
@@ -44,17 +45,29 @@ export const useAuthStore = create<AuthState>()(
         window.dispatchEvent(new Event('authStateChange'));
       },
 
-      logout: () => {
-        localStorage.removeItem(env.TOKEN_STORAGE_KEY);
-        localStorage.removeItem(env.REFRESH_TOKEN_KEY);
-        set({
-          user: null,
-          token: null,
-          pendingToken: null,
-          isAuthenticated: false,
-          isLoading: false,
-        });
-        window.dispatchEvent(new Event('authStateChange'));
+      logout: async () => {
+        try {
+          // API'ga logout so'rov yuborish
+          await authApi.logout();
+        } catch (error) {
+          // API xatosi bo'lsa ham logout qilish (offline mode)
+          console.error('Logout API error:', error);
+        } finally {
+          // LocalStorage va state'ni tozalash
+          localStorage.removeItem(env.TOKEN_STORAGE_KEY);
+          localStorage.removeItem(env.REFRESH_TOKEN_KEY);
+          set({
+            user: null,
+            token: null,
+            pendingToken: null,
+            isAuthenticated: false,
+            isLoading: false,
+          });
+          // Custom event dispatch qilish (mavjud kod bilan moslashish uchun)
+          window.dispatchEvent(new Event('authStateChange'));
+          // Login sahifasiga yo'naltirish
+          window.location.href = '/login';
+        }
       },
 
       setPendingToken: token => {
