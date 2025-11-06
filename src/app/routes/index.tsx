@@ -9,6 +9,7 @@ const UsersPage = lazy(() => import('../../pages/users'));
 const ReviewsPage = lazy(() => import('../../pages/reviews'));
 const TransactionsPage = lazy(() => import('../../pages/transactions'));
 const NotFoundPage = lazy(() => import('../../pages/not-found'));
+const VerifyOtpPage = lazy(() => import('../../pages/verify-otp'));
 
 // Guards
 import { AuthGuard, GuestGuard } from './guards';
@@ -35,6 +36,14 @@ export const AppRoutes = () => {
           element={
             <GuestGuard>
               <RegisterPage />
+            </GuestGuard>
+          }
+        />
+        <Route
+          path="/verify-otp"
+          element={
+            <GuestGuard>
+              <VerifyOtpPage />
             </GuestGuard>
           }
         />

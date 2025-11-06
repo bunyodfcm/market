@@ -32,7 +32,7 @@ Bu fayl dasturda qilinishi kerak bo'lgan ishlar ro'yxatini o'z ichiga oladi.
 
 #### Auth API Integratsiyasi
 
-- [ ] **POST /api/user/login** - Login API integratsiyasi
+- [x] **POST /api/user/login** - Login API integratsiyasi
   - Token localStorage'ga saqlash
   - User ma'lumotlarini global state'ga yozish
   - Redirect logic (dashboard yoki login sahifasiga)
