@@ -60,7 +60,7 @@ Bu fayl dasturda qilinishi kerak bo'lgan ishlar ro'yxatini o'z ichiga oladi.
 - [ ] Remember me funksiyasi
 - [ ] Multi-device session handling
 
-#### Role-Based Access Control (RBAC)
+#### Role-Based Access Control (RBAC) 
 
 - [ ] Foydalanuvchi rollarini tekshirish komponenti
 - [ ] Role-based route guard'lar
