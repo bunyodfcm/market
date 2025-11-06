@@ -6,10 +6,10 @@ const OrderDetails: React.FC = () => {
   const navigate = useNavigate();
   // const { t } = useTranslation();
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-6 flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+          <h1 className="text-2xl font-bold text-gray-900">
             Buyurtma ma'lumotlari
           </h1>
           <button
@@ -20,7 +20,7 @@ const OrderDetails: React.FC = () => {
           </button>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+        <div className="bg-white rounded-lg shadow p-6">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b-2 border-b-gray-300 pb-3 mb-4">
             <div className="flex items-center gap-2 text-gray-500 text-sm">
               <Icon icon="mdi:calendar" className="w-4 h-4" />
@@ -28,15 +28,15 @@ const OrderDetails: React.FC = () => {
               <span className="text-gray-400">#ID 3453012</span>
             </div>
             <div className="flex gap-2 mt-2 md:mt-0 md:gap-4">
-              <select className="w-28 border border-gray-300 bg-white text-gray-500 rounded-lg px-4 py-2 text-sm dark:bg-gray-800 dark:text-white">
+              <select className="w-28 border border-gray-300 bg-white text-gray-500 rounded-lg px-4 py-2 text-sm">
                 <option>Text</option>
                 <option>Text</option>
                 <option>Text</option>
               </select>
-              <button className="bg-white text-gray-500 border border-gray-300 px-4 py-2 rounded-lg text-sm hover:bg-gray-200 dark:bg-gray-800 dark:text-white">
+              <button className="bg-white text-gray-500 border border-gray-300 px-4 py-2 rounded-lg text-sm hover:bg-gray-200">
                 Save
               </button>
-              <button className="bg-white text-gray-500 border border-gray-300 px-4 py-2 rounded-lg text-sm hover:bg-gray-200 dark:bg-gray-800 dark:text-white">
+              <button className="bg-white text-gray-500 border border-gray-300 px-4 py-2 rounded-lg text-sm hover:bg-gray-200">
                 <Icon icon="mdi:printer-outline" className="w-4 h-4" />
               </button>
             </div>
@@ -53,9 +53,7 @@ const OrderDetails: React.FC = () => {
                 <div className="flex items-center gap-2 mb-2 text-blue-600 font-semibold">
                   Customer
                 </div>
-                <p className="font-medium text-gray-800 dark:text-gray-100">
-                  John Alexander
-                </p>
+                <p className="font-medium text-gray-800">John Alexander</p>
                 <p className="text-gray-500">alex@example.com</p>
                 <p className="text-gray-500">+998 99 22123456</p>
                 <a href="#" className="text-blue-500 text-sm hover:underline">
@@ -78,13 +76,13 @@ const OrderDetails: React.FC = () => {
                 <div className="flex items-center gap-2 mb-2 text-blue-600 font-semibold">
                   Order info
                 </div>
-                <p className="text-gray-700 dark:text-gray-300">
+                <p className="text-gray-700">
                   Shipping: <span className="font-medium">Fargo express</span>
                 </p>
-                <p className="text-gray-700 dark:text-gray-300">
+                <p className="text-gray-700">
                   Pay method: <span className="font-medium">Credit card</span>
                 </p>
-                <p className="text-gray-700 dark:text-gray-300">
+                <p className="text-gray-700">
                   Status:{' '}
                   <span className="text-red-500 font-semibold">New</span>
                 </p>
@@ -103,13 +101,9 @@ const OrderDetails: React.FC = () => {
                 <div className="flex items-center gap-2 mb-2 text-blue-600 font-semibold">
                   Deliver to
                 </div>
-                <p className="text-gray-700 dark:text-gray-300">
-                  City: Tashkent, Uzbekistan
-                </p>
-                <p className="text-gray-700 dark:text-gray-300">
-                  Street: Beruniy 369
-                </p>
-                <p className="text-gray-700 dark:text-gray-300">
+                <p className="text-gray-700">City: Tashkent, Uzbekistan</p>
+                <p className="text-gray-700">Street: Beruniy 369</p>
+                <p className="text-gray-700">
                   Address: Block A, House 123, Floor 2
                 </p>
                 <a href="#" className="text-blue-500 text-sm hover:underline">
@@ -122,7 +116,7 @@ const OrderDetails: React.FC = () => {
             {/* Product Table */}
             <div className="border border-gray-300 rounded-lg overflow-hidden row-span-2">
               <table className="w-full text-sm">
-                <thead className="bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300">
+                <thead className="bg-gray-100 text-gray-600">
                   <tr>
                     <th className="text-left p-3">Product</th>
                     <th className="text-center p-3">Quantity</th>
@@ -130,7 +124,7 @@ const OrderDetails: React.FC = () => {
                     <th className="text-right p-3">Total</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-300 dark:divide-gray-700">
+                <tbody className="divide-y divide-gray-300">
                   <tr>
                     <td className="p-3 flex items-center gap-2 text-blue-600 font-medium">
                       <img
@@ -168,7 +162,7 @@ const OrderDetails: React.FC = () => {
                           Shipping cost:{' '}
                           <span className="font-semibold">$10.00</span>
                         </p>
-                        <p className="text-lg font-semibold text-gray-800 dark:text-gray-100">
+                        <p className="text-lg font-semibold text-gray-800">
                           Grand total:{' '}
                           <span className="text-green-600">$983.00</span>
                         </p>
@@ -185,7 +179,7 @@ const OrderDetails: React.FC = () => {
             {/* Payment info + Notes */}
             <div className="flex flex-col gap-4 justify-between">
               <div className="border border-gray-300 rounded-lg p-4">
-                <h3 className="font-semibold mb-2 text-gray-800 dark:text-gray-100">
+                <h3 className="font-semibold mb-2 text-gray-800">
                   Payment info
                 </h3>
                 <p className="flex items-center gap-2">
@@ -197,9 +191,7 @@ const OrderDetails: React.FC = () => {
                 </p>
                 <p className="text-gray-500 text-sm">
                   Business name:{' '}
-                  <span className="text-gray-800 dark:text-gray-200">
-                    Master Card, inc.
-                  </span>
+                  <span className="text-gray-800">Master Card, inc.</span>
                 </p>
                 <p className="text-gray-500 text-sm">
                   Phone: +1 (800) 555-154-52
@@ -209,7 +201,7 @@ const OrderDetails: React.FC = () => {
               <div className="flex flex-col">
                 <textarea
                   placeholder="Notes"
-                  className="border border-gray-300 rounded-lg p-3 text-sm flex-1 resize-none dark:bg-gray-800 dark:text-white"
+                  className="border border-gray-300 rounded-lg p-3 text-sm flex-1 resize-none"
                 ></textarea>
                 <button className="bg-blue-500 text-white py-2 rounded-lg mt-3 hover:bg-blue-600">
                   Save note

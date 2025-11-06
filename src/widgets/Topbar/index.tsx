@@ -2,7 +2,7 @@ import { Icon } from '@iconify/react';
 
 const Topbar = () => {
   return (
-    <div className="flex items-center justify-between px-6 py-6 border-b-2 border-b-gray-200 dark:border-b-gray-700 bg-gray-50 darkbg-gray-700 shadow-sm">
+    <div className="flex items-center justify-between px-6 py-6 border-b-2 border-b-gray-200 bg-gray-50 shadow-sm">
       {/* Search Box */}
       <div className="flex items-center  rounded-md px-3 py-1 w-64">
         <Icon

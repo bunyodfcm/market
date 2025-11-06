@@ -1,7 +1,7 @@
 import type { ThemeConfig } from './types';
 
 export const themeConfig: ThemeConfig = {
-  defaultTheme: 'system',
+  defaultTheme: 'light',
   supportedThemes: ['light', 'dark', 'system'],
 };
 

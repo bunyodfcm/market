@@ -41,7 +41,7 @@ export const Skeleton: React.FC<SkeletonProps> = ({
   return (
     <div
       className={cn(
-        'bg-gray-300 dark:bg-gray-700',
+        'bg-gray-300',
         variantStyles[variant],
         animationStyles[animation],
         !width && 'w-full',

@@ -8,9 +8,7 @@ const ProductPageHeader = (_props: Props) => {
   const navigate = useNavigate();
   return (
     <>
-      <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-        Mahsulotlar
-      </h1>
+      <h1 className="text-2xl font-bold text-gray-900">Mahsulotlar</h1>
       <div className="flex gap-4 md:mt-0 mt-4 md:flex-row flex-col">
         <IconButton
           variant="ghost"

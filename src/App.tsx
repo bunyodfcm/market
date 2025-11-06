@@ -4,7 +4,7 @@ import { ThemeProvider } from './shared/theme/providers/ThemeProvider';
 import { I18nProvider } from './app/providers/i18n/I18nProvider';
 import { ResizableLayout } from './shared/ui/resizable-layout';
 import Sidebar from './widgets/Sidebar/ui/Sidebar';
-import  Topbar  from './widgets/Topbar';
+import Topbar from './widgets/Topbar';
 import { useAuth } from './processes/auth/model/useSession';
 
 function App() {
@@ -25,10 +25,10 @@ function AppContent() {
   // Loading holatida
   if (isLoading) {
     return (
-      <div className="h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+      <div className="h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-400">Yuklanmoqda...</p>
+          <p className="text-gray-600">Yuklanmoqda...</p>
         </div>
       </div>
     );

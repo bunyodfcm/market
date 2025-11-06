@@ -57,20 +57,16 @@ const Sidebar: React.FC = () => {
   ];
 
   return (
-    <div className="h-full bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700">
+    <div className="h-full bg-gray-50 border-r border-gray-200">
       {/* Logo va sarlavha */}
-      <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+      <div className="p-6 border-b border-gray-200">
         <div className="flex items-center space-x-3">
           <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
             <Icon icon="mdi:store" className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h1 className="text-lg font-bold text-gray-900 dark:text-white">
-              Market
-            </h1>
-            <p className="text-xs text-gray-500 dark:text-gray-400">
-              Admin Panel
-            </p>
+            <h1 className="text-lg font-bold text-gray-900">Market</h1>
+            <p className="text-xs text-gray-500">Admin Panel</p>
           </div>
         </div>
       </div>
@@ -88,16 +84,14 @@ const Sidebar: React.FC = () => {
                 flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors
                 ${
                   isActive
-                    ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
-                    : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
+                    ? 'bg-blue-100 text-blue-700'
+                    : 'text-gray-700 hover:bg-gray-100'
                 }
               `}
             >
               <Icon
                 icon={item.icon}
-                className={`w-5 h-5 ${
-                  isActive ? 'text-blue-600 dark:text-blue-400' : ''
-                }`}
+                className={`w-5 h-5 ${isActive ? 'text-blue-600' : ''}`}
               />
               <span className="font-medium">{item.uzLabel}</span>
             </Link>

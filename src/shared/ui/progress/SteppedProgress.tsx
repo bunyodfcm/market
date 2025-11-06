@@ -142,7 +142,7 @@ export const SteppedProgress: React.FC<SteppedProgressProps> = ({
               {/* Step Label */}
               {showLabels && step.label && (
                 <div className="ml-3 pb-8">
-                  <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                  <p className="text-sm font-medium text-gray-900">
                     {step.label}
                   </p>
                 </div>
@@ -190,7 +190,7 @@ export const SteppedProgress: React.FC<SteppedProgressProps> = ({
 
               {/* Step Label */}
               {showLabels && step.label && (
-                <p className="mt-2 text-xs font-medium text-gray-600 dark:text-gray-400 text-center">
+                <p className="mt-2 text-xs font-medium text-gray-600 text-center">
                   {step.label}
                 </p>
               )}

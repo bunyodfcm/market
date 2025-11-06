@@ -35,9 +35,9 @@ const sizeStyles = {
 };
 
 const colorStyles = {
-  default: 'border-gray-300 dark:border-gray-600',
-  light: 'border-gray-200 dark:border-gray-700',
-  dark: 'border-gray-400 dark:border-gray-500',
+  default: 'border-gray-300',
+  light: 'border-gray-200',
+  dark: 'border-gray-400',
 };
 
 export const Divider: React.FC<DividerProps> = ({
@@ -60,9 +60,7 @@ export const Divider: React.FC<DividerProps> = ({
             colorStyles[color]
           )}
         />
-        <span className="px-3 text-sm text-gray-500 bg-white dark:bg-gray-900">
-          {children}
-        </span>
+        <span className="px-3 text-sm text-gray-500 bg-white">{children}</span>
         <div
           className={cn(
             'flex-grow',

@@ -1,4 +1,3 @@
-
 import { IconButton } from '../../../shared/ui';
 import { Icon } from '@iconify/react';
 
@@ -7,9 +6,7 @@ type Props = {};
 const SellersPageHeader = (_props: Props) => {
   return (
     <>
-      <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-        Sotuvchilar
-      </h1>
+      <h1 className="text-2xl font-bold text-gray-900">Sotuvchilar</h1>
       <div className="flex gap-4 md:mt-0 mt-4 md:flex-row flex-col">
         <IconButton
           variant="ghost"

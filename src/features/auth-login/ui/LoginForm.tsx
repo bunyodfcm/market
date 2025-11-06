@@ -51,11 +51,9 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
   return (
     <div className="max-w-md w-full space-y-8">
       {/* Login Form */}
-      <div className="bg-white dark:bg-gray-800 py-8 px-6 shadow-lg rounded-lg">
+      <div className="bg-white py-8 px-6 shadow-lg rounded-lg">
         <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-            Log in
-          </h2>
+          <h2 className="text-2xl font-bold text-gray-900">Log in</h2>
         </div>
 
         {/* Xatolik ko'rsatish */}
@@ -90,7 +88,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
                 value={formData.nickname}
                 onChange={handleInputChange}
                 placeholder="Nickname"
-                className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-md placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900"
                 required
               />
             </div>
@@ -120,7 +118,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
                 value={formData.password}
                 onChange={handleInputChange}
                 placeholder="Password"
-                className="block w-full pl-10 pr-10 py-3 border border-gray-300 dark:border-gray-600 rounded-md placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900"
                 required
               />
             </div>
@@ -134,9 +132,9 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
                 name="rememberMe"
                 checked={formData.rememberMe}
                 onChange={handleInputChange}
-                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-600 rounded"
+                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />
-              <label className="ml-2 block text-sm text-gray-600 dark:text-gray-400">
+              <label className="ml-2 block text-sm text-gray-600">
                 Remember me
               </label>
             </div>
@@ -157,10 +155,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
           {/* Divider */}
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300 dark:border-gray-600" />
+              <div className="w-full border-t border-gray-300" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">
+              <span className="px-2 bg-white text-gray-500">
                 or sign in with
               </span>
             </div>
@@ -171,7 +169,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
             <button
               type="button"
               onClick={() => handleSocialLogin('telegram')}
-              className="w-full inline-flex items-center justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-sm font-medium text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
+              className="w-full inline-flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-colors"
             >
               <Icon icon="logos:telegram" width="20" height="20" />
               <span className="ml-2">Telegram</span>
@@ -180,7 +178,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
             <button
               type="button"
               onClick={() => handleSocialLogin('google')}
-              className="w-full inline-flex items-center justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-sm font-medium text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
+              className="w-full inline-flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-colors"
             >
               <Icon icon="material-icon-theme:google" width="20" height="20" />
               <span className="ml-2">Google</span>
@@ -189,7 +187,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
 
           {/* Sign Up Link */}
           <div className="text-center">
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+            <p className="text-sm text-gray-600">
               Don't have an account?{' '}
               <a
                 href="/register"

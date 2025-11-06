@@ -31,7 +31,7 @@ const SellersPage: React.FC = () => {
       name: 'Sara Karimova',
       email: 'sara@mail.ru',
       status: 'inactive',
-      date: '2023-07-15', 
+      date: '2023-07-15',
     },
     {
       id: 3,
@@ -126,17 +126,21 @@ const SellersPage: React.FC = () => {
     },
   ];
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex justify-between items-center mb-6 md:flex-row flex-col gap-4">
           <SellersPageHeader />
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow py-6">
-          <div className="text-gray-600 dark:text-gray-300 border-b-2 pb-4 border-gray-200">
+        <div className="bg-white rounded-lg shadow py-6">
+          <div className="text-gray-600 border-b-2 pb-4 border-gray-200">
             <SellersPageActions />
           </div>
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-            <Table columns={columns} data={sellersData} className="text-center" />
+          <div className="bg-white rounded-lg shadow p-6">
+            <Table
+              columns={columns}
+              data={sellersData}
+              className="text-center"
+            />
           </div>
         </div>
       </div>

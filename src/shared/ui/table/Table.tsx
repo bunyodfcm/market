@@ -66,25 +66,19 @@ export const Table = <T extends Record<string, any>>({
     <div className={cn('overflow-x-auto', className)}>
       <table className="w-full">
         {/* Table Header */}
-        <thead
-          className={cn(
-            'bg-gray-50 dark:bg-gray-800',
-            sticky && 'sticky top-0 z-10'
-          )}
-        >
+        <thead className={cn('bg-gray-50', sticky && 'sticky top-0 z-10')}>
           <tr>
             {columns.map(column => (
               <th
                 key={column.key}
                 className={cn(
-                  'font-medium text-gray-900 dark:text-gray-100',
-                  'border-b border-gray-200 dark:border-gray-700',
+                  'font-medium text-gray-900',
+                  'border-b border-gray-200',
                   paddingStyles[size],
                   sizeStyles[size],
                   column.align === 'center' && 'text-center',
                   column.align === 'right' && 'text-right',
-                  column.sortable &&
-                    'cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700'
+                  column.sortable && 'cursor-pointer hover:bg-gray-100'
                 )}
                 style={{ width: column.width }}
               >
@@ -100,10 +94,7 @@ export const Table = <T extends Record<string, any>>({
             <tr>
               <td
                 colSpan={columns.length}
-                className={cn(
-                  'text-center text-gray-500 dark:text-gray-400',
-                  paddingStyles[size]
-                )}
+                className={cn('text-center text-gray-500', paddingStyles[size])}
               >
                 Loading...
               </td>
@@ -112,10 +103,7 @@ export const Table = <T extends Record<string, any>>({
             <tr>
               <td
                 colSpan={columns.length}
-                className={cn(
-                  'text-center text-gray-500 dark:text-gray-400',
-                  paddingStyles[size]
-                )}
+                className={cn('text-center text-gray-500', paddingStyles[size])}
               >
                 No data
               </td>
@@ -125,13 +113,10 @@ export const Table = <T extends Record<string, any>>({
               <tr
                 key={index}
                 className={cn(
-                  'border-b border-gray-200 dark:border-gray-700',
-                  variant === 'striped' &&
-                    index % 2 === 1 &&
-                    'bg-gray-50 dark:bg-gray-800',
-                  variant === 'bordered' &&
-                    'border border-gray-200 dark:border-gray-700',
-                  hoverable && 'hover:bg-gray-50 dark:hover:bg-gray-800',
+                  'border-b border-gray-200',
+                  variant === 'striped' && index % 2 === 1 && 'bg-gray-50',
+                  variant === 'bordered' && 'border border-gray-200',
+                  hoverable && 'hover:bg-gray-50',
                   onRowClick && 'cursor-pointer',
                   getRowClassName(record, index)
                 )}
@@ -147,7 +132,7 @@ export const Table = <T extends Record<string, any>>({
                     <td
                       key={column.key}
                       className={cn(
-                        'text-gray-900 dark:text-gray-100',
+                        'text-gray-900',
                         paddingStyles[size],
                         sizeStyles[size],
                         column.align === 'center' && 'text-center',

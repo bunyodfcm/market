@@ -9,10 +9,10 @@ const CreateProductFull: React.FC = () => {
   const [description, setDescription] = useState('');
   const { t } = useTranslation();
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+          <h1 className="text-3xl font-bold text-gray-900">
             {t.products.createProduct}
           </h1>
           <div className="flex gap-4">
@@ -37,12 +37,12 @@ const CreateProductFull: React.FC = () => {
         <div className="p-6">
           <form className="space-y-6">
             <div className="grid grid-cols-3 grid-rows-3 gap-4">
-              <div className="col-span-2 bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+              <div className="col-span-2 bg-white rounded-lg shadow p-6">
                 <label htmlFor="productName">Product title</label>
                 <input
                   type="text"
                   id="productName"
-                  className="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 />
                 <div className="flex gap-4 mt-4 md:flex-row flex-col justify-between items-center">
                   <div>
@@ -50,7 +50,7 @@ const CreateProductFull: React.FC = () => {
                     <input
                       type="text"
                       id="sku"
-                      className="mt-1 block w-full  border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+                      className="mt-1 block w-full  border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                     />
                   </div>
                   <div>
@@ -58,7 +58,7 @@ const CreateProductFull: React.FC = () => {
                     <input
                       type="text"
                       id="color"
-                      className="mt-1 block w-full  border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+                      className="mt-1 block w-full  border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                     />
                   </div>
                   <div>
@@ -66,39 +66,39 @@ const CreateProductFull: React.FC = () => {
                     <input
                       type="text"
                       id="size"
-                      className="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                     />
                   </div>
                 </div>
               </div>
 
-              <div className="col-span-2 col-start-1 row-start-2 bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+              <div className="col-span-2 col-start-1 row-start-2 bg-white rounded-lg shadow p-6">
                 <label htmlFor="description">Description</label>
                 <textarea
                   id="description"
                   rows={4}
                   value={description}
                   onChange={e => setDescription(e.target.value)}
-                  className="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 ></textarea>
               </div>
-              <div className="col-span-2 col-start-1 row-start-3 bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+              <div className="col-span-2 col-start-1 row-start-3 bg-white rounded-lg shadow p-6">
                 <label htmlFor="image">Images</label>
                 <input
                   type="file"
                   id="image"
-                  className="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   multiple
                 />
               </div>
-              <div className="row-span-3 col-start-3 row-start-1 bg-white dark:bg-gray-800 rounded-lg shadow p-6 ">
+              <div className="row-span-3 col-start-3 row-start-1 bg-white rounded-lg shadow p-6 ">
                 <div className="flex flex-col gap-6 h-full justify-start">
                   <div>
                     <label htmlFor="price">Price</label>
                     <input
                       type="number"
                       id="price"
-                      className="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                     />
                   </div>
                   <div>
@@ -106,7 +106,7 @@ const CreateProductFull: React.FC = () => {
                     <input
                       type="text"
                       id="status"
-                      className="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                     />
                   </div>
                   <div>
@@ -114,7 +114,7 @@ const CreateProductFull: React.FC = () => {
                     <input
                       type="text"
                       id="tags"
-                      className="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                     />
                   </div>
                   <div className="flex flex-col gap-2">

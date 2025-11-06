@@ -46,11 +46,9 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess }) => {
   return (
     <div className="max-w-md w-full space-y-8">
       {/* Register Form */}
-      <div className="bg-white dark:bg-gray-800 py-8 px-6 shadow-lg rounded-lg">
+      <div className="bg-white py-8 px-6 shadow-lg rounded-lg">
         <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-            Sign up
-          </h2>
+          <h2 className="text-2xl font-bold text-gray-900">Sign up</h2>
         </div>
 
         {/* Success Alert */}
@@ -89,7 +87,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess }) => {
               placeholder="Phone number"
               pattern="[0-9+\-\s()]*"
               inputMode="numeric"
-              className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-md placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900"
               required
             />
           </div>
@@ -105,7 +103,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess }) => {
               value={formData.nickname}
               onChange={handleInputChange}
               placeholder="Username"
-              className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-md placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900"
               required
             />
           </div>
@@ -121,7 +119,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess }) => {
               value={formData.password}
               onChange={handleInputChange}
               placeholder="Password"
-              className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-md placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900"
               required
             />
           </div>
@@ -137,13 +135,13 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess }) => {
               value={formData.confirmPassword}
               onChange={handleInputChange}
               placeholder="Confirm Password"
-              className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-md placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900"
               required
             />
           </div>
 
           {/* Legal Text */}
-          <div className="text-xs text-gray-500 dark:text-gray-400">
+          <div className="text-xs text-gray-500">
             By signing up, you confirm that you've read and accepted our{' '}
             <a href="#" className="text-blue-600 hover:text-blue-500">
               User Notice
@@ -167,10 +165,10 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess }) => {
           {/* Divider */}
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300 dark:border-gray-600" />
+              <div className="w-full border-t border-gray-300" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">
+              <span className="px-2 bg-white text-gray-500">
                 or sign up with
               </span>
             </div>
@@ -180,7 +178,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess }) => {
           <div className="grid grid-cols-2 gap-3">
             <button
               type="button"
-              className="w-full inline-flex items-center justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-sm font-medium text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
+              className="w-full inline-flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-colors"
             >
               <Icon icon="logos:facebook" width="20" height="20" />
               <span className="ml-2">Facebook</span>
@@ -188,7 +186,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess }) => {
 
             <button
               type="button"
-              className="w-full inline-flex items-center justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-sm font-medium text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
+              className="w-full inline-flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-colors"
             >
               <Icon icon="logos:google-icon" width="20" height="20" />
               <span className="ml-2">Google</span>
@@ -197,7 +195,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess }) => {
 
           {/* Login Link */}
           <div className="text-center">
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+            <p className="text-sm text-gray-600">
               Already have an account?{' '}
               <Link
                 to="/login"

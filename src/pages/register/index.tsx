@@ -2,9 +2,9 @@ import { RegisterForm } from '../../features/auth-register/ui/RegisterForm';
 
 const RegisterPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       {/* Header */}
-      <header className="bg-white dark:bg-gray-800 shadow-sm">
+      <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
@@ -14,7 +14,7 @@ const RegisterPage: React.FC = () => {
                   <span className="text-white font-bold text-sm">A</span>
                 </div>
               </div>
-              <span className="ml-2 text-xl font-semibold text-gray-900 dark:text-white">
+              <span className="ml-2 text-xl font-semibold text-gray-900">
                 Admin
               </span>
             </div>
@@ -23,19 +23,19 @@ const RegisterPage: React.FC = () => {
             <nav className="flex space-x-4">
               <a
                 href="#"
-                className="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white px-3 py-2 text-sm font-medium"
+                className="text-gray-500 hover:text-gray-700 px-3 py-2 text-sm font-medium"
               >
                 Home
               </a>
               <a
                 href="#"
-                className="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white px-3 py-2 text-sm font-medium"
+                className="text-gray-500 hover:text-gray-700 px-3 py-2 text-sm font-medium"
               >
                 Help
               </a>
               <a
                 href="/login"
-                className="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white px-3 py-2 text-sm font-medium"
+                className="text-gray-500 hover:text-gray-700 px-3 py-2 text-sm font-medium"
               >
                 Login
               </a>

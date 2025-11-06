@@ -1,5 +1,5 @@
-import { Icon } from "@iconify/react";
-import { Table } from "../../shared/ui";
+import { Icon } from '@iconify/react';
+import { Table } from '../../shared/ui';
 
 type CategoriesPageProps = {
   id: string;
@@ -12,47 +12,46 @@ type CategoriesPageProps = {
 
 const categorysData: CategoriesPageProps[] = [
   {
-    id: "1",
-    name: "Elektronika",
-    slug: "elektronika",
-    type: "Jismoniy",
+    id: '1',
+    name: 'Elektronika',
+    slug: 'elektronika',
+    type: 'Jismoniy',
     order: 1,
-    description: "Turli elektron qurilmalar va gadjetlar",
+    description: 'Turli elektron qurilmalar va gadjetlar',
   },
   {
-    id: "2",
-    name: "Kitoblar",
-    slug: "kitoblar",
-    type: "Jismoniy",
+    id: '2',
+    name: 'Kitoblar',
+    slug: 'kitoblar',
+    type: 'Jismoniy',
     order: 2,
-    description: "Turli janrlardagi kitoblar va adabiyotlar",
+    description: 'Turli janrlardagi kitoblar va adabiyotlar',
   },
   {
-    id: "3",
+    id: '3',
     name: "Dasturiy ta'minot",
-    slug: "dasturiy-taminot",
-    type: "Raqamli",
+    slug: 'dasturiy-taminot',
+    type: 'Raqamli',
     order: 3,
     description: "Turli dasturiy ta'minot va ilovalar",
   },
 ];
 
 const CategoriesPage: React.FC = () => {
-
   const categoryColumns = [
-   {
-    key: 'id',
-    title: 'ID',
-    dataIndex: 'id',
-   },
+    {
+      key: 'id',
+      title: 'ID',
+      dataIndex: 'id',
+    },
     {
       key: 'name',
       title: 'Kategoriya nomi',
       dataIndex: 'name',
     },
-    
+
     {
-      key: 'description', 
+      key: 'description',
       title: 'Tavsif',
       dataIndex: 'description',
     },
@@ -60,7 +59,7 @@ const CategoriesPage: React.FC = () => {
       key: 'slug',
       title: 'Slug',
       dataIndex: 'slug',
-      render: (slug: string) => <span className="lowercase">{"/"+slug}</span>,
+      render: (slug: string) => <span className="lowercase">{'/' + slug}</span>,
     },
     {
       key: 'order',
@@ -71,35 +70,32 @@ const CategoriesPage: React.FC = () => {
       key: 'actions',
       title: 'Amallar',
       dataIndex: 'actions',
-      render: (_:unknown, record: CategoriesPageProps) => (
-       <div className="flex justify-center gap-2">
-                 <button
-                   onClick={() => console.log('View: ', record.id)}
-                   className="text-blue-600"
-                 >
-                   <Icon icon="mdi:eye" height="16" width="16" />
-                 </button>
-                 <button
-                   onClick={() => console.log('Edit: ', record.id)}
-                   className="text-yellow-600"
-                 >
-                   <Icon icon="mdi:pencil" height="16" width="16" />
-                 </button>
-               </div>
+      render: (_: unknown, record: CategoriesPageProps) => (
+        <div className="flex justify-center gap-2">
+          <button
+            onClick={() => console.log('View: ', record.id)}
+            className="text-blue-600"
+          >
+            <Icon icon="mdi:eye" height="16" width="16" />
+          </button>
+          <button
+            onClick={() => console.log('Edit: ', record.id)}
+            className="text-yellow-600"
+          >
+            <Icon icon="mdi:pencil" height="16" width="16" />
+          </button>
+        </div>
       ),
-    }
+    },
   ];
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-          Kategoriyalar
-        </h1>
-        <div className="flex flex-row justify-between mt-8 bg-white dark:bg-gray-800 rounded-lg shadow py-6">
+        <h1 className="text-2xl font-bold text-gray-900">Kategoriyalar</h1>
+        <div className="flex flex-row justify-between mt-8 bg-white rounded-lg shadow py-6">
           <div className="border-r mr-2 pr-2 border-gray-200">
             {/* add category section*/}
             <div className="mt-6 px-6">
-              
               <form className="flex flex-col gap-4">
                 <input
                   type="text"
@@ -131,8 +127,13 @@ const CategoriesPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="w-full text-gray-600 dark:text-gray-300  border-gray-200">
-            <Table columns={categoryColumns} data={categorysData} variant="striped" size="lg" />
+          <div className="w-full text-gray-600 border-gray-200">
+            <Table
+              columns={categoryColumns}
+              data={categorysData}
+              variant="striped"
+              size="lg"
+            />
           </div>
         </div>
       </div>

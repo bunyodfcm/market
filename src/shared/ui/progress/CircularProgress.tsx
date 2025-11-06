@@ -74,7 +74,7 @@ export const CircularProgress: React.FC<CircularProgressProps> = ({
           stroke="currentColor"
           strokeWidth={strokeWidth}
           fill="none"
-          className="text-gray-200 dark:text-gray-700"
+          className="text-gray-200"
         />
 
         {/* Progress Circle */}
@@ -98,12 +98,7 @@ export const CircularProgress: React.FC<CircularProgressProps> = ({
       {/* Label */}
       {showLabel && (
         <div className="absolute inset-0 flex items-center justify-center">
-          <span
-            className={cn(
-              'font-medium text-gray-700 dark:text-gray-300',
-              fontSize
-            )}
-          >
+          <span className={cn('font-medium text-gray-700', fontSize)}>
             {label || `${Math.round(percentage)}%`}
           </span>
         </div>
