@@ -15,7 +15,7 @@ const ProductsPage: React.FC = () => {
           <div className="text-gray-600 border-b-2 pb-4 border-gray-200">
             <ProductPageActions />
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
+          <div className="w-full p-6">
            <ProductList />
           </div>
         </div>

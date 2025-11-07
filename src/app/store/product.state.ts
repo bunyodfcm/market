@@ -39,7 +39,7 @@ export const useProductStore = create<ProductState>()(
             subCategoryId: String(params?.subCategoryId || 1),
             companyId: String(params?.companyId || 1),
           }).toString();
-          const data = await productApi.fetchAll(query);
+          const data = await productApi.fetchAll();
           set({ products: data });
         } catch (err) {
           console.error('Fetch error:', err);

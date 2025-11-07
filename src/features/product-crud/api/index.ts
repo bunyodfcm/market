@@ -4,8 +4,8 @@ import type { Product } from '../../../app/store/types';
 
 export const productApi = {
   // 🔹 Barcha mahsulotlarni olish
-  fetchAll: async (params:string): Promise<Product[]> => {
-    const res = await apiClient.get(`/products/${params}`);
+  fetchAll: async (params?:string): Promise<Product[]> => {
+    const res = await apiClient.get(`/products/${params || ''}`);
     return res.data;
   },
 
