@@ -24,21 +24,16 @@ export const useProductStore = create<ProductState>()(
       isLoading: false,
 
       // 🔹 Mahsulotlarni yuklash
-      fetchProducts: async (params?: {
-        q?: number;
-        categoryId?: number;
-        subCategoryId?: number;
-        companyId?: number;
-      }) => {
+      fetchProducts: async () => {
         set({ isLoading: true });
         try {
-          // URL query
-          const query = new URLSearchParams({
-            q: String(params?.q || 1),
-            categoryId: String(params?.categoryId || 1),
-            subCategoryId: String(params?.subCategoryId || 1),
-            companyId: String(params?.companyId || 1),
-          }).toString();
+        //   // URL query
+        //   const query = new URLSearchParams({
+        //     q: String(params?.q || 1),
+        //     categoryId: String(params?.categoryId || 1),
+        //     subCategoryId: String(params?.subCategoryId || 1),
+        //     companyId: String(params?.companyId || 1),
+        //   }).toString();
           const data = await productApi.fetchAll();
           set({ products: data });
         } catch (err) {
