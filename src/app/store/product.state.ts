@@ -7,12 +7,7 @@ import type { Product } from './types';
 interface ProductState {
   products: Product[];
   isLoading: boolean;
-  fetchProducts: (params?: {
-        q?: number;
-        categoryId?: number;
-        subCategoryId?: number;
-        companyId?: number;
-      } ) => Promise<void>;
+  fetchProducts: (params?: any) => Promise<void>;
   addProduct: (product: Omit<Product, 'id'>) => Promise<void>;
   removeProduct: (id: string) => Promise<void>;
 }
@@ -24,17 +19,17 @@ export const useProductStore = create<ProductState>()(
       isLoading: false,
 
       // 🔹 Mahsulotlarni yuklash
-      fetchProducts: async () => {
+      fetchProducts: async (params) => {
         set({ isLoading: true });
         try {
-        //   // URL query
-        //   const query = new URLSearchParams({
-        //     q: String(params?.q || 1),
-        //     categoryId: String(params?.categoryId || 1),
-        //     subCategoryId: String(params?.subCategoryId || 1),
-        //     companyId: String(params?.companyId || 1),
-        //   }).toString();
-          const data = await productApi.fetchAll();
+          //   // URL query
+          //   const query = new URLSearchParams({
+          //     q: String(params?.q || 1),
+          //     categoryId: String(params?.categoryId || 1),
+          //     subCategoryId: String(params?.subCategoryId || 1),
+          //     companyId: String(params?.companyId || 1),
+          //   }).toString();
+          const data = await productApi.fetchAll(params);
           set({ products: data });
         } catch (err) {
           console.error('Fetch error:', err);

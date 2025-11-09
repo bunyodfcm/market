@@ -11,10 +11,10 @@ const ProductList: React.FC = () => {
   }, [fetchProducts])
 
   if (isLoading)
-    return <div className="text-center py-10 text-gray-500">Loading products...</div>
+    return <div className="grid place-items-center text-center py-10 text-gray-500">Loading products...</div>
 
   if (products.length === 0)
-    return <div className="text-center py-10 text-gray-400">No products found.</div>
+    return <div className="grid place-items-center text-center py-10 text-gray-400">No products found.</div>
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
