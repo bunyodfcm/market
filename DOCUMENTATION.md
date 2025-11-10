@@ -418,7 +418,7 @@ Authorization: Bearer <JWT_TOKEN>
   "token": "jwt_token"
 }
 ```
-
+ 
 ---
 
 ### POST /api/user
