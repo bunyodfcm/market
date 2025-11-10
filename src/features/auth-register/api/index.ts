@@ -26,12 +26,30 @@ export const registerApi = {
   // Verify OTP API
   verifyOtp: async (
     otp: number
-  ): Promise<{ message: string }> => {
-    const response = await apiClient.post(
-      '/user/verify-otp',
-      { otp }
-    );
-    return response.data;
+  ): Promise<{ message: string; user: any; token?: string }> => {
+    // Pending token'ni Authorization header'ga qo'shish
+    const pendingToken = sessionStorage.getItem('pending_token');
+
+    // Temporary axios instance yaratish (pending token bilan)
+    const axios = (await import('axios')).default;
+    const tempClient = axios.create({
+      baseURL:
+        import.meta.env.VITE_API_BASE_URL || 'https://e-mall.webpack.uz/api',
+      timeout: 10000,
+      headers: {
+        'Content-Type': 'application/json',
+        ...(pendingToken ? { Authorization: `Bearer ${pendingToken}` } : {}),
+      },
+    });
+
+    const response = await tempClient.post('/user/verify-otp', { otp });
+    const data = response.data;
+
+    // Token user.activeToken ichida bo'lishi mumkin
+    return {
+      ...data,
+      token: data.token || data.user?.activeToken || '',
+    };
   },
 
   // Resend verification email

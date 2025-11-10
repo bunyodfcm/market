@@ -42,7 +42,7 @@ export const ru: TranslationKeys = {
     deleteUser: 'Удалить пользователя',
   },
   companies: {
-   companyList: 'Список компаний',
+    companyList: 'Список компаний',
     companyProfile: 'Профиль компании',
     createCompany: 'Создать компанию',
     editCompany: 'Редактировать компанию',
@@ -73,5 +73,5 @@ export const ru: TranslationKeys = {
     profileSettings: 'Настройки профиля',
     accountSettings: 'Настройки аккаунта',
     notificationSettings: 'Настройки уведомлений',
-  }, 
+  },
 };

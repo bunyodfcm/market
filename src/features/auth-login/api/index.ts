@@ -1,4 +1,4 @@
- import { apiClient } from '../../../shared/api/client';
+import { apiClient } from '../../../shared/api/client';
 
 export interface LoginRequest {
   nickname: string;
@@ -39,15 +39,21 @@ export interface UserInCompany {
 }
 
 export interface LoginResponse {
-  message: string;
   user: User;
+  token: string;
 }
 
 export const authApi = {
   // Login API
   login: async (credentials: LoginRequest): Promise<LoginResponse> => {
     const response = await apiClient.post('/user/login', credentials);
-    return response.data;
+    const data = response.data;
+    // Backend'dan kelgan response format: { user, token }
+    // Agar token user ichida bo'lsa (activeToken), uni alohida qilib qaytarish
+    return {
+      user: data.user,
+      token: data.token || data.user?.activeToken || '',
+    };
   },
 
   // Logout API

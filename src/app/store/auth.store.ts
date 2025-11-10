@@ -24,74 +24,85 @@ interface AuthState {
 
 export const useAuthStore = create<AuthState>()(
   persist(
-    set => ({
-      // Initial state
-      user: null,
-      token: null,
-      pendingToken: null,
-      isAuthenticated: false,
-      isLoading: false,
+    set => {
+      // Initial state - token mavjudligini tekshirish
+      const token = localStorage.getItem(env.TOKEN_STORAGE_KEY);
+      const initialAuth = !!token;
 
-      // Actions
-      login: (token, user) => {
-        localStorage.setItem(env.TOKEN_STORAGE_KEY, token);
-        set({
-          token,
-          user,
-          isAuthenticated: true,
-          isLoading: false,
-        });
-        // Custom event dispatch qilish (mavjud kod bilan moslashish uchun)
-        window.dispatchEvent(new Event('authStateChange'));
-      },
+      return {
+        // Initial state
+        user: null,
+        token: token,
+        pendingToken: null,
+        isAuthenticated: initialAuth,
+        isLoading: false,
 
-      logout: async () => {
-        try {
-          // API'ga logout so'rov yuborish
-          await authApi.logout();
-        } catch (error) {
-          // API xatosi bo'lsa ham logout qilish (offline mode)
-          console.error('Logout API error:', error);
-        } finally {
-          // LocalStorage va state'ni tozalash
-          localStorage.removeItem(env.TOKEN_STORAGE_KEY);
-          localStorage.removeItem(env.REFRESH_TOKEN_KEY);
+        // Actions
+        login: (token, user) => {
+          localStorage.setItem(env.TOKEN_STORAGE_KEY, token);
           set({
-            user: null,
-            token: null,
-            pendingToken: null,
-            isAuthenticated: false,
+            token,
+            user,
+            isAuthenticated: true,
             isLoading: false,
           });
           // Custom event dispatch qilish (mavjud kod bilan moslashish uchun)
           window.dispatchEvent(new Event('authStateChange'));
-          // Login sahifasiga yo'naltirish
-          window.location.href = '/login';
-        }
-      },
+        },
 
-      setPendingToken: token => {
-        set({ pendingToken: token });
-      },
+        logout: async () => {
+          try {
+            // API'ga logout so'rov yuborish
+            await authApi.logout();
+          } catch (error) {
+            // API xatosi bo'lsa ham logout qilish (offline mode)
+            console.error('Logout API error:', error);
+          } finally {
+            // LocalStorage va state'ni tozalash
+            localStorage.removeItem(env.TOKEN_STORAGE_KEY);
+            localStorage.removeItem(env.REFRESH_TOKEN_KEY);
+            set({
+              user: null,
+              token: null,
+              pendingToken: null,
+              isAuthenticated: false,
+              isLoading: false,
+            });
+            // Custom event dispatch qilish (mavjud kod bilan moslashish uchun)
+            window.dispatchEvent(new Event('authStateChange'));
+            // Login sahifasiga yo'naltirish
+            window.location.href = '/login';
+          }
+        },
 
-      clearPendingToken: () => {
-        set({ pendingToken: null });
-      },
+        setPendingToken: token => {
+          // Pending token'ni sessionStorage'ga saqlash (asosiy token emas)
+          // SessionStorage ishlatiladi, chunki bu vaqtinchalik token
+          sessionStorage.setItem('pending_token', token);
+          set({ pendingToken: token });
+        },
 
-      setUser: user => {
-        set({ user });
-      },
+        clearPendingToken: () => {
+          // Pending token'ni tozalash
+          sessionStorage.removeItem('pending_token');
+          set({ pendingToken: null });
+        },
 
-      setLoading: loading => {
-        set({ isLoading: loading });
-      },
+        setUser: user => {
+          set({ user });
+        },
 
-      updateUser: userData => {
-        set(state => ({
-          user: state.user ? { ...state.user, ...userData } : null,
-        }));
-      },
-    }),
+        setLoading: loading => {
+          set({ isLoading: loading });
+        },
+
+        updateUser: userData => {
+          set(state => ({
+            user: state.user ? { ...state.user, ...userData } : null,
+          }));
+        },
+      };
+    },
     {
       name: 'auth-storage',
       partialize: state => ({

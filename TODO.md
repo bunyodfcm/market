@@ -33,9 +33,12 @@ Bu fayl dasturda qilinishi kerak bo'lgan ishlar ro'yxatini o'z ichiga oladi.
 #### Auth API Integratsiyasi
 
 - [x] **POST /api/user/login** - Login API integratsiyasi
-  - Token localStorage'ga saqlash
-  - User ma'lumotlarini global state'ga yozish
-  - Redirect logic (dashboard yoki login sahifasiga)
+  - [x] Token localStorage'ga saqlash
+  - [x] User ma'lumotlarini global state'ga yozish (useAuthStore)
+  - [x] Redirect logic (dashboard yoki login sahifasiga)
+  - [x] Toast notification (muvaffaqiyat/xatolik)
+  - [x] Translation integratsiyasi
+  - [x] Error handling
 - [ ] **POST /api/user/register** - Register API integratsiyasi
 
   - OTP yuborish jarayoni
@@ -48,19 +51,20 @@ Bu fayl dasturda qilinishi kerak bo'lgan ishlar ro'yxatini o'z ichiga oladi.
   - Foydalanuvchi yaratish
   - JWT token olish va saqlash
 
-- [ ] **POST /api/user/logout** - Logout funksiyasi
-  - Token o'chirish
-  - Session tozalash
-  - Redirect login sahifasiga
+- [x] **POST /api/user/logout** - Logout funksiyasi
+  - [x] Token o'chirish
+  - [x] Session tozalash
+  - [x] Redirect login sahifasiga
+  - [x] API logout so'rovi
 
 #### Session Management
 
-- [ ] Token refresh mekanizmi
-- [ ] Auto-logout (token muddati tugaganda)
-- [ ] Remember me funksiyasi
+- [x] Token refresh mekanizmi (API client interceptor)
+- [x] Auto-logout (token muddati tugaganda, 401 xatolik)
+- [x] Remember me funksiyasi
 - [ ] Multi-device session handling
 
-#### Role-Based Access Control (RBAC) 
+#### Role-Based Access Control (RBAC)
 
 - [ ] Foydalanuvchi rollarini tekshirish komponenti
 - [ ] Role-based route guard'lar
@@ -77,6 +81,8 @@ Bu fayl dasturda qilinishi kerak bo'lgan ishlar ro'yxatini o'z ichiga oladi.
 - [x] Request/Response interceptors
 - [x] Token qo'shish interceptor'da
 - [x] 401 error handling
+- [x] Token refresh mekanizmi (auto-refresh on 401)
+- [x] Auto-logout on token expiry
 
 ### 🚧 Qilinishi kerak
 
@@ -236,7 +242,12 @@ Bu fayl dasturda qilinishi kerak bo'lgan ishlar ro'yxatini o'z ichiga oladi.
 
 #### Auth Features
 
-- [ ] **auth-login** - Login API integratsiyasi
+- [x] **auth-login** - Login API integratsiyasi
+  - [x] useLogin hook to'liq implementatsiya
+  - [x] LoginForm UI to'liq (translation, toast, validation)
+  - [x] Error handling va toast notifications
+  - [x] Remember me funksiyasi
+  - [x] Token va user state management
 - [ ] **auth-register** - Register API integratsiyasi
 - [ ] **auth-forgot-password** - Parolni tiklash funksiyasi
 - [ ] **auth-verify-otp** - OTP tasdiqlash funksiyasi
@@ -516,17 +527,17 @@ Bu fayl dasturda qilinishi kerak bo'lgan ishlar ro'yxatini o'z ichiga oladi.
 
 - [x] API client error interceptor
 - [x] 401 error handling
+- [x] Toast notification system (ToastProvider qo'shildi)
+- [x] User-friendly error messages (LoginForm'da)
+- [x] Network error handling (API client'da)
 
 ### 🚧 Qilinishi kerak
 
 #### Error Handling
 
-- [ ] Toast notification system
 - [ ] Error boundary komponentlari
 - [ ] Error logging (Sentry/LogRocket)
-- [ ] User-friendly error messages
-- [ ] Network error handling
-- [ ] Server error handling
+- [ ] Server error handling (detailed)
 
 #### Validation
 
@@ -545,6 +556,8 @@ Bu fayl dasturda qilinishi kerak bo'lgan ishlar ro'yxatini o'z ichiga oladi.
 - [x] Tailwind CSS setup
 - [x] Asosiy UI komponentlar (Button, Input, Table, Badge, Rating, Progress, Tooltip, Skeleton)
 - [x] Light mode (dark olib tashlandi)
+- [x] Toast komponenti va ToastProvider
+- [x] Alert komponenti
 
 ### 🚧 Qilinishi kerak
 
@@ -707,12 +720,12 @@ Bu fayl dasturda qilinishi kerak bo'lgan ishlar ro'yxatini o'z ichiga oladi.
 
 ### 🔴 High Priority (Yuqori ustuvorlik)
 
-1. Authentication API integratsiyasi (Login, Register, OTP)
+1. ✅ Authentication API integratsiyasi (Login ✅, Register, OTP)
 2. User CRUD API integratsiyasi
 3. Product CRUD API integratsiyasi
 4. Order CRUD API integratsiyasi
 5. Real-time Socket.IO integratsiyasi
-6. Error handling va toast notifications
+6. ✅ Error handling va toast notifications
 7. Form validation
 
 ### 🟡 Medium Priority (O'rtacha ustuvorlik)

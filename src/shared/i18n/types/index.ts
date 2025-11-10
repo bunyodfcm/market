@@ -37,6 +37,12 @@ export interface TranslationKeys {
     email: string;
     password: string;
     forgotPassword: string;
+    nickname?: string;
+    rememberMe?: string;
+    orSignInWith?: string;
+    dontHaveAccount?: string;
+    loginSuccess?: string;
+    loginError?: string;
   };
   // Dashboard
   dashboard: {

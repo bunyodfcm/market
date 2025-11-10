@@ -19,27 +19,31 @@ export const OtpForm: React.FC<OtpFormProps> = ({ onSuccess }) => {
   } = useRegister();
   const [otpNumber, setOtpNumber] = useState('');
 
- 
- const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  try {
-    const res = await verifyOtp(Number(otpNumber));
-    if (res) {
-      console.log(res)
-      onSuccess?.(); // parentda navigate bo'ladi
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const res = await verifyOtp(Number(otpNumber));
+      // Token user.activeToken ichida bo'lishi mumkin
+      const token = res?.token || res?.user?.activeToken;
+      if (res && token && res.user) {
+        // OTP tasdiqlangandan keyin token va user saqlanadi
+        // Dashboard'ga o'tish (login qilish shart emas)
+        // onSuccess callback'ni chaqirish (parent navigate qiladi)
+        onSuccess?.();
+      }
+    } catch (err) {
+      console.error(err);
     }
-  } catch (err) {
-    console.error(err);
-  }
-};
-
+  };
 
   return (
     <div className="max-w-md w-full space-y-8">
       {/* Register Form */}
       <div className="bg-white py-8 px-6 shadow-lg rounded-lg">
         <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-gray-900">Verify OTP</h2>
+          <h2 className="text-2xl font-bold text-gray-900">
+            Tasdiqlash kodini kiriting
+          </h2>
         </div>
 
         {/* Success Alert */}
@@ -75,12 +79,17 @@ export const OtpForm: React.FC<OtpFormProps> = ({ onSuccess }) => {
             </div>
             <input
               type="tel"
-              name="phone"
+              name="otp"
               value={otpNumber}
-              onChange={(e) => setOtpNumber(e.target.value)}
-              placeholder="Number in SMS"
-              pattern="[0-9+\-\s()]*"
+              onChange={e => {
+                // Faqat raqamlarni qabul qilish
+                const value = e.target.value.replace(/\D/g, '');
+                setOtpNumber(value);
+              }}
+              placeholder="Tasdiqlash kodini kiriting"
+              pattern="[0-9]*"
               inputMode="numeric"
+              maxLength={6}
               className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900"
               required
             />
@@ -92,7 +101,7 @@ export const OtpForm: React.FC<OtpFormProps> = ({ onSuccess }) => {
             disabled={isLoading}
             className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isLoading ? 'Loading...' : 'Verify'}
+            {isLoading ? 'Yuklanmoqda...' : 'Tasdiqlash'}
           </button>
 
           {/* Login Link */}
@@ -102,7 +111,7 @@ export const OtpForm: React.FC<OtpFormProps> = ({ onSuccess }) => {
                 to="/login"
                 className="text-blue-600 hover:text-blue-500 font-medium"
               >
-                Go back
+                Orqaga qaytish
               </Link>
             </p>
           </div>

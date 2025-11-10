@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLogin } from '../model/useLogin';
 import { Icon } from '@iconify/react';
+import { useTranslation } from '../../../shared/i18n';
+import { useToast } from '../../../shared/ui/toast';
 
 interface LoginFormProps {
   onSuccess?: () => void;
@@ -9,7 +11,9 @@ interface LoginFormProps {
 
 export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
   const navigate = useNavigate();
-  const { handleLogin, isLoading, error } = useLogin();
+  const { t } = useTranslation();
+  const { showToast } = useToast();
+  const { handleLogin, isLoading, error, clearError } = useLogin();
   const [formData, setFormData] = useState({
     nickname: '',
     password: '',
@@ -26,11 +30,23 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    clearError();
 
     try {
-      await handleLogin({
-        nickname: formData.nickname,
-        password: formData.password,
+      await handleLogin(
+        {
+          nickname: formData.nickname,
+          password: formData.password,
+        },
+        formData.rememberMe
+      );
+
+      // Muvaffaqiyatli login toast
+      showToast({
+        variant: 'success',
+        title: t.common.success,
+        message: t.auth.loginSuccess || 'Muvaffaqiyatli kirildi',
+        duration: 3000,
       });
 
       // Muvaffaqiyatli login - dashboard sahifasiga yo'naltirish
@@ -38,8 +54,20 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
 
       // Agar onSuccess callback berilgan bo'lsa, uni chaqirish
       onSuccess?.();
-    } catch (err) {
+    } catch (err: any) {
       console.error('Login failed:', err);
+      // Xatolik toast
+      const errorMessage =
+        err.response?.data?.message ||
+        err.message ||
+        t.auth.loginError ||
+        'Login xatoligi yuz berdi';
+      showToast({
+        variant: 'error',
+        title: t.common.error,
+        message: errorMessage,
+        duration: 5000,
+      });
     }
   };
 
@@ -53,12 +81,12 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
       {/* Login Form */}
       <div className="bg-white py-8 px-6 shadow-lg rounded-lg">
         <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-gray-900">Log in</h2>
+          <h2 className="text-2xl font-bold text-gray-900">{t.auth.login}</h2>
         </div>
 
-        {/* Xatolik ko'rsatish */}
+        {/* Xatolik ko'rsatish (fallback, toast asosiy) */}
         {error && (
-          <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+          <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded text-sm">
             {error}
           </div>
         )}
@@ -87,9 +115,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
                 name="nickname"
                 value={formData.nickname}
                 onChange={handleInputChange}
-                placeholder="Nickname"
+                placeholder={t.auth.nickname || 'Nickname'}
                 className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900"
                 required
+                autoComplete="username"
               />
             </div>
           </div>
@@ -117,9 +146,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
                 name="password"
                 value={formData.password}
                 onChange={handleInputChange}
-                placeholder="Password"
+                placeholder={t.auth.password}
                 className="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900"
                 required
+                autoComplete="current-password"
               />
             </div>
           </div>
@@ -135,11 +165,14 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />
               <label className="ml-2 block text-sm text-gray-600">
-                Remember me
+                {t.auth.rememberMe || 'Remember me'}
               </label>
             </div>
-            <a href="#" className="text-sm text-blue-600 hover:text-blue-500">
-              Forgot Password?
+            <a
+              href="/forgot-password"
+              className="text-sm text-blue-600 hover:text-blue-500"
+            >
+              {t.auth.forgotPassword}
             </a>
           </div>
 
@@ -149,7 +182,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
             disabled={isLoading}
             className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isLoading ? 'Loading...' : 'LOG IN'}
+            {isLoading ? t.common.loading : t.auth.login.toUpperCase()}
           </button>
 
           {/* Divider */}
@@ -159,7 +192,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
             </div>
             <div className="relative flex justify-center text-sm">
               <span className="px-2 bg-white text-gray-500">
-                or sign in with
+                {t.auth.orSignInWith || 'or sign in with'}
               </span>
             </div>
           </div>
@@ -188,12 +221,12 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
           {/* Sign Up Link */}
           <div className="text-center">
             <p className="text-sm text-gray-600">
-              Don't have an account?{' '}
+              {t.auth.dontHaveAccount || "Don't have an account?"}{' '}
               <a
                 href="/register"
                 className="text-blue-600 hover:text-blue-500 font-medium"
               >
-                Sign Up
+                {t.auth.register}
               </a>
             </p>
           </div>

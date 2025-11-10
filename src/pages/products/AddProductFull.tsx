@@ -10,23 +10,25 @@ const CreateProductFull: React.FC = () => {
   const { t } = useTranslation();
   const { handleAdd, isLoading } = useProductCrud();
 
-  const [description, setDescription] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [formData, setFormData] = useState<Omit<Product, 'id'>>({
+  const [formData, setFormData] = useState<
+    Omit<Product, 'id'> & { sku?: string; color?: string; size?: string }
+  >({
     name: '',
     price: 0,
     description: '',
     image: '',
     category: '',
     stock: 0,
+    sku: '',
+    color: '',
+    size: '',
   });
 
   // 🔹 Checkboxlarni boshqarish
   const handleCategoryChange = (value: string) => {
-    setSelectedCategories((prev) =>
-      prev.includes(value)
-        ? prev.filter((c) => c !== value)
-        : [...prev, value]
+    setSelectedCategories(prev =>
+      prev.includes(value) ? prev.filter(c => c !== value) : [...prev, value]
     );
   };
 
@@ -34,8 +36,24 @@ const CreateProductFull: React.FC = () => {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { id, value } = e.target;
-    setFormData((prev) => ({ ...prev, [id]: value }));
+    const { id, value, type } = e.target;
+    const inputValue =
+      type === 'number' ? (value === '' ? 0 : Number(value)) : value;
+    setFormData(prev => ({ ...prev, [id]: inputValue }));
+  };
+
+  // 🔹 File input uchun handler
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      // Faqat birinchi fayl URL ni olish (yoki FileReader ishlatish kerak)
+      const file = files[0];
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData(prev => ({ ...prev, image: reader.result as string }));
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   // 🔹 Formani yuborish
@@ -43,9 +61,12 @@ const CreateProductFull: React.FC = () => {
     e.preventDefault();
 
     const newProduct: Omit<Product, 'id'> = {
-      ...formData,
-      description,
+      name: formData.name,
+      price: formData.price,
+      description: formData.description,
+      image: formData.image,
       category: selectedCategories.join(', '),
+      stock: formData.stock,
     };
 
     await handleAdd(newProduct);
@@ -75,24 +96,34 @@ const CreateProductFull: React.FC = () => {
               disabled={isLoading}
               className="inline-flex items-center px-3 py-2 border-2 border-gray-200 text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-700 disabled:opacity-50"
             >
-              <Icon icon="mdi:content-save" width="24" height="24" className="mr-2" />
-              {isLoading ? 'Saving...' : t.common.save}
+              <Icon
+                icon="mdi:content-save"
+                width="24"
+                height="24"
+                className="mr-2"
+              />
+              {isLoading ? t.common.loading : t.common.save}
             </button>
           </div>
         </div>
 
         <div className="p-6">
-          <form id="create-product-form" onSubmit={handleSubmit} className="space-y-6">
+          <form
+            id="create-product-form"
+            onSubmit={handleSubmit}
+            className="space-y-6"
+          >
             <div className="grid grid-cols-3 grid-rows-3 gap-4">
               {/* Product Info */}
               <div className="col-span-2 bg-white rounded-lg shadow p-6">
-                <label htmlFor="name">Product title</label>
+                <label htmlFor="name">{t.products.name}</label>
                 <input
                   type="text"
                   id="name"
                   value={formData.name}
                   onChange={handleChange}
                   className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3"
+                  required
                 />
                 <div className="flex gap-4 mt-4 md:flex-row flex-col justify-between items-center">
                   <div>
@@ -100,6 +131,7 @@ const CreateProductFull: React.FC = () => {
                     <input
                       type="text"
                       id="sku"
+                      value={formData.sku || ''}
                       onChange={handleChange}
                       className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3"
                     />
@@ -109,6 +141,7 @@ const CreateProductFull: React.FC = () => {
                     <input
                       type="text"
                       id="color"
+                      value={formData.color || ''}
                       onChange={handleChange}
                       className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3"
                     />
@@ -118,6 +151,7 @@ const CreateProductFull: React.FC = () => {
                     <input
                       type="text"
                       id="size"
+                      value={formData.size || ''}
                       onChange={handleChange}
                       className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3"
                     />
@@ -127,64 +161,81 @@ const CreateProductFull: React.FC = () => {
 
               {/* Description */}
               <div className="col-span-2 col-start-1 row-start-2 bg-white rounded-lg shadow p-6">
-                <label htmlFor="description">Description</label>
+                <label htmlFor="description">{t.products.description}</label>
                 <textarea
                   id="description"
                   rows={4}
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
+                  value={formData.description || ''}
+                  onChange={handleChange}
                   className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3"
                 ></textarea>
               </div>
 
               {/* Image */}
               <div className="col-span-2 col-start-1 row-start-3 bg-white rounded-lg shadow p-6">
-                <label htmlFor="image">Images</label>
+                <label htmlFor="image">{t.products.image}</label>
                 <input
                   type="file"
                   id="image"
-                  multiple
+                  accept="image/*"
+                  onChange={handleFileChange}
                   className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3"
                 />
+                {formData.image && (
+                  <img
+                    src={formData.image}
+                    alt="Preview"
+                    className="mt-2 w-32 h-32 object-cover rounded"
+                  />
+                )}
               </div>
 
               {/* Right Sidebar */}
               <div className="row-span-3 col-start-3 row-start-1 bg-white rounded-lg shadow p-6">
                 <div className="flex flex-col gap-6 h-full justify-start">
                   <div>
-                    <label htmlFor="price">Price</label>
+                    <label htmlFor="price">{t.products.price}</label>
                     <input
                       type="number"
                       id="price"
                       value={formData.price}
                       onChange={handleChange}
+                      min="0"
+                      step="0.01"
                       className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3"
+                      required
                     />
                   </div>
                   <div>
-                    <label htmlFor="stock">Stock</label>
+                    <label htmlFor="stock">{t.products.stock}</label>
                     <input
                       type="number"
                       id="stock"
                       value={formData.stock}
                       onChange={handleChange}
+                      min="0"
                       className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3"
+                      required
                     />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <span className="font-medium mt-2">Category</span>
-                    {['electronics', 'fashion', 'home', 'books', 'toys'].map((cat) => (
-                      <label key={cat} className="flex items-center gap-2">
-                        <input
-                          type="checkbox"
-                          value={cat}
-                          checked={selectedCategories.includes(cat)}
-                          onChange={() => handleCategoryChange(cat)}
-                          className="accent-blue-500"
-                        />
-                        <span className="capitalize">{cat}</span>
-                      </label>
-                    ))}
+                    <span className="font-medium mt-2">
+                      {t.products.categories}
+                    </span>
+                    {['electronics', 'fashion', 'home', 'books', 'toys'].map(
+                      cat => (
+                        <label key={cat} className="flex items-center gap-2">
+                          <input
+                            type="checkbox"
+                            value={cat}
+                            checked={selectedCategories.includes(cat)}
+                            onChange={() => handleCategoryChange(cat)}
+                            className="accent-blue-500"
+                          />
+                          <span className="capitalize">{cat}</span>
+                        </label>
+                      )
+                    )}
                   </div>
                 </div>
               </div>

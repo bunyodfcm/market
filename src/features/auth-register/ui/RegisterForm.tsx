@@ -83,10 +83,14 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess }) => {
               type="tel"
               name="phone"
               value={formData.phone}
-              onChange={handleInputChange}
-              placeholder="Phone number"
-              pattern="[0-9+\-\s()]*"
-              inputMode="numeric"
+              onChange={e => {
+                // Telefon raqami formatlash (+998901234567)
+                const value = e.target.value.replace(/[^\d+()-]/g, '');
+                setFormData(prev => ({ ...prev, phone: value }));
+              }}
+              placeholder="Phone number (+998901234567)"
+              pattern="[+]?[0-9\s()-]*"
+              inputMode="tel"
               className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900"
               required
             />

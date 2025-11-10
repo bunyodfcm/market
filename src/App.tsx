@@ -2,17 +2,20 @@ import { BrowserRouter } from 'react-router-dom';
 import { AppRoutes } from './app/routes';
 import { ThemeProvider } from './shared/theme/providers/ThemeProvider';
 import { I18nProvider } from './app/providers/i18n/I18nProvider';
+import { ToastProvider } from './shared/ui/toast';
 import { ResizableLayout } from './shared/ui/resizable-layout';
 import Sidebar from './widgets/Sidebar/ui/Sidebar';
 import Topbar from './widgets/Topbar';
-import { useAuth } from './processes/auth/model/useSession';
+import { useAuthStore } from './app/store/auth.store';
 
 function App() {
   return (
     <BrowserRouter>
       <ThemeProvider>
         <I18nProvider>
-          <AppContent />
+          <ToastProvider>
+            <AppContent />
+          </ToastProvider>
         </I18nProvider>
       </ThemeProvider>
     </BrowserRouter>
@@ -20,7 +23,7 @@ function App() {
 }
 
 function AppContent() {
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isLoading } = useAuthStore();
 
   // Loading holatida
   if (isLoading) {
