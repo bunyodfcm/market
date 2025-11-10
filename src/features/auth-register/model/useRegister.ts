@@ -158,7 +158,7 @@ export const useRegister = () => {
   return {
     handleRegister,
     verifyEmail,
-      verifyOtp,
+    verifyOtp,
     resendVerification,
     isLoading,
     error,

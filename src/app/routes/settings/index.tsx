@@ -4,15 +4,17 @@ import { Suspense, lazy } from 'react';
 import SettingsPage from '../../../pages/settings';
 
 const General = lazy(() => import('../../../pages/settings/General'));
-const Notifications = lazy(() => import('../../../pages/settings/Notifications'));
+const Notifications = lazy(
+  () => import('../../../pages/settings/Notifications')
+);
 const Security = lazy(() => import('../../../pages/settings/Security'));
 
 export const SettingsRoutes = () => {
   return (
     <Suspense fallback={<div className="p-8">Loading Settings...</div>}>
       <Routes>
-        {/* /settings parent route */}
-        <Route path="settings" element={<SettingsPage />}>
+        {/* /settings parent route - path="" chunki /settings/* dan kelmoqda */}
+        <Route path="" element={<SettingsPage />}>
           {/* Default ochiladigan sahifa */}
           <Route index element={<General />} />
 
@@ -21,12 +23,9 @@ export const SettingsRoutes = () => {
           <Route path="security" element={<Security />} />
           <Route path="notifications" element={<Notifications />} />
 
-          {/* Noma’lum yo‘l bo‘lsa general sahifaga qaytaradi */}
+          {/* Noma'lum yo'l bo'lsa general sahifaga qaytaradi */}
           <Route path="*" element={<Navigate to="general" replace />} />
         </Route>
-
-        {/* Fallback — /settings dan tashqariga chiqsa */}
-        <Route path="*" element={<Navigate to="settings" replace />} />
       </Routes>
     </Suspense>
   );
