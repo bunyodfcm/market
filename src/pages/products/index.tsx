@@ -1,7 +1,8 @@
 import React from 'react';
 import ProductPageHeader from '../../features/product-crud/ui/ProductPageHeader';
 import ProductPageActions from '../../features/product-crud/ui/ProductPageActions';
-import ProductCard from '../../features/product-crud/ui/ProductCard';
+// import ProductCard from '../../features/product-crud/ui/ProductCard';
+import ProductList from '../../features/product-crud/ui/ProductList';
 
 const ProductsPage: React.FC = () => {
   return (
@@ -14,12 +15,8 @@ const ProductsPage: React.FC = () => {
           <div className="text-gray-600 border-b-2 pb-4 border-gray-200">
             <ProductPageActions />
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
+          <div className="w-full p-6">
+           <ProductList />
           </div>
         </div>
       </div>
