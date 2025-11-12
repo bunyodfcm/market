@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useAuthStore } from '../../app/store/auth.store';
 import { useUserCrud } from '../../features/user-crud/model/useUserCrud';
 import { Input, Label, Textarea, NumberInput } from '../../shared/ui/input';
@@ -26,10 +26,12 @@ const General: React.FC = () => {
 
   const [emailInput, setEmailInput] = useState('');
   const [phoneInput, setPhoneInput] = useState('');
+  const lastUserIdRef = useRef<number | null>(null);
 
   // User ma'lumotlarini formaga yuklash
   useEffect(() => {
-    if (user) {
+    if (user && user.id && lastUserIdRef.current !== user.id) {
+      lastUserIdRef.current = user.id;
       setFormData({
         id: user.id,
         firstName: user.firstName || '',
@@ -47,7 +49,7 @@ const General: React.FC = () => {
         salary: user.salary || null,
       });
     }
-  }, [user]);
+  }, [user?.id]); // Faqat user.id o'zgarganda yangilash
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>

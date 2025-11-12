@@ -24,7 +24,10 @@ export const SettingsRoutes = () => {
           <Route path="notifications" element={<Notifications />} />
 
           {/* Noma'lum yo'l bo'lsa general sahifaga qaytaradi */}
-          <Route path="*" element={<Navigate to="general" replace />} />
+          <Route
+            path="*"
+            element={<Navigate to="/settings/general" replace />}
+          />
         </Route>
       </Routes>
     </Suspense>
