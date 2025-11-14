@@ -15,9 +15,11 @@ const VerifyOtpPage = lazy(() => import('../../pages/verify-otp'));
 // Guards
 import { AuthGuard, GuestGuard } from './guards';
 import { ProductRoutes } from './products';
+import { CompanyRoutes } from './company';
 import { OrderRoutes } from './orders';
 import { SellerRoutes } from './sellers';
 import { SettingsRoutes } from './settings';
+import { LoadingSpinner } from '../../shared/ui';
 
 // Root redirect komponenti
 const RootRedirect = () => {
@@ -45,7 +47,8 @@ const NotFoundRedirect = () => {
     return (
       <div className="h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          {/* <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div> */}
+          <LoadingSpinner />
           <p className="text-gray-600">Yuklanmoqda...</p>
         </div>
       </div>
@@ -63,7 +66,8 @@ const NotFoundRedirect = () => {
       fallback={
         <div className="h-screen flex items-center justify-center bg-gray-50">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            {/* <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div> */}
+            <LoadingSpinner />
             <p className="text-gray-600">Yuklanmoqda...</p>
           </div>
         </div>
@@ -110,6 +114,14 @@ export const AppRoutes = () => {
           element={
             <AuthGuard>
               <DashboardPage />
+            </AuthGuard>
+          }
+        />
+        <Route
+          path="/companies/*"
+          element={
+            <AuthGuard>
+              <CompanyRoutes />
             </AuthGuard>
           }
         />
