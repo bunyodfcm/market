@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useAuthStore } from '../../app/store/auth.store';
 import { useUserCrud } from '../../features/user-crud/model/useUserCrud';
-import { Input, Label, Textarea, NumberInput } from '../../shared/ui/input';
+import { Input, Label, Textarea } from '../../shared/ui/input';
 import { Button } from '../../shared/ui/button';
 import { useTranslation } from '../../shared/i18n/hooks';
 import type { EditUserRequest } from '../../features/user-crud/api';
@@ -21,7 +21,7 @@ const General: React.FC = () => {
     adress: null,
     emails: [],
     phones: [],
-    salary: null,
+   
   });
 
   const [emailInput, setEmailInput] = useState('');
@@ -46,7 +46,7 @@ const General: React.FC = () => {
           : null,
         emails: user.emails || [],
         phones: user.phones || [],
-        salary: user.salary || null,
+        
       });
     }
   }, [user?.id]); // Faqat user.id o'zgarganda yangilash
@@ -61,12 +61,7 @@ const General: React.FC = () => {
     }));
   };
 
-  const handleSalaryChange = (value: number) => {
-    setFormData(prev => ({
-      ...prev,
-      salary: value || null,
-    }));
-  };
+ 
 
   const handleAddEmail = () => {
     if (emailInput.trim()) {
@@ -308,18 +303,7 @@ const General: React.FC = () => {
           )}
         </div>
 
-        {/* Maosh */}
-        <div>
-          <Label htmlFor="salary">Maosh</Label>
-          <NumberInput
-            id="salary"
-            value={formData.salary || 0}
-            onChange={e => handleSalaryChange(Number(e.target.value))}
-            min={0}
-            variant="outline"
-            placeholder="Maosh miqdorini kiriting"
-          />
-        </div>
+       
 
         {/* Submit button */}
         <div className="flex justify-end gap-4 pt-4">
